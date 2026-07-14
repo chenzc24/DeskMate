@@ -1,0 +1,61 @@
+# Local Python environments and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets and machine-local configuration
+.env
+.env.*
+*.pem
+*.key
+
+# Raw or downloaded datasets and extracted camera frames
+data/raw/
+data/downloads/
+data/cache/
+datasets/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# Downloaded or trained model artifacts
+models/*
+!models/README.md
+!models/manifest.yaml
+weights/
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.tflite
+*.task
+*.engine
+*.safetensors
+
+# Training and runtime outputs
+runs/
+wandb/
+logs/
+artifacts/logs/
+artifacts/demo_videos/
+events.out.tfevents.*
+
+# Private or generated video captures
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Editor and operating-system metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
