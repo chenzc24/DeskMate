@@ -27,3 +27,10 @@ Use concise entries:
 - Changed areas: initialized the child repository, added its GitHub remote, prepared the complete project tree for the initial commit, and reserved the parent `.gitmodules` and `project` gitlink as the only parent-repository changes.
 - Validation: reviewed the staged child file list and diff summary, ran `git diff --cached --check`, and scanned staged text files for common private-key and access-token signatures.
 - Commit status: child initial commit `bd36ac0` and parent conversion commit `a67f845` were committed and pushed successfully. No pull request was requested or opened.
+
+## 2026-07-14 - Structure Assignment Announcement
+
+- Target: turn the copied Great Cat Census announcement into a readable Markdown handout without changing its requirements.
+- Changed areas: `References/The requirement/Assignment announcement.md` and the target plan.
+- Validation: confirmed the title and five required section headings; restored and checked the previously condensed logistics, mission narrative, team instructions, and evaluation content; checked that copied `Download` labels and the time-range encoding artifact were absent; and ran `git diff --check` plus `git status --short --branch`.
+- Commit status: included in the user-requested consolidation of all pending project changes on `main`.
