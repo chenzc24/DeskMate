@@ -32,10 +32,10 @@ Read-only/out of scope:
 
 - [x] Create private GitHub repository `chenzc24/DeskMate`.
 - [x] Initialize `project/` as an independent repository on branch `main`.
-- [ ] Validate, commit, and push the complete current project tree.
-- [ ] Convert parent `project/` to a Git submodule and absorb its Git directory.
-- [ ] Verify that the parent stages only `.gitmodules` and the `project` gitlink.
-- [ ] Commit and push the parent branch.
+- [x] Validate, commit, and push the complete current project tree.
+- [x] Convert parent `project/` to a Git submodule and absorb its Git directory.
+- [x] Verify that the parent stages only `.gitmodules` and the `project` gitlink.
+- [x] Commit and push the parent branch.
 
 ## Validation
 
@@ -51,3 +51,12 @@ Read-only/out of scope:
 - Parent commit: `Track DeskMate as submodule`
 - Push the child `main` branch and the current parent feature branch.
 - Do not open a pull request unless explicitly requested.
+
+## Outcome
+
+- Child initial commit: `bd36ac0` on `DeskMate/main`, verified on GitHub.
+- Parent conversion commit: `a67f845` on
+  `DeepLearning/agent/refine-deep-learning-paper-notes`, verified on GitHub.
+- The parent gitlink uses mode `160000`, and the child Git directory is absorbed
+  under the parent repository's submodule metadata.
+- Parent `notes.md` remains modified and unstaged.
