@@ -2,20 +2,25 @@
 
 ## Goal
 
-Synchronize the first executable Baseline phase with the hardened v1.2
+Synchronize the first executable Baseline phase with the v1.3
 architecture so the team can start immediately without confusing source audit,
 bulk acquisition, model training, or final evaluation. Phase 0 must establish
 the robot-video/runtime skeleton, five reportable labels plus internal
 `not_target`, data-source priority, reproducible manifests, bounded worker
 contracts, and objective entry conditions for Phase 1.
 
+The 2026-07-15 refresh also records the annotation-free assisted-localization
+decision without changing Gate B0: an official COCO-pretrained detector may
+propose cat-content boxes for the classifier, while centre ROIs remain the
+mandatory fallback and the release works with the detector disabled.
+
 ## Dirty-State Note
 
-The worktree already contains the uncommitted Baseline/Advanced split, plan
-organization, YOLO-classification revision, dataset-first Phase 0 revision, and
-subsequent architecture hardening. The hardened Baseline v1.2 decisions are
-inputs to this synchronization, not changes to be undone. No existing dirty
-path will be discarded or staged.
+The worktree contains active 2026-07-15 robot-JPEG-default and review-handoff
+changes in configuration, evaluation reports, scripts, tests, and other target
+plans. They are external evidence and remain read-only here. The Baseline v1.3
+principles are inputs to this Phase 0 refresh; no existing dirty path will be
+discarded or staged.
 
 ## Owned Files
 
@@ -26,8 +31,8 @@ path will be discarded or staged.
 ## Read-Only Files And External State
 
 - `References/The requirement/**` — authoritative assignment evidence.
-- `docs/plans/BASELINE_PLAN.md` — hardened v1.2 governing principle for this
-  target; this synchronization does not change it.
+- `docs/plans/BASELINE_PLAN.md` — v1.3 governing principle, updated by the
+  separate `2026-07-15-add-pretrained-cat-localizer` target.
 - `docs/plans/ADVANCED_PLAN.md` and Advanced dataset documents.
 - `AGENTS.md` and `README.md`.
 - `plan/2026-07-14-harden-baseline-architecture/**` and all prior target plans.
@@ -48,8 +53,11 @@ path will be discarded or staged.
   `not_target`, `val_select`/`val_cal`, separate `robot_calibration`/
   `robot_final`, `ModelRunner[OutputT]`, `ClassificationObservation`, quality
   gates, and bounded capture/preview/confirmation queues.
-- Local RTX 4070; robot stream details are still required from the Robotics
-  team but no motion is needed for this documentation target.
+- Official COCO-pretrained `yolo26s.pt` for optional `cat` localization;
+  `yolo26n.pt` is a latency fallback. Neither requires project detector labels.
+- Local RTX 4070. Robot video is being handed over, but the real frame and
+  delivery contract are still required from the Robotics team; no motion is
+  needed for this documentation target.
 
 ## Decision Questions
 
@@ -94,6 +102,26 @@ path will be discarded or staged.
   to UI, logging, or scheduling code.
 - Preview output may update UI state but must not print a species line. Only a
   fresh, quality-gated confirmation event may print and register a species.
+- Treat `B-D01=yolo26s.pt` as an optional, pretrained COCO `cat` proposal
+  source. It never predicts breed, never prints a species, never sends motor
+  commands, and never changes B0/B1. Stable boxes are padded and classified by
+  `B-M01`; missing/stale/invalid boxes immediately select centre ROIs.
+- Do not annotate or fine-tune a Baseline detector. If the pretrained localizer
+  does not improve time-to-confirm on the same robot videos without metric
+  regression, disable it. Record source/version/hash/license/class mapping if
+  it is admitted.
+- After human acceptance, deduplication, and grouped 85/10/5 split freeze, use
+  the same pinned `B-D01` offline to derive padded classifier views. Every crop
+  inherits `parent_image_id` and split, never increases official counts, and
+  never causes a detector-miss parent to be removed.
+- Train `B-M01` with base-image-balanced original/crop view selection rather
+  than flattening both files into a folder loader. Other-breed cat crops remain
+  `not_target`; no-cat backgrounds retain original/centre views; robot and
+  assignment media remain excluded.
+- If the multi-view loader is not deterministically verified before first
+  training, materialize exactly one view per parent (valid crop, otherwise
+  original). This preserves the existing folder trainer and prevents the data
+  enhancement from blocking the first seed or double-weighting detector hits.
 
 ## Phase Boundary
 
@@ -107,6 +135,12 @@ challengers remain evidence-gated. Phase 3 owns temperature/threshold fitting,
 robot-domain calibration, one untouched final evaluation, reliability, and
 release freeze. Phase 4 owns official evaluation and report submission.
 
+The annotation-free `B-D01` decision is documented in Phase 0. A separate
+bounded smoke target has since exercised the official weight and typed crop
+router, but neither that smoke nor derived training views change B0/B1. Offline
+crop derivation begins only after B1 freezes accepted base-image splits; online
+same-video admission remains Phase 2 after the `B-M01` centre-ROI live path.
+
 ## Expected Phase 0 Output
 
 - Five reportable labels, internal `not_target`, display names, and exact output
@@ -114,6 +148,9 @@ release freeze. Phase 4 owns official evaluation and report submission.
 - Source matrix with primary, secondary, and gap-fill source per class.
 - Dataset manifest schema, target/negative count separation, source/session
   groups, duplicate clusters, and split policy frozen.
+- Derived-view policy freezes split-before-derive, parent/split inheritance,
+  detector-miss retention, base-balanced sampling, official count exclusion,
+  and assignment/robot-test exclusion; implementation is not a B0 artifact.
 - Target-source pilots cover each configured source/class pair; negative pilots
   cover real robot background, other cats, blur/exposure failures, and partial
   posters without counting adjacent frames as unique images.
@@ -124,6 +161,11 @@ release freeze. Phase 4 owns official evaluation and report submission.
   framework-native result crossing the runner boundary.
 - Capture uses a bounded latest-frame buffer; preview has at most one pending
   job; confirmation cannot block capture, remote control, or the UI event loop.
+- The optional localizer now has a bounded smoke-tested `LocalizerObservation`
+  adapter and same-frame padded crop router with contract tests; release queue
+  integration and robot-video admission remain later work. Missing/stale/
+  multi-box cases must keep centre fallback immediate and console output
+  classifier-only.
 - Deterministic fixtures cover stale/missing frame invalidation, queue drop,
   blur/exposure/age/ROI-quality reasons, `not_target`, preview-without-console,
   and confirmation console format. Phase 0 verifies the metric/reason plumbing;
@@ -133,27 +175,51 @@ release freeze. Phase 4 owns official evaluation and report submission.
 
 ## Gate B0 Evidence Checklist
 
-- [ ] Six internal labels and five reportable display names match the governing
+- [x] Six internal labels and five reportable display names match the governing
   Baseline plan.
-- [ ] Manifest template contains provenance/license, source/session group,
+- [x] Manifest template contains provenance/license, source/session group,
   exact/perceptual hash, review, duplicate-cluster, and split fields.
-- [ ] Every configured target source/class pair has a 10–20 image pilot with
+- [x] Every configured target source/class pair has a 10–20 image pilot with
   success, label-error, license-missing, and duplicate-risk counts.
-- [ ] Representative `not_target` source pilots and the Phase 1 route to at
+- [x] Representative `not_target` source pilots and the Phase 1 route to at
   least 300 grouped negatives are documented.
 - [ ] At least one recorded or live robot frame reaches the UI skeleton with a
-  valid `FramePacket` timestamp and the correct orientation/color treatment.
-- [ ] A placeholder `ClassificationObservation` reaches UI/aggregator through
+  valid `FramePacket` timestamp and the correct orientation/color treatment;
+  robot video is currently in handoff and is not yet accepted evidence.
+- [x] A placeholder `ClassificationObservation` reaches UI/aggregator through
   the generic runner boundary; UI/logging code does not read framework-native
   model objects.
-- [ ] Preview produces no species console line; a deterministic confirmation
+- [x] Preview produces no species console line; a deterministic confirmation
   fixture produces the specified confirmed-species line exactly once.
-- [ ] Stale/missing frames clear temporal state; full preview queues drop old
+- [x] Stale/missing frames clear temporal state; full preview queues drop old
   jobs; confirmation does not block capture/UI in the deterministic harness.
 - [ ] Robotics stream/reconnect/display facts, owners, and Phase 1 data/review
-  owners are named.
-- [ ] Selenium remains disabled until the Phase 1 post-dedup coverage report
+  owners are named; requested JPEG settings exist, but protocol/endpoint and
+  observed behavior remain unverified.
+- [x] Selenium remains disabled until the Phase 1 post-dedup coverage report
   demonstrates a target-class gap below 400.
+
+## 2026-07-15 Current Status
+
+- Phase 0 software skeleton, source pilots, manifest contracts, bounded queues,
+  silent preview, exactly-once confirmation, and stale clearing have evidence.
+- Gate B0 remains `NOT PASSED` only because the actual robot-camera frame and
+  verified stream delivery contract are still open. The requested profile is
+  480 x 480 JPEG quality 85 at 8 FPS, but it is not an observed stream result.
+- Robot video is being handed over. Receipt alone is not a pass: verify consent,
+  original dimensions, orientation/mirroring, color, source-frame identity,
+  timestamps, freshness, and disconnect behavior before regenerating B0.
+- Phase 1 acquisition produced a 2,321-item review handoff: 1,875 target and 446
+  negative candidates at the latest recorded audit. Human filtering is in
+  progress; accepted count was still zero, B1 is not passed, and no split may
+  be frozen from pending rows.
+- The official `B-D01` weight has a bounded non-robot GPU smoke: its `cat`
+  mapping ran on all five assignment smoke images, with recorded local latency.
+  Those images and crops remain training-excluded. No robot print-domain recall
+  or time-saving claim exists until the handed-over video is evaluated.
+- Detector-derived classifier crops have not been generated from the pending
+  review pool. They must wait for human acceptance and split freeze; current
+  2,321 pending rows cannot be used to create a training view manifest.
 
 ## Validation
 
@@ -168,15 +234,22 @@ release freeze. Phase 4 owns official evaluation and report submission.
   into Phase 0 and does not require a challenger before the first live model.
 - Ensure interface names and console behavior match the hardened Baseline and
   obsolete backend-boundary/preview-console assumptions are absent.
+- Ensure `B-D01` remains annotation-free, classifier-only for species output,
+  separately thresholded, bounded, optional, and centre-ROI fallback-safe.
+- Ensure detector-derived views are generated after split, inherit parent/split,
+  do not change base counts or sampling weight, retain misses, and exclude
+  assignment/robot-test media.
+- Ensure current data and robot handoff language distinguishes obtained,
+  pending review, received, verified, accepted, and gate-passing states.
 - Check local Markdown links, code fences, whitespace, `git diff --check`, and
   final status scope.
 
 ## Recorded-Video And Robot Validation
 
-No physical motion. Phase 0 implementation later must prove that at least one
-recorded or live robot frame reaches the bounded UI/observation skeleton and
-exercise stale-frame behavior; this documentation revision does not claim those
-runtime results.
+No physical motion. The offline consumer and deterministic skeleton exist, but
+the robot-video handoff must still prove that at least one recorded or live
+robot frame reaches the bounded UI/observation skeleton and exercise stale-frame
+behavior. This documentation revision does not claim those runtime results.
 
 ## Commit Intent
 
@@ -199,3 +272,33 @@ review.
 - Final status review found the existing uncommitted plan moves/revisions plus
   this synchronized target. Nothing was staged, committed, pushed, installed,
   downloaded, or executed against a robot.
+
+### 2026-07-15 Refresh Validation
+
+- Preserved the two remaining B0 failures instead of expanding or weakening
+  the gate; completed software/source checks are now checked off and the robot
+  frame/stream-contract items remain open.
+- Recorded Phase 1 candidate acquisition and human-review status without
+  treating pending rows as accepted images or freezing B1.
+- Added the annotation-free `B-D01` design as a Phase 2 optional experiment,
+  explicitly outside B0/B1 and unable to replace the centre-ROI release path.
+- Matched the v1.3 model IDs, typed-boundary intent, no-console detector rule,
+  bounded scheduling, fallback, video admission, and no-labeling stop rule.
+- Rechecked local links, Markdown whitespace/fences, requirement immutability,
+  architecture terms, `git diff --check`, and project-root status scope.
+
+### 2026-07-15 Detector-Derived View Refresh Validation
+
+- Kept human acceptance and grouped split freeze ahead of any crop generation;
+  pending review rows remain ineligible for training views.
+- Added parent/split inheritance, count exclusion, miss retention, per-class
+  coverage, `not_target` routing, base-balanced sampling, deterministic
+  validation crops, and assignment/robot-test exclusion.
+- Added a one-view-per-parent materialization fallback so the derived-view
+  design cannot block first training or silently double-weight detector hits.
+- Updated localizer status from design-only to smoke-tested typed adapter/crop
+  router while retaining disabled/not-release-admitted and no-robot-evidence
+  status.
+- Resolved owned links, parsed the Baseline YAML example, checked semantic
+  guards and Markdown structure, and passed requirement immutability plus
+  `git diff --check`.

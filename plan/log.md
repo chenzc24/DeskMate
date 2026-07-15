@@ -132,3 +132,38 @@ Use concise entries:
 - Changed areas: added an operator-facing manual-action dashboard; linked it from the repository entry point and human-readable B0 audit; refreshed the machine-readable audit evidence; and documented this bounded target.
 - Validation: system Python 3.13 and training Python 3.12 each pass all 55 tests; the B0 verifier remains fail-closed with exactly `real_robot_frame` and `robot_stream_contract` failed; the B1 auditor reports 2,321 pending, zero accepted, zero audit errors, and `ready_to_freeze_split=false`; JSON parsing, required-path checks, requirement immutability, and `git diff --check` pass.
 - Commit status: the user authorized a bounded commit and push to `main`; no pull request is intended.
+
+## 2026-07-15 - Build Minimal Phase 1 Review Handoff
+
+- Target: hand the candidate pool to a colleague for human filtering without copying unrelated acquisition, training, inference, evaluation, video, or contact-sheet artifacts.
+- Changed areas: added a concise reviewer README, a deterministic minimal-handoff builder, six safety/layout tests, and an ignored handoff containing the editable queue, integrity inventory, summary, and 2,321 candidate images flattened into one folder per class with no batch/source subdirectories.
+- Validation: the image tree has exactly six class directories and zero nested directories; queue/inventory/image counts are all 2,321; 364,150,364 image bytes have zero missing, extra, or SHA-256-mismatched files; the 362,912,283-byte ZIP contains exactly 2,325 files and hashes to `5fa6a44804ed04e93f57d1b5c8342c9edb011bf081e1d400d4a4cc714cdb2af3`; both Python environments pass 61 tests and compilation; the copied queue audit intentionally remains fail-closed with 2,321 pending, zero accepted/rejected, zero errors, and `ready_to_freeze_split=false`.
+- Commit status: not committed or pushed; generated data remains ignored. No acceptance decision, split freeze, training, robot connection, or motion occurred.
+
+## 2026-07-15 - Activate Robot JPEG Defaults
+
+- Target: restart robot integration with a provisional 480 x 480 JPEG quality 85 at 8 FPS profile while human image review proceeds independently.
+- Changed areas: recorded the requested camera profile and latest-frame/freshness requirements; distinguished image encoding from the still-unknown delivery protocol and endpoint; refreshed B0 and video-readiness evidence; marked B1 human review in progress without claiming decisions.
+- Validation: both Python environments pass all 61 currently discovered tests; B0 remains fail-closed only on the real robot frame and stream delivery contract; B1 reports 2,321 pending, zero accepted, zero audit errors, and `ready_to_freeze_split=false`.
+- Commit status: not committed or pushed; the active untracked review-handoff paths remain untouched.
+
+## 2026-07-15 - Add A Pretrained Cat Localizer To Baseline Planning
+
+- Target: reduce operator alignment time without adding detector labeling or making localization a Baseline release dependency.
+- Changed areas: updated `docs/plans/BASELINE_PLAN.md` and the Phase 0 target with optional official COCO `B-D01=yolo26s.pt` cat proposals, padded-crop routing into `B-M01`, bounded latest-only scheduling, centre-ROI fallback, same-video admission, and a no-fine-tuning stop rule; recorded the current image-review and robot-video handoff state.
+- Validation: kept formal requirements untouched; confirmed classifier labels/outputs and B0/B1 gates are unchanged; resolved 7 local links; checked model IDs, current-state evidence, required/obsolete terms, Markdown whitespace/fences, `git diff --check`, and status scope.
+- Commit status: not committed or pushed; ready for human review. Existing robot-JPEG, evaluation, handoff script, test, and report changes remained read-only.
+
+## 2026-07-15 - Smoke Pretrained Cat Localizer During B1 Review
+
+- Target: use the B1 human-review window for a bounded offline smoke of official COCO `B-D01=yolo26s.pt` without enabling it or changing the classifier and Gate contracts.
+- Changed areas: added a pinned disabled localizer config, official weight manifest entry, typed box-only adapter, same-frame stable-box crop router with centre fallback, deterministic tests, GPU smoke script/report, and a Baseline timing clarification; the downloaded weight remains ignored.
+- Validation: official 20,422,725-byte weight hashed to `646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b`; native `cat` resolved to ID 15; all five assignment smoke images produced a proposal; 25 warmed detector predictions measured 37.71 ms mean and 44.52 ms P95 on the RTX 4070; both Python environments pass 67 tests and compile checks; B0/B1 remain intentionally unchanged.
+- Commit status: not committed or pushed. `B-D01` remains disabled and not release-admitted; no robot media, training, split freeze, species output, or motion was used.
+
+## 2026-07-15 - Add Detector-Derived Classifier Views
+
+- Target: align classifier training inputs with the optional runtime detector crops without detector annotation, split leakage, inflated image counts, detector-selection bias, or delayed first training.
+- Changed areas: updated `docs/plans/BASELINE_PLAN.md` to v1.4 and refreshed the Phase 0 plan with review/dedup-before-split, split-before-derive, `view_manifest`, deterministic padded crops, parent-balanced original/crop sampling, miss retention, per-view evaluation, and a one-view-per-parent fallback; added the bounded target plan.
+- Validation: preserved formal requirements and B0/B1 state; cross-checked the existing localizer smoke evidence; resolved 7 local links; parsed the YAML example; checked parent/split/count/miss/exclusion guards, model IDs, Markdown whitespace/fences, `git diff --check`, and status scope.
+- Commit status: not committed or pushed; ready for human review. No crop was generated and all active localizer, review-handoff, robot-video, config, model-manifest, source, script, test, and evaluation paths remained read-only.
