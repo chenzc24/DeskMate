@@ -13,3 +13,9 @@ The project currently uses Ultralytics under its AGPL-3.0 academic/open-source
 terms. The team must review the license before distributing a closed-source or
 commercial derivative; a university demonstration does not change the license
 record kept here.
+
+`yolo26s.pt` is the optional official COCO-pretrained **detection** weight for
+`B-D01`. It may propose only the native `cat` class and never decides or prints
+a breed. It remains disabled until same robot-video comparison shows that a
+stable padded crop improves time-to-confirm without weakening classification or
+rejection gates; a miss always falls back to the centre ROI.

@@ -1,0 +1,27 @@
+schema_version = 1
+model_id = "B-D01"
+task = "cat_localization"
+checkpoint = "models/yolo26s.pt"
+device = 0
+imgsz = 640
+confidence_threshold = 0.25
+minimum_box_area_ratio = 0.02
+maximum_candidates = 5
+maximum_frame_age_ms = 500.0
+padding_ratio = 0.15
+fallback_center_scale = 0.8
+enabled_by_default = false
+release_admitted = false
+allowed_native_classes = ["cat"]
+
+[smoke]
+measured_iterations_per_image = 5
+inputs = [
+  "References/The requirement/SWS3009A_Assg_assets/cat-000.png",
+  "References/The requirement/SWS3009A_Assg_assets/cat-001.png",
+  "References/The requirement/SWS3009A_Assg_assets/cat-002.png",
+  "References/The requirement/SWS3009A_Assg_assets/cat-003.png",
+  "References/The requirement/SWS3009A_Assg_assets/cat-004.png",
+]
+role = "assignment_examples_smoke_only"
+training_allowed = false

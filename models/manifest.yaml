@@ -51,3 +51,49 @@ models:
       boxes_present: false
       imagenet_top1: Persian_cat
       note: ImageNet output proves loading and task wiring only; it is not Baseline accuracy evidence.
+  - id: B-D01
+    state: verified_pretrained_smoke_not_release_admitted
+    enabled_priority: P1_optional_disabled
+    task: detection
+    framework: ultralytics
+    architecture: YOLO26s
+    file: models/yolo26s.pt
+    bytes: 20422725
+    sha256: 646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b
+    source:
+      organization: Ultralytics
+      documentation_url: https://docs.ultralytics.com/models/yolo26/
+      asset_url: https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s.pt
+      asset_release: v8.4.0
+      pretrained_on: COCO
+    license:
+      name: AGPL-3.0
+      url: https://www.ultralytics.com/license
+      project_use: academic_coursework
+      review_before_closed_or_commercial_distribution: true
+    input:
+      color: RGB
+      initial_size: [640, 640]
+      scope: full_frame_cat_proposals
+    output:
+      native: Ultralytics Results.boxes
+      adapter_contract: LocalizerObservation
+      breed_semantics_allowed: false
+      native_objects_must_not_cross_adapter: true
+    class_filter:
+      native_name: cat
+      resolved_native_id: 15
+    environment:
+      python: 3.12.10
+      torch: 2.11.0+cu128
+      ultralytics: 8.4.95
+      cuda_runtime: "12.8"
+    smoke_validation:
+      hardware: NVIDIA GeForce RTX 4070 Laptop GPU
+      cuda_available: true
+      image_role: assignment_examples_smoke_only
+      image_in_training_data: false
+      images: 5
+      images_with_cat_proposal: 5
+      release_admitted: false
+      note: Assignment-example proposals prove loading and typed detection wiring only; robot-video admission is still required.

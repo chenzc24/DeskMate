@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T10:50:18+08:00",
+  "status": "SMOKE_COMPLETE_NOT_RELEASE_ADMITTED",
+  "model_id": "B-D01",
+  "task": "cat_localization",
+  "enabled_by_default": false,
+  "release_admitted": false,
+  "checkpoint": {
+    "path": "models/yolo26s.pt",
+    "bytes": 20422725,
+    "sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
+  },
+  "checksums": {
+    "config": "d44dc280e5c98412a11c2926a348bd4629a22a7887fda4dc9a77d353503c66f2",
+    "localization_module": "48f1d4fb2f203fc226034b5173291f4b219876c54c552469a26e9ed68f449cbf",
+    "smoke_script": "9483d40898f38741498518cbe8881b5c419159d8d57c8798dd1909e822f32739"
+  },
+  "runtime": {
+    "ultralytics": "8.4.95",
+    "torch": "2.11.0+cu128",
+    "cuda_available": true,
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "cat_class_id": 15,
+    "imgsz": 640
+  },
+  "smoke": {
+    "role": "assignment_examples_smoke_only",
+    "training_allowed": false,
+    "images": 5,
+    "images_with_cat_proposal": 5,
+    "measured_iterations_per_image": 5,
+    "measured_predictions": 25,
+    "mean_latency_ms": 37.709052,
+    "p95_latency_ms": 44.5221,
+    "results": [
+      {
+        "path": "References/The requirement/SWS3009A_Assg_assets/cat-000.png",
+        "valid": true,
+        "reason": null,
+        "candidate_count": 1,
+        "top_confidence": 0.9530130624771118,
+        "mean_latency_ms": 36.2252,
+        "p95_latency_ms": 38.677
+      },
+      {
+        "path": "References/The requirement/SWS3009A_Assg_assets/cat-001.png",
+        "valid": true,
+        "reason": null,
+        "candidate_count": 1,
+        "top_confidence": 0.9288290143013,
+        "mean_latency_ms": 35.43492,
+        "p95_latency_ms": 38.7196
+      },
+      {
+        "path": "References/The requirement/SWS3009A_Assg_assets/cat-002.png",
+        "valid": true,
+        "reason": null,
+        "candidate_count": 1,
+        "top_confidence": 0.844835638999939,
+        "mean_latency_ms": 39.23084,
+        "p95_latency_ms": 44.5221
+      },
+      {
+        "path": "References/The requirement/SWS3009A_Assg_assets/cat-003.png",
+        "valid": true,
+        "reason": null,
+        "candidate_count": 1,
+        "top_confidence": 0.763640820980072,
+        "mean_latency_ms": 41.01688,
+        "p95_latency_ms": 50.6304
+      },
+      {
+        "path": "References/The requirement/SWS3009A_Assg_assets/cat-004.png",
+        "valid": true,
+        "reason": null,
+        "candidate_count": 1,
+        "top_confidence": 0.7340813875198364,
+        "mean_latency_ms": 36.63742,
+        "p95_latency_ms": 43.2791
+      }
+    ]
+  },
+  "limitations": [
+    "assignment examples are smoke inputs, not training or accuracy evidence",
+    "no real robot JPG or recorded robot video was available",
+    "single images cannot validate temporal box stability",
+    "centre-ROI classifier remains the release path"
+  ]
+}
