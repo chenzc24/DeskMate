@@ -30,5 +30,5 @@ data/
 Run an audit with:
 
 ```powershell
-python scripts/audit_source_manifest.py data/manifests/source_manifest.csv
+python scripts/data/audit_source_manifest.py data/manifests/source_manifest.csv
 ```

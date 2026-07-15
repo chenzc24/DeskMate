@@ -3,7 +3,7 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from deskmate_baseline.manifest import MANIFEST_FIELDS, audit_manifest
+from deskmate_baseline.domain.manifest import MANIFEST_FIELDS, audit_manifest
 
 
 def row(**overrides: str) -> dict[str, str]:

@@ -46,10 +46,10 @@ to `plan/log.md`; it does not overlap the existing modified smoke report.
 - `configs/baseline_inference_hardened_candidate.toml`
 - `models/manifest.yaml`
 - `src/deskmate_baseline/classifier_hardening.py`
-- `scripts/build_classifier_hardening_dataset.py`
-- `scripts/train_classifier_hardening.py`
-- `scripts/evaluate_classifier_candidates.py`
-- `scripts/build_classifier_weight_soups.py`
+- `scripts/data/build_classifier_hardening_dataset.py`
+- `scripts/training/train_classifier_hardening.py`
+- `scripts/evaluation/evaluate_classifier_candidates.py`
+- `scripts/training/build_classifier_weight_soups.py`
 - `tests/test_classifier_hardening.py`
 - `docs/evaluation/BASELINE_CLASSIFIER_HARDENING.json`
 - `docs/evaluation/BASELINE_CLASSIFIER_HARDENING.md`

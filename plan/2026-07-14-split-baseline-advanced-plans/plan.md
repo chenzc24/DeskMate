@@ -34,7 +34,7 @@ The project worktree was clean on `main` at `4965cb9` before this target.
 
 - `References/The requirement/**` — authoritative assignment evidence.
 - `References/The previous works/**` — presentation references only.
-- `scripts/download_dataset_sources.ps1` — existing Advanced acquisition tool;
+- `scripts/data/download_dataset_sources.ps1` — existing Advanced acquisition tool;
   no behavior change is needed for this documentation target.
 - All prior target plans and experience notes.
 

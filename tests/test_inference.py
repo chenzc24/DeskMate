@@ -6,8 +6,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from deskmate_baseline.contracts import INTERNAL_LABELS, FramePacket
-from deskmate_baseline.inference import (
+from deskmate_baseline.domain.contracts import INTERNAL_LABELS, FramePacket
+from deskmate_baseline.perception.inference import (
     ClassMappingError,
     UltralyticsClassificationBackend,
     canonical_index_mapping,

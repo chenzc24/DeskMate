@@ -27,7 +27,7 @@ Existing paths left read-only include:
 - `plan/2026-07-15-activate-robot-jpeg-defaults/`;
 - `plan/2026-07-15-add-pretrained-cat-localizer/`;
 - `plan/2026-07-15-build-minimal-review-handoff/`;
-- `scripts/build_phase1_review_handoff.py` and `tests/test_review_handoff.py`;
+- `scripts/data/build_phase1_review_handoff.py` and `tests/test_review_handoff.py`;
 - all ignored review decisions, candidate data, and robot media.
 
 ## Owned Files
@@ -37,7 +37,7 @@ Existing paths left read-only include:
 - `models/manifest.yaml`
 - `models/README.md`
 - `src/deskmate_baseline/localization.py`
-- `scripts/verify_pretrained_cat_localizer.py`
+- `scripts/evaluation/verify_pretrained_cat_localizer.py`
 - `tests/test_localization.py`
 - `docs/evaluation/BASELINE_LOCALIZER_SMOKE.json`
 - `docs/evaluation/BASELINE_LOCALIZER_SMOKE.md`

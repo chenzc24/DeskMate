@@ -9,7 +9,7 @@ dataset and checkpoint unchanged.
 
 ## Owned files
 
-- `scripts/build_balanced_300_ablation.py`
+- `scripts/data/build_balanced_300_ablation.py`
 - `configs/baseline_training_balanced300.toml`
 - generated ignored `data/downloads/baseline_balanced300/`
 - generated ignored `runs/baseline_balanced300/`

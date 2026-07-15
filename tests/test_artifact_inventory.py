@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from scripts.artifact_inventory import build_inventory
+from scripts.tools.artifact_inventory import build_inventory
 
 
 def write(path: Path, content: bytes) -> None:

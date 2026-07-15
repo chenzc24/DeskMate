@@ -21,7 +21,7 @@ All unrelated paths remain read-only.
 ## Owned Files
 
 - `configs/baseline_training_provisional.toml`
-- `scripts/train_provisional_baseline.py`
+- `scripts/training/train_provisional_baseline.py`
 - `tests/test_provisional_training.py`
 - `docs/evaluation/BASELINE_PROVISIONAL_TRAINING.json`
 - `docs/evaluation/BASELINE_PROVISIONAL_TRAINING.md`

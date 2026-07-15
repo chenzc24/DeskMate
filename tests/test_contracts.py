@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from deskmate_baseline.contracts import (
+from deskmate_baseline.domain.contracts import (
     INTERNAL_LABELS,
     REPORTABLE_LABELS,
     ClassificationObservation,

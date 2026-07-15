@@ -12,10 +12,8 @@ deskmate_baseline/
 └── experiments/  training, evaluation, and hardening workflows
 ```
 
-The Python files directly under `deskmate_baseline/` are compatibility imports.
-They preserve existing commands such as
-`from deskmate_baseline.localization import ...`, but new code should use the
-responsibility-based path, for example:
+Implementation modules live inside the responsibility-based packages. Import
+them through their canonical path, for example:
 
 ```python
 from deskmate_baseline.domain.contracts import FramePacket
@@ -28,8 +26,9 @@ from deskmate_baseline.perception.localization import route_classification_roi
 - `data` and `perception` may depend on `domain`.
 - `experiments` may depend on `domain`, `data`, and `perception`.
 - `app` composes the runtime-facing pieces and may depend on all lower layers.
-- reusable logic belongs here; `scripts/` should eventually contain only thin
-  argument-parsing and command wrappers.
+- reusable logic belongs here; grouped files under `scripts/` are command
+  entry points and should contain only argument parsing and orchestration as
+  they are incrementally thinned.
 
 Frozen datasets, checkpoints, reports, and reference material remain outside
 the Python package and are not affected by this layout.

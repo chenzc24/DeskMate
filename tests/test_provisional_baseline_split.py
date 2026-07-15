@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from scripts.build_provisional_baseline_split import (
+from scripts.data.build_provisional_baseline_split import (
     INTERNAL_LABELS,
     MANIFEST_FIELDS,
     build_dataset,

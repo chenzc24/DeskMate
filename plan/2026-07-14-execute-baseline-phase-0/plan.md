@@ -46,11 +46,11 @@ maintenance log. No existing change will be discarded, staged, or rewritten.
 - `configs/phase0_pilot_review.toml`
 - `data/README.md`
 - `data/manifests/source_manifest.template.csv`
-- `scripts/audit_source_manifest.py`
-- `scripts/build_pilot_contact_sheets.py`
-- `scripts/run_source_pilot.py`
-- `scripts/run_phase0_skeleton.py`
-- `scripts/verify_gate_b0.py`
+- `scripts/data/audit_source_manifest.py`
+- `scripts/data/build_pilot_contact_sheets.py`
+- `scripts/data/run_source_pilot.py`
+- `scripts/runtime/run_phase0_skeleton.py`
+- `scripts/tools/verify_gate_b0.py`
 - `data/downloads/phase0_pilot/**` — ignored generated pilot images/metadata;
   never stage or commit
 - `docs/evaluation/BASELINE_PHASE0_B0_REPORT.md`
@@ -64,7 +64,7 @@ maintenance log. No existing change will be discarded, staged, or rewritten.
 - `docs/plans/**`
 - `AGENTS.md` and `README.md`
 - All earlier target plans
-- `scripts/download_dataset_sources.ps1`
+- `scripts/data/download_dataset_sources.ps1`
 - Existing user browser/Chrome preparation
 - Any parent-workspace paths and all non-pilot raw dataset/model artifact paths
 

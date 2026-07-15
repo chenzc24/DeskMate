@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.train_provisional_baseline import parse_results_csv
+from scripts.training.train_provisional_baseline import parse_results_csv
 
 
 def write_results(path: Path) -> None:

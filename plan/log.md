@@ -285,3 +285,10 @@ Use concise entries:
 - Changed areas: moved implementation modules into `domain`, `data`, `perception`, `app`, and `experiments`; retained thin top-level compatibility imports; added package-layout documentation and compatibility tests. Datasets, checkpoints, reports, configs, and reference material were unchanged.
 - Validation: all Python sources, scripts, and tests compiled in the repository virtual environment; the full suite passed with 97 tests. Legacy and canonical import paths resolve to the same objects.
 - Commit status: not committed or pushed; migration of the large flat `scripts/` implementations is intentionally deferred to a second bounded refactor.
+
+## 2026-07-16 - Finish Package And Script Layout Cleanup
+
+- Target: remove the temporary root-level import shims and make the executable command layout navigable without breaking repository-owned workflows.
+- Changed areas: updated all imports to canonical responsibility-based package paths; grouped commands into `scripts/data`, `training`, `evaluation`, `runtime`, and `tools`; corrected repository-root discovery after the moves; updated tests, command documentation, and historical plan path references. Dataset contents, models, runs, artifacts, configs, and reference inputs were unchanged.
+- Validation: all Python files compiled, every grouped command module imported successfully, representative direct-file command entry points resolved the repository layout, and the full suite passed with 97 tests. `src/deskmate_baseline/` and `scripts/` now contain only `README.md` and `__init__.py` at their roots.
+- Commit status: the first responsibility-based package checkpoint was committed as `fb8a213`; this completion pass has not yet been pushed.

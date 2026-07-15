@@ -14,7 +14,7 @@ Start state from `git status --short --branch`:
 ```text
 ## main...origin/main
 ?? plan/2026-07-15-build-minimal-review-handoff/
-?? scripts/build_phase1_review_handoff.py
+?? scripts/data/build_phase1_review_handoff.py
 ?? tests/test_review_handoff.py
 ```
 
@@ -45,7 +45,7 @@ as this target's output.
 - `configs/baseline_phase1_data.toml`
 - all source, scripts, and tests
 - `plan/2026-07-15-build-minimal-review-handoff/`
-- `scripts/build_phase1_review_handoff.py`
+- `scripts/data/build_phase1_review_handoff.py`
 - `tests/test_review_handoff.py`
 - the ignored B1 queue, contact sheets, datasets, weights, and media
 

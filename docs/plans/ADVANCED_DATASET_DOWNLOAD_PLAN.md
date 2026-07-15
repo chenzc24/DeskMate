@@ -39,7 +39,7 @@ data/
 在项目根目录执行：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\download_dataset_sources.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\data\download_dataset_sources.ps1
 ```
 
 脚本只下载约 30 MB 的可自动获取内容，不会下载大型数据集：

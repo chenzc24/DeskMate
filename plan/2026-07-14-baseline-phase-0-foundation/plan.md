@@ -36,7 +36,7 @@ discarded or staged.
 - `docs/plans/ADVANCED_PLAN.md` and Advanced dataset documents.
 - `AGENTS.md` and `README.md`.
 - `plan/2026-07-14-harden-baseline-architecture/**` and all prior target plans.
-- `scripts/download_dataset_sources.ps1` — belongs to Advanced desk-object data.
+- `scripts/data/download_dataset_sources.ps1` — belongs to Advanced desk-object data.
 - The user's browser/driver preparation for the referenced Selenium tutorial;
   this target does not install packages or run a scraper.
 - All source code and data directories until a later implementation target

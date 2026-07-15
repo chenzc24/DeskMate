@@ -4,7 +4,7 @@ import hashlib
 import zipfile
 from pathlib import Path
 
-from scripts.freeze_baseline_training_handoff import readme_text, write_deterministic_zip
+from scripts.tools.freeze_baseline_training_handoff import readme_text, write_deterministic_zip
 
 
 def sha(path: Path) -> str:

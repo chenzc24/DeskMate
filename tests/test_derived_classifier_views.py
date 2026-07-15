@@ -9,9 +9,9 @@ import pytest
 
 cv2 = pytest.importorskip("cv2")
 
-from deskmate_baseline.contracts import INTERNAL_LABELS
-from deskmate_baseline.localization import LocalizerBox, LocalizerObservation
-from scripts.derive_detector_classifier_views import derive_views
+from deskmate_baseline.domain.contracts import INTERNAL_LABELS
+from deskmate_baseline.perception.localization import LocalizerBox, LocalizerObservation
+from scripts.data.derive_detector_classifier_views import derive_views
 
 
 def sha(path: Path) -> str:

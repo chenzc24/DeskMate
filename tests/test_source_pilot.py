@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import tarfile
 
-from deskmate_baseline.source_pilot import (
+from deskmate_baseline.data.source_pilot import (
     LICENSE_URLS,
     PUBLIC_DOMAIN_MARK_URL,
     canonical_commons_license_url,

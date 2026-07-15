@@ -11,7 +11,7 @@ training outputs, smoke videos, and other runtime files.
 
 ## Owned Paths
 
-- `scripts/build_phase1_review_handoff.py`
+- `scripts/data/build_phase1_review_handoff.py`
 - `tests/test_review_handoff.py`
 - `data/downloads/phase1_candidates/README.md`
 - `data/downloads/phase1_review_handoff_minimal/`

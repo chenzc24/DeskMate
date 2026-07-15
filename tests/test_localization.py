@@ -6,8 +6,8 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from deskmate_baseline.contracts import FramePacket
-from deskmate_baseline.localization import (
+from deskmate_baseline.domain.contracts import FramePacket
+from deskmate_baseline.perception.localization import (
     LocalizerBox,
     LocalizerMappingError,
     UltralyticsCatLocalizerBackend,

@@ -45,8 +45,8 @@ configuration, test, and new evaluation paths, so the overlap is bounded.
 - `src/deskmate_baseline/localization.py`
 - `configs/baseline_localizer.toml`
 - `tests/test_localization.py`
-- `scripts/verify_pretrained_cat_localizer.py`
-- `scripts/compare_baseline_routing.py`
+- `scripts/evaluation/verify_pretrained_cat_localizer.py`
+- `scripts/evaluation/compare_baseline_routing.py`
 - `docs/evaluation/BASELINE_ROUTING_ABLATION.json`
 - `docs/evaluation/BASELINE_ROUTING_ABLATION.md`
 - `data/downloads/baseline_routing_ablation/` (ignored/generated)
@@ -96,7 +96,7 @@ configuration, test, and new evaluation paths, so the overlap is bounded.
 - `git status --short --branch`
 - `.\.venv\Scripts\python.exe -m pytest -q tests/test_localization.py`
 - `.\.venv\Scripts\python.exe -m pytest -q tests`
-- Run `scripts/compare_baseline_routing.py` with pinned inputs and checkpoints.
+- Run `scripts/evaluation/compare_baseline_routing.py` with pinned inputs and checkpoints.
 - Parse generated JSON/CSV with real parsers and visually inspect the generated
   robot-camera contact sheet.
 - Report same-image before/after route, correctness, abstention/conflict, model

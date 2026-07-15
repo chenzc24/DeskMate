@@ -6,9 +6,9 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from deskmate_baseline.contracts import REPORTABLE_LABELS, FramePacket
-from deskmate_baseline.inference import ClassMappingError
-from deskmate_baseline.target_inference import (
+from deskmate_baseline.domain.contracts import REPORTABLE_LABELS, FramePacket
+from deskmate_baseline.perception.inference import ClassMappingError
+from deskmate_baseline.perception.target_inference import (
     UltralyticsTargetClassificationBackend,
     fuse_target_probabilities,
     target_index_mapping,

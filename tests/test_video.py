@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from deskmate_baseline.video import OpenCVFrameSource
+from deskmate_baseline.app.video import OpenCVFrameSource
 
 
 class FakeCapture:

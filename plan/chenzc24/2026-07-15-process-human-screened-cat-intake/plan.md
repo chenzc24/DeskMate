@@ -28,8 +28,8 @@ plan/2026-07-15-build-minimal-review-handoff/
 plan/2026-07-15-add-pretrained-cat-localizer/
 plan/2026-07-15-smoke-pretrained-cat-localizer/
 plan/2026-07-15-add-detector-derived-classifier-views/
-scripts/build_phase1_review_handoff.py
-scripts/verify_pretrained_cat_localizer.py
+scripts/data/build_phase1_review_handoff.py
+scripts/evaluation/verify_pretrained_cat_localizer.py
 src/deskmate_baseline/localization.py
 tests/test_localization.py
 tests/test_review_handoff.py
@@ -45,7 +45,7 @@ tests/test_review_handoff.py
 ## Owned Files
 
 - `configs/baseline_human_screened_intake.toml`
-- `scripts/process_human_screened_cat_intake.py`
+- `scripts/data/process_human_screened_cat_intake.py`
 - `tests/test_human_screened_cat_intake.py`
 - `docs/evaluation/BASELINE_HUMAN_SCREENED_INTAKE.json`
 - `docs/evaluation/BASELINE_HUMAN_SCREENED_INTAKE.md`

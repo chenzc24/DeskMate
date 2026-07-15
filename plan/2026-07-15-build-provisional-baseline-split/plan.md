@@ -22,7 +22,7 @@ localizer, presentation, and Advanced work.
 ## Owned Files
 
 - `configs/baseline_provisional_dataset.toml`
-- `scripts/build_provisional_baseline_split.py`
+- `scripts/data/build_provisional_baseline_split.py`
 - `tests/test_provisional_baseline_split.py`
 - `docs/evaluation/BASELINE_PROVISIONAL_SPLIT.json`
 - `docs/evaluation/BASELINE_PROVISIONAL_SPLIT.md`

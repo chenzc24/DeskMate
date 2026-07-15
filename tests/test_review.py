@@ -3,8 +3,8 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from deskmate_baseline.manifest import MANIFEST_FIELDS
-from deskmate_baseline.review import audit_review_queue
+from deskmate_baseline.domain.manifest import MANIFEST_FIELDS
+from deskmate_baseline.data.review import audit_review_queue
 
 
 QUEUE_FIELDS = [

@@ -89,7 +89,7 @@ errors, and `ready_to_freeze_split=false`.
 Run the audit after filling the local queue:
 
 ```powershell
-python scripts/audit_phase1_reviews.py
+python scripts/data/audit_phase1_reviews.py
 ```
 
 Only accepted/post-dedup counts may authorize targeted Selenium gap-fill or a

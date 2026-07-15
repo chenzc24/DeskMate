@@ -24,7 +24,7 @@ fail-closed.
 4. From the repository root, run:
 
    ```powershell
-   python scripts/run_phase0_skeleton.py `
+   python scripts/runtime/run_phase0_skeleton.py `
      data/raw/robot/b0/frame-001.png `
      --source-kind recorded_robot `
      --output data/downloads/phase0_pilot/robot_frame_smoke.json
@@ -81,7 +81,7 @@ still reports:
 After reviewers record their decisions, run:
 
 ```powershell
-python scripts/audit_phase1_reviews.py
+python scripts/data/audit_phase1_reviews.py
 ```
 
 Exit code 3 is expected while required reviews are missing or disagree. Do not
@@ -91,6 +91,6 @@ freeze the split or begin official training while
 ## Definition Of B0 Cleared
 
 Gate B0 is cleared only after both robot inputs above are supplied and
-`python scripts/verify_gate_b0.py` exits 0 with status `PASS` and an empty
+`python scripts/tools/verify_gate_b0.py` exits 0 with status `PASS` and an empty
 `failed_checks` list. Gate B1 image acceptance remains a separate subsequent
 gate.

@@ -2,12 +2,12 @@ from __future__ import annotations
 
 import pytest
 
-from deskmate_baseline.contracts import (
+from deskmate_baseline.domain.contracts import (
     ClassificationObservation,
     ConfirmationEvent,
     FramePacket,
 )
-from deskmate_baseline.runtime import (
+from deskmate_baseline.app.runtime import (
     BoundedInferenceQueue,
     EventPresenter,
     InferenceJob,

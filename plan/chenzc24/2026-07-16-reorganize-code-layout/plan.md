@@ -2,21 +2,23 @@
 
 ## Outcome and owned paths
 
-Restructure `src/deskmate_baseline/` into responsibility-based subpackages
-without changing the installed package name or breaking existing imports and
-script commands. Add a documented destination for later migration of the flat
-`scripts/` implementations.
+Restructure `src/deskmate_baseline/` into responsibility-based subpackages,
+then finish the cleanup by removing root-level compatibility modules and
+grouping executable scripts by workflow. Update all repository-owned imports
+and command references to their canonical locations.
 
 Owned paths:
 
 - `src/deskmate_baseline/`
-- import-only compatibility updates in `tests/`
+- `scripts/`, tests, and documentation (including `data/README.md`) that
+  directly reference moved commands
 - `pyproject.toml` only if package discovery or entry points require it
 - this target plan and one factual completion entry in `plan/log.md`
 
 ## Read-only paths
 
-- `data/`, `models/`, `runs/`, `artifacts/`, and `References/`
+- dataset contents under `data/`, plus `models/`, `runs/`, `artifacts/`, and
+  `References/`
 - all configs and evaluation evidence
 - frozen BD05 and M9 assets
 
@@ -27,9 +29,8 @@ only.
 
 ## Validation and robot motion
 
-- preserve legacy `deskmate_baseline.<module>` imports through compatibility
-  shims;
-- verify new responsibility-based import paths;
+- verify responsibility-based import paths and grouped script modules;
+- keep the `scripts/` root limited to package metadata and a layout README;
 - compile all Python files and run `python -m pytest -q`;
 - run `git diff --check` and inspect repository status.
 

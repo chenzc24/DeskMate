@@ -21,9 +21,9 @@ ignored and must not be staged.
 - `configs/baseline_sources.toml`
 - `configs/phase0_pilot_review.toml`
 - `src/deskmate_baseline/source_pilot.py`
-- `scripts/run_source_pilot.py`
-- `scripts/build_pilot_contact_sheets.py`
-- `scripts/verify_gate_b0.py`
+- `scripts/data/run_source_pilot.py`
+- `scripts/data/build_pilot_contact_sheets.py`
+- `scripts/tools/verify_gate_b0.py`
 - targeted tests under `tests/`
 - `docs/evaluation/BASELINE_PHASE0_B0_REPORT.md`
 - `docs/evaluation/BASELINE_PHASE0_B0_REPORT.json`
@@ -79,7 +79,7 @@ ignored and must not be staged.
 - parse all changed TOML/JSON using real parsers
 - inspect generated contact sheets for each new source/group
 - verify archive checksum and that only safe regular image members are selected
-- run `python scripts/verify_gate_b0.py`; expect only robot-evidence checks to
+- run `python scripts/tools/verify_gate_b0.py`; expect only robot-evidence checks to
   remain open
 - confirm `References/The requirement/**` is unchanged
 - run `git diff --check` and `git status --short --branch`

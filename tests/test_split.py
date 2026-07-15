@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from deskmate_baseline.contracts import INTERNAL_LABELS
-from deskmate_baseline.manifest import MANIFEST_FIELDS
-from deskmate_baseline.split import (
+from deskmate_baseline.domain.contracts import INTERNAL_LABELS
+from deskmate_baseline.domain.manifest import MANIFEST_FIELDS
+from deskmate_baseline.data.split import (
     CLASS_DIRS,
     GateB1NotReady,
     build_frozen_split,

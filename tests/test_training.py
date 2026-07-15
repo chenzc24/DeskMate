@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from deskmate_baseline.contracts import INTERNAL_LABELS
-from deskmate_baseline.training import build_training_plan, load_training_config
+from deskmate_baseline.domain.contracts import INTERNAL_LABELS
+from deskmate_baseline.experiments.training import build_training_plan, load_training_config
 
 
 def test_training_config_and_dry_run_plan() -> None:

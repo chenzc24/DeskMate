@@ -67,4 +67,4 @@ of these numbers is release accuracy.
 
 Generated evidence is under
 `data/downloads/baseline_routing_ablation/`; the reproducible runner is
-`scripts/compare_baseline_routing.py`.
+`scripts/evaluation/compare_baseline_routing.py`.

@@ -88,7 +88,7 @@ and produced checkpoint hash. A directory name alone is not provenance.
   manifest, not an arbitrary mutable `runs/...` path.
 - States are `development`, `candidate`, `release`, or `fallback`. Only one
   release and one fallback per model ID may be active.
-- Run `python scripts/artifact_inventory.py` before cleanup or promotion. It is
+- Run `python scripts/tools/artifact_inventory.py` before cleanup or promotion. It is
   read-only; cleanup remains an explicit human-approved action.
 
 ## Baseline Architecture Invariants

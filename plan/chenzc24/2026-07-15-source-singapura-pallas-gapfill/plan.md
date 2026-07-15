@@ -8,7 +8,7 @@ team can retain about 100 unique images and bring both classes near 400.
 
 ## Owned files
 
-- `scripts/source_singapura_pallas_gapfill.py`
+- `scripts/data/source_singapura_pallas_gapfill.py`
 - generated ignored `data/downloads/baseline_additional_review_20260715/`
 - this plan
 

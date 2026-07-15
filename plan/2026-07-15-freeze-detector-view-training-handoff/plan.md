@@ -23,11 +23,11 @@ and packaging changes below and leaves official Gate B1 unchanged.
 
 - `configs/baseline_derived_views.toml`
 - `configs/baseline_training_provisional.toml`
-- `scripts/derive_detector_classifier_views.py`
-- `scripts/train_provisional_baseline.py`
-- `scripts/freeze_baseline_training_handoff.py`
-- `scripts/fetch_baseline_model_assets.py`
-- `scripts/bootstrap_training_env.ps1`
+- `scripts/data/derive_detector_classifier_views.py`
+- `scripts/training/train_provisional_baseline.py`
+- `scripts/tools/freeze_baseline_training_handoff.py`
+- `scripts/tools/fetch_baseline_model_assets.py`
+- `scripts/tools/bootstrap_training_env.ps1`
 - `tests/test_derived_classifier_views.py`
 - `tests/test_provisional_training.py`
 - `tests/test_training_handoff.py`

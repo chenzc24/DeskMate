@@ -86,7 +86,7 @@ archives stay ignored and must not be staged.
 - confirm each downloaded file hash/dimensions matches its manifest row
 - confirm assignment examples are absent
 - generate and inspect representative contact-sheet batches
-- run `python scripts/verify_gate_b0.py` and require the same two deferred robot
+- run `python scripts/tools/verify_gate_b0.py` and require the same two deferred robot
   failures, with no regression in completed checks
 - confirm `References/The requirement/**` is unchanged
 - run `git diff --check` and `git status --short --branch`

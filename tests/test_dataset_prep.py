@@ -6,13 +6,13 @@ from pathlib import Path
 
 from PIL import Image
 
-from deskmate_baseline.dataset_prep import (
+from deskmate_baseline.data.dataset_prep import (
     coverage_decision,
     dhash64,
     hamming_distance,
     prepare_candidate_rows,
 )
-from deskmate_baseline.manifest import MANIFEST_FIELDS
+from deskmate_baseline.domain.manifest import MANIFEST_FIELDS
 
 
 def image_bytes(color: tuple[int, int, int]) -> bytes:
@@ -139,7 +139,7 @@ def test_candidate_coverage_never_authorizes_selenium_or_acceptance() -> None:
 
 
 def test_original_url_normalization_keeps_archive_member_identity() -> None:
-    from deskmate_baseline.dataset_prep import normalize_original_url
+    from deskmate_baseline.data.dataset_prep import normalize_original_url
 
     first = normalize_original_url("https://example.test/images.tar.gz#images/Persian_1.jpg")
     second = normalize_original_url("https://example.test/images.tar.gz#images/Persian_2.jpg")

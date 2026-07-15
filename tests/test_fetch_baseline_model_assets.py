@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.fetch_baseline_model_assets import ensure_asset
+from scripts.tools.fetch_baseline_model_assets import ensure_asset
 
 
 class Response(io.BytesIO):

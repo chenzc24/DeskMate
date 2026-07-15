@@ -6,8 +6,8 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-from deskmate_baseline.classifier_hardening import build_hardening_datasets
-from deskmate_baseline.contracts import INTERNAL_LABELS
+from deskmate_baseline.experiments.classifier_hardening import build_hardening_datasets
+from deskmate_baseline.domain.contracts import INTERNAL_LABELS
 
 
 CLASS_DIRECTORIES = tuple(

@@ -1,16 +1,12 @@
 from __future__ import annotations
 
 import csv
-import sys
 from pathlib import Path
 
 import pytest
 
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "scripts"))
-
-from build_phase1_review_handoff import build_handoff  # noqa: E402
+from scripts.data.build_phase1_review_handoff import build_handoff
 
 
 FIELDS = [

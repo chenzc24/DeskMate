@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from deskmate_baseline.contracts import INTERNAL_LABELS
-from deskmate_baseline.evaluation import (
+from deskmate_baseline.domain.contracts import INTERNAL_LABELS
+from deskmate_baseline.experiments.evaluation import (
     PREDICTION_FIELDS,
     PredictionRow,
     evaluate_predictions,

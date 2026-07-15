@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from scripts.process_human_screened_cat_intake import (
+from scripts.data.process_human_screened_cat_intake import (
     REPORTABLE_LABELS,
     process_intake,
 )

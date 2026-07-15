@@ -24,7 +24,7 @@ pending human review.
   machine-readable Gate B1 report with `ready=true`, a materialized train/val
   view, and the verified base weight.
 - A project-local Python 3.12 environment is pinned and reproducible through
-  `scripts/bootstrap_training_env.ps1` and the tracked dependency lock.
+  `scripts/tools/bootstrap_training_env.ps1` and the tracked dependency lock.
 
 ## Verified Local Stack
 
@@ -59,8 +59,8 @@ review the license before closed-source or commercial distribution.
 | B1 | Not passed | 2,321 human decisions; accepted count is still zero |
 | B2 | Not started | Fine-tuned checkpoint and real live-stream integration |
 
-Running `scripts/freeze_baseline_split.py` against the current queue exits with
-code 3 and writes no split. Running `scripts/train_baseline.py` without
+Running `scripts/data/freeze_baseline_split.py` against the current queue exits with
+code 3 and writes no split. Running `scripts/training/train_baseline.py` without
 `--execute` produces the pinned dry-run plan. No official training, split
 freeze, robot connection, Selenium acquisition, calibration, or motion was
 performed.

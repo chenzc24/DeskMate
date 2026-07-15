@@ -20,7 +20,7 @@ def test_assignment_image_runs_only_as_smoke_fixture() -> None:
     completed = subprocess.run(
         [
             sys.executable,
-            str(ROOT / "scripts" / "run_phase0_skeleton.py"),
+            str(ROOT / "scripts" / "runtime" / "run_phase0_skeleton.py"),
             str(image),
             "--source-kind",
             "assignment_smoke",
