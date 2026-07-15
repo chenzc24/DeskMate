@@ -11,14 +11,19 @@ Create a target plan before editing tracked project files.
 Default path:
 
 ```text
-plan/<YYYY-MM-DD-target-name>/plan.md
+plan/<user>/<YYYY-MM-DD-target-name>/plan.md
 ```
 
 Example:
 
 ```text
-plan/2026-07-15-scaffold-multi-expert-runtime/plan.md
+plan/chenzc24/2026-07-15-scaffold-multi-expert-runtime/plan.md
 ```
+
+Use the collaborator's stable GitHub/Git username for `<user>`. This keeps
+concurrent targets grouped by owner and avoids same-date target-name
+collisions. Existing published flat plans remain valid historical records and
+do not need bulk renaming.
 
 Start from `plan/target-plan.template.md`. Every plan identifies the goal,
 owner, dirty-state decision, owned and read-only paths, shared dependencies,

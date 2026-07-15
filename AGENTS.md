@@ -40,8 +40,12 @@ before implementing dependent code.
 Before editing repository files, create or update:
 
 ```text
-plan/<YYYY-MM-DD-target-name>/plan.md
+plan/<user>/<YYYY-MM-DD-target-name>/plan.md
 ```
+
+Use the collaborator's stable GitHub/Git username for `<user>`. Keep already
+published flat plans in place as historical records; new and still-uncommitted
+targets use the user-scoped layout.
 
 Each target must name:
 
