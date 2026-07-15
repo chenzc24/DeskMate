@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T13:34:18+08:00",
+  "status": "ROUTING_HARDENING_DIAGNOSTICALLY_SUPPORTED_NOT_RELEASE_ADMITTED",
+  "decision": {
+    "minimum_box_area_ratio": 0.01,
+    "minimum_padded_short_side_pixels": 64,
+    "candidate_deduplication_iou_threshold": 0.85,
+    "detector_confidence_threshold": 0.25
+  },
+  "same_image_comparison": {
+    "biased_40": {
+      "control_correct": 37,
+      "hardened_correct": 38,
+      "count": 40,
+      "corrections": 1,
+      "regressions": 0
+    },
+    "expanded_600": {
+      "control_correct": 588,
+      "hardened_correct": 588,
+      "count": 600,
+      "corrections": 0,
+      "regressions": 0
+    },
+    "robot_9": {
+      "control_correct": 6,
+      "hardened_correct": 7,
+      "count": 9,
+      "corrections": 1,
+      "regressions": 0,
+      "ground_truth_role": "human_read_visible_printed_label_not_frozen_manifest"
+    }
+  },
+  "changed_cases": [
+    {
+      "sample_id": "target-sphynx-000158",
+      "change": "31-pixel false crop rejected in favor of centre fallback",
+      "control_prediction": "not_target",
+      "hardened_prediction": "sphynx"
+    },
+    {
+      "sample_id": "robot-03",
+      "change": "1.26-percent-area cat proposal admitted",
+      "control_prediction": "not_target",
+      "hardened_prediction": "sphynx"
+    }
+  ],
+  "candidate_deduplication": {
+    "samples_with_removed_near_duplicate": 12,
+    "route_or_prediction_changes": 0
+  },
+  "robot_low_confidence_diagnostic": {
+    "detector_confidence_range": "[0.01, 0.25)",
+    "candidate_count": 4,
+    "correct_candidate_classifications": 0,
+    "pallas_candidate_count": 2,
+    "pallas_correct_candidate_classifications": 0,
+    "decision": "do not lower the global confidence threshold"
+  },
+  "class_diagnostics": {
+    "expanded_600_singapura": "96/100",
+    "expanded_600_pallas": "99/100",
+    "robot_9_singapura": "1/1",
+    "robot_9_pallas": "0/2; both predicted persian"
+  },
+  "control_reproduction": {
+    "compared_count": 640,
+    "prediction_mismatch_count": 0
+  },
+  "latency_ms": {
+    "detector_shared_mean": 32.97907950693374,
+    "detector_shared_p95": 38.3423,
+    "classifier_mean": 15.185697709923664,
+    "classifier_p95": 21.7548,
+    "role": "warmed_static_component_diagnostic_not_end_to_end_camera_timing"
+  },
+  "models": {
+    "detector_sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b",
+    "classifier_sha256": "c41cfd4a12411883df52bf8643b20a2621b189bbd27c642bae441e92cf06319d"
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.95"
+  },
+  "artifacts": {
+    "report": "data/downloads/baseline_routing_ablation/report.json",
+    "predictions": "data/downloads/baseline_routing_ablation/predictions.csv",
+    "low_confidence_candidates": "data/downloads/baseline_routing_ablation/robot_low_confidence_candidates.csv",
+    "robot_contact_sheet": "data/downloads/baseline_routing_ablation/robot_control_vs_hardened.jpg"
+  },
+  "limitations": [
+    "the 40-image set is deliberately biased",
+    "the 600-image set includes training and validation parents",
+    "the nine robot stills have no frozen ground-truth manifest",
+    "static images do not validate temporal consensus",
+    "raw classifier probabilities are uncalibrated",
+    "routing cannot repair Pallas robot-print domain errors"
+  ]
+}

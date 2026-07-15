@@ -189,3 +189,59 @@ Use concise entries:
 - Changed areas: generated a complete parent-linked detector-view manifest; materialized one deterministic crop-or-original view per parent; retargeted the guarded classifier training entry point; added a dataset-only handoff ZIP, Git-delivered training code, pinned asset bootstrap, inventories, tests, and evaluation evidence.
 - Validation: pinned COCO `B-D01` generated 1,958 selected crops with 829 original/fallback views while preserving all 2,787 parents and the frozen 85/10/5 allocation; the clean repository extraction passed 2,789 dataset per-file size/SHA-256 checks, contained 2,787 training images and zero interrupted checkpoints, and passed the repository training dry-run.
 - Commit policy: the user authorized this bounded code/configuration/evidence scope for direct commit and push to `main`; no PR. The interrupted original-only run is excluded and superseded. Gate B1 remains closed because negative review, provenance/license, source/session grouping, dHash adjudication, and multi-box review are still provisional; no robot connection or motion occurred.
+
+## 2026-07-15 - Train Detector-View Baseline Classifier
+
+- Target: train one real `B-M01` seed on the frozen one-view-per-parent outputs produced by `B-D01`, then independently reload and evaluate the best checkpoint.
+- Result: patience-12 early stopping completed 19 epochs in 139.55 seconds; epoch 7 reached 95.71% val-select top-1 and 100% top-5, while an independent 280-image pass reproduced 95.71% accuracy and 95.81% macro F1.
+- Checkpoint: `best.pt` is 11,035,778 bytes with SHA-256 `c41cfd4a12411883df52bf8643b20a2621b189bbd27c642bae441e92cf06319d`; canonical six-class mapping verified.
+- Scope: development only and not committed automatically. Gate B1 remains false; val-cal, robot calibration, robot-final data, robot connection, and motion were not used.
+
+## 2026-07-15 - Evaluate Robot-Camera Stills End To End
+
+- Target: pass all three 640×480 frames in `data/downloads/Camera/` through the current `B-D01 -> padded crop/fallback -> B-M01 best.pt` chain and save visible evidence.
+- Result: the active 2% area-floor config detected the near and medium images and classified both Sphynx at greater than 99.99% confidence; the far frame used centre fallback and returned `not_target` at 49.79% with only 16.43% margin.
+- Diagnosis: the far frame had a native cat proposal at confidence 0.376 and area 1.26%, rejected solely by the 2% area floor. A diagnostic-only 1% floor produced a crop classified Sphynx at 99.13%; active thresholds remain unchanged pending a larger same-frame sweep with background negatives.
+- Scope: no formal accuracy/FPS/P95 claim from three stills; no robot command, motion, commit, or push.
+
+## 2026-07-15 - Re-evaluate Expanded Robot-Camera Still Batch
+
+- Target: rerun the unchanged detector-to-classifier chain after new files arrived in `data/downloads/Camera/`, while preserving the first-batch artifacts.
+- Result: the frozen snapshot contained six new images; four detector hits and two fallbacks produced four visible-label-correct outputs. Persian, Ragdoll, Persian, and Singapura were correct; both Pallas frames were predicted Persian.
+- Diagnosis: one Pallas frame had an accepted detector crop but still failed classification; the second had only 0.0167 native detector confidence and failed all centre ROI scales. A 1% area-floor diagnostic recovered neither new miss, so the active configuration remains unchanged.
+- Scope: results are descriptive from visible paper labels, not release accuracy evidence; no robot command, motion, commit, or push.
+
+## 2026-07-15 - Review Detector Boxes On Original Data
+
+- Target: show the user fresh `B-D01` boxes on a deterministic subset of immutable original target images without changing the frozen classifier dataset.
+- Changed areas: added one user-scoped no-commit target and generated three ignored contact sheets plus CSV/JSON detector evidence under `data/downloads/baseline_detector_box_review/`; all concurrent training and robot-camera dirty paths remained read-only.
+- Validation: fresh RTX 4070 inference used pinned detector SHA-256 `646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b`, Ultralytics 8.4.95, cat ID 15, `conf=0.25`, and `imgsz=640` on 40 original images. The deliberately biased sample yielded 20 hits, 9 multi-box results, and 11 misses; visual review exposed Sphynx/Pallas misses and multi-cat/nested-cat extra boxes. These are review counts, not detector accuracy.
+- Commit status: no commit or push requested; generated sheets remain ignored and no robot motion occurred.
+
+## 2026-07-15 - Review Full Pipeline On The Same Original Images
+
+- Target: run the active detector crop/fallback and current provisional classifier checkpoint on exactly the same ordered 40-image detector-review sample.
+- Changed areas: added one user-scoped no-commit target and generated three ignored full-pipeline contact sheets plus predictions CSV/JSON under `data/downloads/baseline_full_pipeline_review/`; all existing training, camera evaluation, data, and checkpoint paths remained read-only.
+- Validation: both model hashes and the canonical class mapping passed; the same 40 parent IDs/paths/labels/order were asserted. The deliberately biased sample gave 37/40 top-1 correct, with detector crops 29/32 and centre fallbacks 8/8. Errors were one false Sphynx detector crop and two multi-box Singapura cases. Raw probabilities and sequential still-image latency are diagnostic only, not calibrated, temporal, held-out, or release evidence.
+- Commit status: no commit or push; no threshold, dataset, checkpoint, robot command, or motion changed.
+
+## 2026-07-15 - Validation-Only Full Pipeline Review
+
+- Target: run the unchanged detector crop/fallback and classifier chain on every frozen `val_select` and `val_cal` parent, excluding train images.
+- Changed areas: added one user-scoped no-commit target and generated ignored validation-only predictions/errors CSVs, JSON metrics, confusion matrix, and error/low-margin contact sheet under `data/downloads/baseline_full_pipeline_validation_only/`.
+- Validation: 419 rows were asserted with zero train parents; overall raw top-1 was 398/419 (94.99%), target-only 339/352 (96.31%), provisional-negative rejection 59/67 (88.06%), macro-F1 0.9511; `val_select` was 267/280 and `val_cal` 131/139. Detector crops were 276/293 and fallbacks 122/126. Sequential static chain measured 51.54 ms mean/64.21 ms P95. These are validation diagnostics, not final calibration or robot-domain release metrics.
+- Commit status: no commit or push; no source, split, threshold, model, checkpoint, robot command, or motion changed.
+
+## 2026-07-15 - Expand Full-Pipeline Static Diagnostic To 600 Images
+
+- Target: expand the unchanged detector-crop/fallback-to-classifier review to 600 unique original parents, balanced at 100 per target/rejection class and 85/10/5 per-class split, while excluding the preceding 40.
+- Changed areas: added one user-scoped no-commit target and generated ignored predictions/errors CSVs, JSON metrics, confusion matrix, and balanced/failure/low-margin/fallback sheets under `data/downloads/baseline_full_pipeline_expanded/`; concurrent training and camera-evaluation work remained read-only.
+- Validation: model hashes, source existence, sample uniqueness/distribution, schemas, counts, and image decoding passed. The mixed-split diagnostic yielded 588/600 correct, 98.4% target-only accuracy, 96% provisional-negative rejection, macro F1 0.9800, detector-crop 401/409, fallback 187/191, and warmed sequential static chain 49.32 ms mean/55.62 ms P95. These are not held-out, temporal, camera, or release metrics.
+- Commit status: no commit or push; no source, split, threshold, model, checkpoint, robot command, or motion changed.
+
+## 2026-07-15 - Harden Detector-To-Classifier ROI Routing
+
+- Target: prevent implausibly small detector crops from suppressing centre fallback, recover useful 1%-area cat proposals, and remove near-duplicate candidates without treating routing as a cure for breed/domain errors.
+- Changed areas: added a 64-source-pixel padded-crop gate, explicit fallback reasons, IoU 0.85 candidate de-duplication, a 1% detector area floor, unit tests, a reproducible four-policy ablation, and tracked aggregate evidence; generated per-image results and the robot comparison sheet remain ignored.
+- Validation: 10 targeted tests passed; the control reproduced all 640 previous non-robot predictions. Hardened routing moved the biased 40 from 37 to 38 correct and the nine robot stills from 6 to 7 visible-label-correct, with no change across the expanded 600 and zero observed regressions. Candidate de-duplication reduced 12 candidate sets without changing top routes. A robot-only confidence `[0.01, 0.25)` sweep added four candidates but classified none correctly, including both Pallas proposals as Persian; Pallas remains explicitly deferred to a separate classifier/domain-data target.
+- Commit status: user explicitly authorized a bounded direct commit and push to `main`; results remain static diagnostics, not held-out release accuracy; no robot command or motion occurred. Concurrent dirty paths remain unstaged.

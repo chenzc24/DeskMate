@@ -55,6 +55,33 @@ class LocalizerBox:
         return (x2 - x1) * (y2 - y1)
 
 
+def box_iou(first: LocalizerBox, second: LocalizerBox) -> float:
+    """Return normalized intersection-over-union for two proposals."""
+    ax1, ay1, ax2, ay2 = first.xyxy
+    bx1, by1, bx2, by2 = second.xyxy
+    intersection_width = max(0.0, min(ax2, bx2) - max(ax1, bx1))
+    intersection_height = max(0.0, min(ay2, by2) - max(ay1, by1))
+    intersection = intersection_width * intersection_height
+    union = first.area_ratio + second.area_ratio - intersection
+    return intersection / union if union > 0.0 else 0.0
+
+
+def deduplicate_overlapping_boxes(
+    boxes: Sequence[LocalizerBox], *, iou_threshold: float
+) -> tuple[LocalizerBox, ...]:
+    """Keep the strongest proposal from each near-identical overlap cluster."""
+    if not 0.0 <= iou_threshold <= 1.0:
+        raise ValueError("IoU threshold must be within [0, 1]")
+    ordered = sorted(
+        boxes, key=lambda box: (box.confidence, box.area_ratio), reverse=True
+    )
+    kept: list[LocalizerBox] = []
+    for candidate in ordered:
+        if all(box_iou(candidate, existing) < iou_threshold for existing in kept):
+            kept.append(candidate)
+    return tuple(kept)
+
+
 @dataclass(frozen=True, slots=True)
 class LocalizerObservation:
     """Typed detector output; it cannot represent or print a cat breed."""
@@ -103,6 +130,7 @@ class RoutedROI:
     mode: str
     frame_id: int
     source_confidence: float | None
+    route_reason: str
 
     def __post_init__(self) -> None:
         if self.mode not in {"detector_crop", "centre_fallback"}:
@@ -127,6 +155,23 @@ def _center_bounds(width: int, height: int, scale: float) -> tuple[int, int, int
     return left, top, left + roi_width, top + roi_height
 
 
+def _padded_box_bounds(
+    *,
+    box: LocalizerBox,
+    frame_width: int,
+    frame_height: int,
+    padding_ratio: float,
+) -> tuple[int, int, int, int]:
+    x1, y1, x2, y2 = box.xyxy
+    pad_x = (x2 - x1) * padding_ratio
+    pad_y = (y2 - y1) * padding_ratio
+    left = max(0, int(math.floor((x1 - pad_x) * frame_width)))
+    top = max(0, int(math.floor((y1 - pad_y) * frame_height)))
+    right = min(frame_width, int(math.ceil((x2 + pad_x) * frame_width)))
+    bottom = min(frame_height, int(math.ceil((y2 + pad_y) * frame_height)))
+    return left, top, right, bottom
+
+
 def route_classification_roi(
     frame: FramePacket,
     observation: LocalizerObservation | None,
@@ -134,10 +179,13 @@ def route_classification_roi(
     box_is_stable: bool,
     padding_ratio: float = 0.15,
     fallback_center_scale: float = 0.8,
+    minimum_padded_short_side_pixels: int = 0,
 ) -> RoutedROI:
     """Route only a same-frame stable proposal; otherwise copy the centre ROI."""
     if padding_ratio < 0:
         raise ValueError("padding_ratio must be non-negative")
+    if minimum_padded_short_side_pixels < 0:
+        raise ValueError("minimum padded short-side pixels must be non-negative")
     shape = getattr(frame.image_bgr, "shape", ())
     if len(shape) != 3 or int(shape[2]) != 3 or (int(shape[1]), int(shape[0])) != (
         frame.width,
@@ -155,21 +203,42 @@ def route_classification_roi(
     )
     if usable:
         box = observation.boxes[0]
-        x1, y1, x2, y2 = box.xyxy
-        pad_x = (x2 - x1) * padding_ratio
-        pad_y = (y2 - y1) * padding_ratio
-        left = max(0, int(math.floor((x1 - pad_x) * frame.width)))
-        top = max(0, int(math.floor((y1 - pad_y) * frame.height)))
-        right = min(frame.width, int(math.ceil((x2 + pad_x) * frame.width)))
-        bottom = min(frame.height, int(math.ceil((y2 + pad_y) * frame.height)))
-        if right > left and bottom > top:
+        left, top, right, bottom = _padded_box_bounds(
+            box=box,
+            frame_width=frame.width,
+            frame_height=frame.height,
+            padding_ratio=padding_ratio,
+        )
+        short_side_pixels = min(right - left, bottom - top)
+        if (
+            right > left
+            and bottom > top
+            and short_side_pixels >= minimum_padded_short_side_pixels
+        ):
             return RoutedROI(
                 image_bgr=frame.image_bgr[top:bottom, left:right].copy(),
                 pixel_xyxy=(left, top, right, bottom),
                 mode="detector_crop",
                 frame_id=frame.frame_id,
                 source_confidence=box.confidence,
+                route_reason="accepted_detector_box",
             )
+
+    if observation is None:
+        fallback_reason = "missing_observation"
+    elif not observation.valid:
+        fallback_reason = "invalid_observation"
+    elif (
+        observation.frame_id != frame.frame_id
+        or observation.captured_at_ns != frame.captured_at_ns
+    ):
+        fallback_reason = "mismatched_observation"
+    elif not observation.boxes:
+        fallback_reason = "detector_miss"
+    elif not box_is_stable:
+        fallback_reason = "unstable_detector_box"
+    else:
+        fallback_reason = "rejected_detector_box_short_side_pixels"
 
     left, top, right, bottom = _center_bounds(
         frame.width, frame.height, fallback_center_scale
@@ -180,6 +249,7 @@ def route_classification_roi(
         mode="centre_fallback",
         frame_id=frame.frame_id,
         source_confidence=None,
+        route_reason=fallback_reason,
     )
 
 
@@ -196,6 +266,7 @@ class UltralyticsCatLocalizerBackend:
         confidence_threshold: float = 0.25,
         minimum_box_area_ratio: float = 0.02,
         maximum_candidates: int = 5,
+        candidate_deduplication_iou_threshold: float = 0.85,
         maximum_frame_age_ms: float = 500.0,
         model_factory: Callable[..., Any] | None = None,
     ) -> None:
@@ -206,6 +277,9 @@ class UltralyticsCatLocalizerBackend:
         self.confidence_threshold = confidence_threshold
         self.minimum_box_area_ratio = minimum_box_area_ratio
         self.maximum_candidates = maximum_candidates
+        self.candidate_deduplication_iou_threshold = (
+            candidate_deduplication_iou_threshold
+        )
         self.maximum_frame_age_ns = int(maximum_frame_age_ms * 1_000_000)
         self._model_factory = model_factory
         self._model: Any | None = None
@@ -305,7 +379,12 @@ class UltralyticsCatLocalizerBackend:
                     and box.area_ratio >= self.minimum_box_area_ratio
                 ):
                     boxes.append(box)
-            boxes.sort(key=lambda box: (box.confidence, box.area_ratio), reverse=True)
+            boxes = list(
+                deduplicate_overlapping_boxes(
+                    boxes,
+                    iou_threshold=self.candidate_deduplication_iou_threshold,
+                )
+            )
             self._health = "ready"
             return LocalizerObservation(
                 task="cat_localization",

@@ -8,8 +8,11 @@ import pytest
 
 from deskmate_baseline.contracts import FramePacket
 from deskmate_baseline.localization import (
+    LocalizerBox,
     LocalizerMappingError,
     UltralyticsCatLocalizerBackend,
+    box_iou,
+    deduplicate_overlapping_boxes,
     resolve_native_class_id,
     route_classification_roi,
 )
@@ -92,6 +95,31 @@ def test_adapter_filters_sorts_and_contains_native_results(tmp_path):
     assert fake.calls[0][1]["classes"] == [15]
 
 
+def test_overlapping_candidates_are_deduplicated_by_iou(tmp_path):
+    fake = FakeModel(
+        FakeBoxes(
+            xyxyn=[[0.1, 0.1, 0.8, 0.8], [0.11, 0.11, 0.79, 0.79], [0.0, 0.0, 0.2, 0.2]],
+            conf=[0.8, 0.9, 0.7],
+            cls=[15, 15, 15],
+        )
+    )
+    model = backend(
+        tmp_path,
+        fake,
+        minimum_box_area_ratio=0.0,
+        candidate_deduplication_iou_threshold=0.85,
+    )
+    observation = model.infer(frame())
+    assert [box.confidence for box in observation.boxes] == pytest.approx([0.9, 0.7])
+    assert box_iou(observation.boxes[0], observation.boxes[1]) < 0.85
+
+
+def test_deduplication_threshold_is_validated():
+    box = LocalizerBox((0.0, 0.0, 0.5, 0.5), 0.8, 15)
+    with pytest.raises(ValueError, match="IoU threshold"):
+        deduplicate_overlapping_boxes([box], iou_threshold=1.1)
+
+
 def test_empty_detection_is_valid_and_routes_to_centre(tmp_path):
     model = backend(tmp_path, FakeModel())
     packet = frame()
@@ -99,6 +127,7 @@ def test_empty_detection_is_valid_and_routes_to_centre(tmp_path):
     routed = route_classification_roi(packet, observation, box_is_stable=True)
     assert observation.valid and observation.boxes == ()
     assert routed.mode == "centre_fallback"
+    assert routed.route_reason == "detector_miss"
     assert routed.image_bgr.shape == (80, 160, 3)
 
 
@@ -127,7 +156,47 @@ def test_stable_box_is_padded_clamped_and_copied(tmp_path):
     assert routed.mode == "detector_crop"
     assert routed.pixel_xyxy == (0, 0, 200, 100)
     assert routed.source_confidence == pytest.approx(0.8)
+    assert routed.route_reason == "accepted_detector_box"
     assert not np.shares_memory(packet.image_bgr, routed.image_bgr)
+
+
+def test_implausibly_thin_padded_crop_routes_to_centre(tmp_path):
+    boxes = FakeBoxes([[0.0, 0.2, 0.08, 0.8]], [0.8], [15])
+    model = backend(tmp_path, FakeModel(boxes), minimum_box_area_ratio=0.0)
+    packet = frame()
+    observation = model.infer(packet)
+    routed = route_classification_roi(
+        packet,
+        observation,
+        box_is_stable=True,
+        padding_ratio=0.15,
+        minimum_padded_short_side_pixels=32,
+    )
+    assert routed.mode == "centre_fallback"
+    assert routed.route_reason == "rejected_detector_box_short_side_pixels"
+    assert routed.pixel_xyxy == (20, 10, 180, 90)
+
+
+def test_short_side_pixel_gate_accepts_boundary_and_rejects_bad_config(tmp_path):
+    boxes = FakeBoxes([[0.0, 0.2, 0.15, 0.8]], [0.8], [15])
+    model = backend(tmp_path, FakeModel(boxes), minimum_box_area_ratio=0.0)
+    packet = frame()
+    observation = model.infer(packet)
+    routed = route_classification_roi(
+        packet,
+        observation,
+        box_is_stable=True,
+        padding_ratio=0.2,
+        minimum_padded_short_side_pixels=36,
+    )
+    assert routed.mode == "detector_crop"
+    with pytest.raises(ValueError, match="short-side"):
+        route_classification_roi(
+            packet,
+            observation,
+            box_is_stable=True,
+            minimum_padded_short_side_pixels=-1,
+        )
 
 
 def test_malformed_result_and_inference_error_fail_closed(tmp_path):

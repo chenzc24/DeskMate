@@ -52,6 +52,9 @@ def main() -> int:
         confidence_threshold=config["confidence_threshold"],
         minimum_box_area_ratio=config["minimum_box_area_ratio"],
         maximum_candidates=config["maximum_candidates"],
+        candidate_deduplication_iou_threshold=config[
+            "candidate_deduplication_iou_threshold"
+        ],
         maximum_frame_age_ms=config["maximum_frame_age_ms"],
     )
     backend.load()
