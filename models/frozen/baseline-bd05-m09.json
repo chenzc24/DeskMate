@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "status": "STAGE_CANDIDATE_FROZEN",
+  "freeze_date": "2026-07-16",
+  "combination": "BD05+M9",
+  "configuration": "models/frozen/baseline-bd05-m09.toml",
+  "models": {
+    "detector": {
+      "id": "B-D05-MANUAL-CURATED-SCREENPRINT-FROM-PRETRAINED",
+      "checkpoint": "models/frozen/b-d05-manual-curated-screenprint.pt",
+      "bytes": 20289733,
+      "sha256": "b290f57f3534b60a59b5f1d281b209ff773b8acab4b20a90458be9af51fbe503",
+      "initial_checkpoint": "models/yolo26s.pt",
+      "initial_checkpoint_sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
+    },
+    "classifier": {
+      "id": "B-M09-TARGET5-MANUAL-CURATED-AUG-FROM-PRETRAINED",
+      "checkpoint": "models/frozen/b-m09-target5-manual-curated-aug.pt",
+      "bytes": 11033666,
+      "sha256": "d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1",
+      "initial_checkpoint": "models/yolo26s-cls.pt",
+      "initial_checkpoint_sha256": "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09"
+    }
+  },
+  "datasets": {
+    "classifier_curated_source_manifest_sha256": "7a3477bebe95e374ba04e1dc4cc9abf1c8e9edc81aa5f053486f92a7b5a7ee4d",
+    "classifier_augmented_manifest_sha256": "3855d82cabf272f081bb25d8f8089926e2aab366fb997259941709d7360f29da",
+    "detector_curated_base_manifest_sha256": "4003b49d9ab859995330bafe99d7f0d79bc37905850d483ed51ba94fba51445e",
+    "detector_augmented_manifest_sha256": "22d1ebec8330fe39ecd65ee3a1f6dc6e45a005a4efa3d4de206011260afda173",
+    "detector_synthetic_manifest_sha256": "522018b68b4f132d9edd9743f05bd18972d44b5e869d1e287ed2064f5d77c6e7",
+    "seed": 20260715,
+    "diagnostic_source_overlap": 0
+  },
+  "training": {
+    "classifier_validation_top1": 0.97468,
+    "classifier_epochs_completed": 29,
+    "detector_epochs_completed": 24,
+    "detector_validation_precision": 0.973,
+    "detector_validation_recall": 0.971,
+    "detector_validation_map50": 0.984,
+    "detector_validation_map50_95": 0.693
+  },
+  "evaluation": {
+    "model_selection_24": {
+      "correct": 22,
+      "total": 24,
+      "source_group_correct": 8,
+      "source_group_total": 8
+    },
+    "robot_camera_11": {
+      "correct": 10,
+      "total": 11,
+      "source_group_correct": 9,
+      "source_group_total": 10
+    },
+    "combined_descriptive": {
+      "correct": 32,
+      "total": 35
+    },
+    "detector_held_out_iou50": {
+      "matched_images": 49,
+      "total_images": 49,
+      "mean_best_iou": 0.856525777930837
+    },
+    "detector_five_breed_replay": {
+      "accepted_images": 345,
+      "total_images": 354
+    },
+    "detector_not_target": {
+      "false_positive_images": 0,
+      "total_images": 54
+    }
+  },
+  "evidence": "docs/evaluation/BASELINE_MANUAL_CURATED_RETRAINING_20260715.md",
+  "limitations": [
+    "The 24-image and 11-image sets are small correlated diagnostics, not an independent final holdout.",
+    "M9 has no internal not_target class; rejection remains owned by localization or an external decision gate.",
+    "Keep BD04 and M8 available as rollback artifacts outside this freeze commit if needed."
+  ]
+}

@@ -1,0 +1,58 @@
+schema_version = 1
+freeze_date = "2026-07-16"
+status = "stage_candidate"
+
+[detector]
+model_id = "B-D05-MANUAL-CURATED-SCREENPRINT-FROM-PRETRAINED"
+checkpoint = "models/frozen/b-d05-manual-curated-screenprint.pt"
+expected_sha256 = "b290f57f3534b60a59b5f1d281b209ff773b8acab4b20a90458be9af51fbe503"
+backend = "UltralyticsCatLocalizerBackend"
+class_id = 0
+class_name = "cat"
+imgsz = 640
+confidence_threshold = 0.25
+minimum_box_area_ratio = 0.02
+
+[classifier]
+model_id = "B-M09-TARGET5-MANUAL-CURATED-AUG-FROM-PRETRAINED"
+checkpoint = "models/frozen/b-m09-target5-manual-curated-aug.pt"
+expected_sha256 = "d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1"
+backend = "UltralyticsTargetClassificationBackend"
+labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas"]
+imgsz = 224
+temperature = 1.0
+
+[routing]
+primary_policy = "detector_crop_else_centre_fallback"
+padding_ratio = 0.25
+fallback_center_scale = 0.8
+minimum_padded_short_side_pixels = 32
+temporal_voting_recommended = true
+
+[training_provenance]
+detector_initial_checkpoint = "models/yolo26s.pt"
+detector_initial_checkpoint_sha256 = "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
+classifier_initial_checkpoint = "models/yolo26s-cls.pt"
+classifier_initial_checkpoint_sha256 = "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09"
+inherited_project_checkpoint = false
+seed = 20260715
+
+[detector_training]
+epochs = 50
+patience = 10
+batch = 8
+workers = 0
+optimizer = "AdamW"
+lr0 = 0.001
+lrf = 0.01
+weight_decay = 0.0005
+warmup_epochs = 3
+freeze = 10
+close_mosaic = 10
+amp = true
+deterministic = true
+
+[decision]
+selected_combination = "BD05+M9"
+scope = "stage_candidate_not_final_release"
+rejection_owner = "localizer_or_external_gate"
