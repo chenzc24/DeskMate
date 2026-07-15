@@ -1,6 +1,6 @@
-"""DeskMate Cat Census Baseline contracts and Phase 0 runtime skeleton."""
+"""Stable domain contracts and low-level metadata utilities."""
 
-from .domain.contracts import (
+from .contracts import (
     INTERNAL_LABELS,
     REPORTABLE_LABELS,
     ClassificationObservation,

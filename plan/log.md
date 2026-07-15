@@ -278,3 +278,10 @@ Use concise entries:
 - Changed areas: added a reproducible acquisition/materialization script and generated ignored review folders under `data/downloads/baseline_additional_review_20260715/`; frozen datasets and checkpoints remained read-only.
 - Validation: materialized 204 Singapura and 220 Pallas candidates. All 424 images decoded, contain source/license metadata, are exact-hash unique within class, and have zero SHA-256 overlap with the 2,787 frozen split. Status is pending human review; no images were merged or trained.
 - Commit status: not committed or pushed.
+
+## 2026-07-16 - Reorganize Baseline Python Package
+
+- Target: replace the flat `src/deskmate_baseline/` implementation layout with responsibility-based packages while preserving every existing import and script command.
+- Changed areas: moved implementation modules into `domain`, `data`, `perception`, `app`, and `experiments`; retained thin top-level compatibility imports; added package-layout documentation and compatibility tests. Datasets, checkpoints, reports, configs, and reference material were unchanged.
+- Validation: all Python sources, scripts, and tests compiled in the repository virtual environment; the full suite passed with 97 tests. Legacy and canonical import paths resolve to the same objects.
+- Commit status: not committed or pushed; migration of the large flat `scripts/` implementations is intentionally deferred to a second bounded refactor.
