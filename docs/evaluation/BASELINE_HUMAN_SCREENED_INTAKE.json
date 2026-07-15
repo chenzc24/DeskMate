@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "status": "PROCESSED_NOT_READY_FOR_SPLIT_OR_TRAINING",
+  "source": "data/downloads/cat",
+  "processed_output": "data/downloads/cat_processed",
+  "screening_status": "human_screened_claimed",
+  "raw_counts": {
+    "ragdoll": 604,
+    "singapura": 374,
+    "persian": 675,
+    "sphynx": 474,
+    "pallas": 300
+  },
+  "raw_image_count": 2427,
+  "decoded_count": 2427,
+  "decode_error_count": 0,
+  "technical_exclusions": {
+    "below_160x160": {
+      "ragdoll": 0,
+      "singapura": 69,
+      "persian": 1,
+      "sphynx": 9,
+      "pallas": 0,
+      "total": 79
+    },
+    "redundant_exact_duplicates": {
+      "singapura": 7,
+      "total": 7
+    },
+    "cross_label_exact_groups": 0
+  },
+  "candidate_counts": {
+    "ragdoll": 604,
+    "singapura": 298,
+    "persian": 674,
+    "sphynx": 465,
+    "pallas": 300
+  },
+  "candidate_total": 2341,
+  "materialized_candidate_count": 2341,
+  "materialized_integrity_errors": 0,
+  "duplicate_review": {
+    "dhash_hamming_threshold": 4,
+    "near_pair_edges": 33,
+    "near_cluster_count": 32,
+    "near_cluster_images": 65,
+    "cross_label_near_cluster_count": 1,
+    "cross_label_cluster": {
+      "cluster_id": "near-d4d8e5557966",
+      "members": [
+        "Persian/Persian_cat_443.jpg",
+        "ragdoll_photos/Ragdoll_cat_196.jpg",
+        "Sphynx - Hairless Cat/Sphynx_cat_451.jpg"
+      ]
+    }
+  },
+  "provenance": {
+    "missing": 2210,
+    "partial_flickr_urls_without_license_or_author": 217,
+    "complete": 0,
+    "source_session_groups_complete": false
+  },
+  "readiness": {
+    "target_release_floor_ready": true,
+    "target_preferred_400_each_ready": false,
+    "not_target_count": 0,
+    "gate_b1_ready": false,
+    "ready_for_training": false
+  },
+  "blockers": [
+    "not_target_not_present_in_this_intake",
+    "provenance_and_license_incomplete",
+    "source_session_groups_incomplete",
+    "near_duplicate_clusters_require_human_confirmation",
+    "cross_label_near_hash_collisions_require_human_review"
+  ],
+  "checksums": {
+    "config_sha256": "1ccbc51c51c70492d5e48547bbeccdcb250be3117e6df407fc7cbbefac3ae986",
+    "processor_sha256": "2c54315bf98ca322e5b61180afc97f55fd5a63bf3cb9e461d8395eb24ab14a59",
+    "processor_test_sha256": "581f3304a04c805577ffed8836bbeec30c25836d825e95e01973245e0095dd00",
+    "input_snapshot_sha256": "ffc42a8e11af1f569fb2360dbfa7ca163036e33ba7dcdb2ec524f8533543e59b",
+    "materialized_manifest_sha256": "b4b3f57974b679eab15392e9f43aed5bafb22095985d25a03781dbb9fc950a6f",
+    "duplicate_review_sha256": "06de224636f6c51138fbe8b5dd47cad6a8991d11caa21fa466f8df8a4ec4ea4e",
+    "materialized_audit_sha256": "203535ad68f514ef6bea5e3a604709b9ef9d9b85ae22aa4f8cd6be1098162a0f",
+    "deterministic_manifest_sha256": "c490c8a9448a86219664e05920b91715cd647f79f52657b4d837fba3ae5ade3a",
+    "deterministic_audit_sha256": "0b414fbdb26aa67cca71b43ae4b831a5efa3e13a7fc4ce8f4923626fa0c8deab"
+  },
+  "originals_modified": false
+}

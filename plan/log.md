@@ -167,3 +167,11 @@ Use concise entries:
 - Changed areas: updated `docs/plans/BASELINE_PLAN.md` to v1.4 and refreshed the Phase 0 plan with review/dedup-before-split, split-before-derive, `view_manifest`, deterministic padded crops, parent-balanced original/crop sampling, miss retention, per-view evaluation, and a one-view-per-parent fallback; added the bounded target plan.
 - Validation: preserved formal requirements and B0/B1 state; cross-checked the existing localizer smoke evidence; resolved 7 local links; parsed the YAML example; checked parent/split/count/miss/exclusion guards, model IDs, Markdown whitespace/fences, `git diff --check`, and status scope.
 - Commit status: not committed or pushed; ready for human review. No crop was generated and all active localizer, review-handoff, robot-video, config, model-manifest, source, script, test, and evaluation paths remained read-only.
+
+## 2026-07-15 - Process Human-Screened Cat Intake
+
+- Target owner: `chenzc24`; execution agent: `Codex`.
+- Target: turn the teammate-merged five-breed image delivery into a deterministic, auditable intake without modifying originals or claiming Gate B1 readiness.
+- Changed areas: added canonical folder mapping, decode/dimension/hash checks, exact-duplicate exclusion, conservative dHash grouping, ignored clean-candidate materialization, tracked aggregate evaluation reports, tests, and the user-named target plan.
+- Validation: all 2,427 images decode; 2,341 candidates remain after 79 below-floor and 7 redundant-exact exclusions; no cross-label exact duplicate exists; two independent scans have identical manifest/duplicate-review/audit hashes; both Python environments pass 71 tests; TOML/JSON parsing, compilation, and `git diff --check` pass.
+- Commit status: not committed or pushed; generated data stays ignored. Gate B1 remains closed and no training, robot connection, or motion occurred.

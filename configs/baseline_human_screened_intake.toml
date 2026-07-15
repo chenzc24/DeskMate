@@ -1,0 +1,30 @@
+schema_version = 1
+
+[paths]
+input_root = "data/downloads/cat"
+output_root = "data/downloads/cat_processed"
+
+[technical]
+minimum_width = 160
+minimum_height = 160
+near_duplicate_hamming_distance = 4
+allowed_extensions = [".jpg", ".jpeg", ".png"]
+materialization = "copy"
+
+[targets]
+release_floor_total = 1200
+release_floor_per_class = 220
+preferred_per_class = 400
+not_target_floor = 300
+
+[folder_prefixes]
+pallas = "Pallas"
+persian = "Persian"
+ragdoll = "ragdoll"
+singapura = "Singapura"
+sphynx = "Sphynx"
+
+[screening]
+status = "human_screened_claimed"
+reviewer_identity_recorded = false
+note = "Human-filtered target images merged from two contributors; project provenance and duplicate/session audit remains required."
