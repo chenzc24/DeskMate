@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T01:44:24+08:00",
+  "status": "TOOLING_READY_REAL_PREDICTIONS_PENDING",
+  "official_model_metrics_exist": false,
+  "capabilities": {
+    "prediction_manifest_validation": true,
+    "confusion_matrix": true,
+    "six_class_accuracy": true,
+    "target_only_accuracy": true,
+    "target_macro_f1": true,
+    "per_class_recall": true,
+    "negative_rejection_rate": true,
+    "negative_log_likelihood": true,
+    "expected_calibration_error": true,
+    "val_cal_temperature_fit": true
+  },
+  "role_separation": {
+    "val_select": "epoch_seed_architecture_selection_only",
+    "val_cal": "temperature_and_threshold_calibration_only",
+    "robot_calibration": "domain_calibration_only",
+    "robot_final": "one_time_final_evaluation_only",
+    "mixed_role_report_rejected": true,
+    "temperature_accepts_only": "val_cal"
+  },
+  "fixture_smoke": {
+    "performance_evidence": false,
+    "rows": 6,
+    "split": "val_cal",
+    "fitted_temperature": 1.65,
+    "nll_before": 1.374248012247933,
+    "nll_after": 1.1729957044403325,
+    "normalized_after_calibration": true,
+    "deterministic": true
+  },
+  "gates": {
+    "B0": "NOT_PASSED_DEFERRED_BY_USER",
+    "B1": "NOT_PASSED_2321_REVIEWS_PENDING",
+    "B2": "NOT_STARTED_NO_FINE_TUNED_CHECKPOINT",
+    "B3": "NOT_STARTED_NO_REAL_CALIBRATION_OR_FINAL_DATA"
+  },
+  "validation": {
+    "tests_passed": 52,
+    "tests_failed": 0,
+    "real_checkpoint_evaluated": false,
+    "temperature_frozen": false,
+    "thresholds_frozen": false,
+    "robot_motion": false
+  },
+  "checksums": {
+    "evaluation_config": "7a7c72d82507cc7c58d4c75c54195387351ee9b48d9017baac972c00fc642654",
+    "evaluation_module": "61a541058a041b050ef8e8d31779cd6fb681e1447aaabfd0b06877161d7b204d",
+    "evaluation_script": "41c7b50820d82470c6fe3c25e1f6397436ae5253d2515834bfabe3c7ab8742ce",
+    "fixture_manifest": "e07093e052e1af666fb64f147be7f65bb862cbd0008f48d0ca6767c3399cf549"
+  }
+}

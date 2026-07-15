@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T01:47:40+08:00",
+  "status": "VIDEO_CONSUMER_READY_ROBOT_CONTRACT_PENDING",
+  "capabilities": {
+    "camera_index_endpoint": true,
+    "local_file_endpoint": true,
+    "url_endpoint": true,
+    "fresh_frame_packets": true,
+    "explicit_disconnect": true,
+    "explicit_reconnect": true,
+    "bounded_read_call": true,
+    "stale_frame_reuse": false,
+    "motor_dependency": false
+  },
+  "offline_smoke": {
+    "evidence_role": "offline_fixture_only",
+    "real_robot_evidence": false,
+    "frames_written": 20,
+    "frames_read": 20,
+    "sequential_frame_ids": true,
+    "monotonic_timestamps": true,
+    "frame_shape": [240, 320, 3],
+    "color_boundary": "OpenCV BGR",
+    "eof_health": "disconnected",
+    "read_failures": 1,
+    "stale_frame_reused": false
+  },
+  "deferred_robot_contract": {
+    "endpoint": "",
+    "protocol": "unknown",
+    "orientation": "unknown",
+    "stable_resolution": "unknown",
+    "stable_fps": "unknown",
+    "gate_b0_satisfied": false
+  },
+  "validation": {
+    "tests_passed": 55,
+    "tests_failed": 0,
+    "robot_endpoint_opened": false,
+    "robot_motion": false
+  },
+  "checksums": {
+    "video_module": "9ccc383368f730fc16ca9fd43442e7e88bf0c55d8b7dbe187c6a5d3ab63f2407",
+    "offline_smoke_script": "13cbd2bfcb6b52999b7d6c4aa8bb9007a366e225bf97d626a2351791b1d9283b"
+  }
+}

@@ -1,0 +1,7 @@
+image_id,split,true_label,p_ragdoll,p_singapura,p_persian,p_sphynx,p_pallas,p_not_target,model_id,dataset_sha256,checkpoint_sha256,source_group_id
+fixture-ragdoll,val_cal,ragdoll,0.02,0.90,0.02,0.02,0.02,0.02,FIXTURE,a64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a001,b64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a002,fixture-ragdoll
+fixture-singapura,val_cal,singapura,0.90,0.02,0.02,0.02,0.02,0.02,FIXTURE,a64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a001,b64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a002,fixture-singapura
+fixture-persian,val_cal,persian,0.02,0.02,0.90,0.02,0.02,0.02,FIXTURE,a64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a001,b64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a002,fixture-persian
+fixture-sphynx,val_cal,sphynx,0.02,0.02,0.02,0.90,0.02,0.02,FIXTURE,a64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a001,b64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a002,fixture-sphynx
+fixture-pallas,val_cal,pallas,0.02,0.02,0.02,0.02,0.90,0.02,FIXTURE,a64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a001,b64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a002,fixture-pallas
+fixture-negative,val_cal,not_target,0.02,0.02,0.02,0.02,0.02,0.90,FIXTURE,a64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a001,b64f1d74a49987f12d27c7b4980c2415cf8959b1dfc5332d45c1d6f0d0a0a002,fixture-negative

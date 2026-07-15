@@ -16,14 +16,24 @@ project's ownership unless a correction target explicitly names a parent path.
 Primary entry documents:
 
 - `README.md`: stable repository entry point;
-- `BASELINE_PLAN.md`: product scope, architecture, model IDs, safety,
-  schedule, and acceptance gates;
-- `DATASET_SOURCING.md`: dataset source decisions;
-- `DATASET_DOWNLOAD_PLAN.md`: dataset acquisition plan;
+- `docs/plans/README.md`: high-level plan index and authority order;
+- `docs/plans/BASELINE_PLAN.md`: official five-breed Cat Census principles,
+  due 17 July 2026;
+- `docs/plans/ADVANCED_PLAN.md`: post-Baseline DeskMate design principles and
+  acceptance gates;
+- `docs/plans/ADVANCED_DATASET_SOURCING.md`: post-Baseline desk-object data
+  principles;
+- `docs/plans/ADVANCED_DATASET_DOWNLOAD_PLAN.md`: post-Baseline acquisition
+  principles;
+- `References/The requirement/`: read-only authoritative originals and faithful
+  local transcriptions of the assignment, SOP, announcement, and answer book;
 - `plan/README.md`: target planning and maintenance-log protocol.
 
-When these documents disagree, stop and resolve the contract in a bounded
-target before implementing dependent code.
+The materials under `References/The requirement/` outrank project-authored
+plans. The documents under `docs/plans/` express durable design and delivery
+principles; a dated target plan defines the bounded implementation work. When
+these documents disagree, stop and resolve the contract in a bounded target
+before implementing dependent code.
 
 ## Target Workflow
 
@@ -49,28 +59,76 @@ explains why they are inseparable.
 
 ## Architecture Contracts
 
-Treat `BASELINE_PLAN.md` as the current architecture source of truth.
+Architecture authority is phase-specific:
 
-- `M01`: global object expert (`yolo26n.pt`, with documented fallback);
+- Until official Baseline Gate B4 passes,
+  `docs/plans/BASELINE_PLAN.md` is the only P0 project principle.
+  `References/The requirement/` overrides it if the two ever disagree.
+- After the Baseline release is frozen, `docs/plans/ADVANCED_PLAN.md` becomes
+  the governing project principle for DeskMate Advanced. Advanced work must not
+  consume Baseline-critical integration time before that gate.
+
+The official Baseline uses one active classifier with five reportable breeds and
+one internal rejection output:
+
+- `B-M01`: Ultralytics `yolo26s-cls.pt`, ImageNet-pretrained, using the
+  **classification** task and `Results.probs`, not object detection;
+- `B-M01F`: Torchvision EfficientNet-B0 is an evidence-gated backup after the
+  primary live pipeline works, not a second P0 dependency;
+- canonical target label order:
+  `ragdoll / singapura / persian / sphynx / pallas`, followed internally by
+  `not_target`, which is never printed as a cat species;
+- reusable lifecycle boundary:
+  `FramePacket -> ModelRunner[ClassificationObservation]`; Advanced keeps
+  `ModelRunner` but emits `ExpertObservation` from detection backends;
+- operator-guided multi-scale centre ROIs plus temporal consensus replace any
+  assumption of autonomous search or alignment;
+- blur, exposure, freshness, and ROI-coverage gates must pass before a frame can
+  contribute to confirmation;
+- capture, preview, confirmation, and presentation use bounded queues so a
+  confirmation burst cannot block video display or remote driving;
+- remote driving stays outside the DL process; Baseline DL code never issues
+  motor commands.
+
+Framework-native tensors or result objects must not cross from `B-M01` into UI,
+logging, or integration code. Raw `Results.probs` must be adapted, temperature
+calibrated, and aggregated as correlated spatial/temporal evidence rather than
+counted as independent votes. The live UI must visibly show each confirmed
+species, print only confirmed target species to the console, and invalidate
+temporal state after stale or missing frames.
+
+Baseline data targets 2,000 clean unique images (400 per class), may stretch to
+3,000 without delaying integration, and must never release below 1,200. The
+internal `not_target` class adds 300–600 source/session-grouped negatives. Keep
+the target-cat split at 85% train, 10% model selection, and 5% calibration so
+the latter two still total the required 15% validation. Robot-domain calibration
+uses 25 unseen target base images plus negative scenes; the final gate uses a
+separate 50 target images and 50 negative scenes exactly once. Repeated camera
+frames do not increase those counts.
+
+DeskMate Advanced extends the proven Baseline capture, model packaging, replay,
+telemetry, and UI infrastructure with:
+
+- `M01`: global object expert; benchmark pretrained `yolo26n.pt` first, compare
+  `yolo26s.pt` only when recall is insufficient and the full-expert P95 budget
+  permits it, and fine-tune only after real-camera evidence justifies it;
 - `M02`: MediaPipe Face Landmarker;
 - `M03`: MediaPipe Gesture Recognizer;
 - `C01`: ByteTrack tracking component;
-- `M04` and `M05`: optional P1 components, not P0 dependencies.
+- `M04` and `M05`: optional P1 components, not Advanced P0 dependencies.
 
-All perception backends must emit the canonical `ExpertObservation` contract.
-Framework-native tensors or result objects must not cross into the semantics
-layer. The fusion layer must align observations by Track ID and timestamp,
-respect quality and TTL, and represent missing values as `unknown`, not zero.
-
-The control dependency is one-way:
+Advanced perception backends emit the canonical `ExpertObservation` contract.
+The fusion layer aligns observations by Track ID and timestamp, respects quality
+and TTL, and represents missing values as `unknown`, not zero. Its control
+dependency remains one-way:
 
 ```text
 camera -> experts -> observations -> WorldState -> semantic events -> FSM -> safety gate -> robot adapter
 ```
 
-Experts never issue motor commands. The FSM never bypasses the safety gate.
-Any schema or robot-command change is a shared-contract change and requires a
-target plan, producer/consumer updates, and contract tests in the same target.
+Experts never issue motor commands. The FSM never bypasses the safety gate. Any
+shared schema or robot-command change requires a target plan, producer/consumer
+updates, and contract tests in the same target.
 
 ## Model And Dataset Policy
 
@@ -82,6 +140,9 @@ target plan, producer/consumer updates, and contract tests in the same target.
   scripts, schemas, small fixtures, and reproducible configuration instead.
 - Never commit secrets, access tokens, signed dataset URLs, or personal identity
   data.
+- For the official Baseline, keep the required 85% train / 15% validation ratio,
+  stratify by the five cat breeds, and keep duplicate/near-duplicate source
+  groups in one split. Do not train on the five assignment example images.
 - Split video-derived data by recording session, not random adjacent frames.
 - Do not perform face identification. Face signals are limited to landmarks,
   quality, head/eye motion, and task-relevant temporal events.

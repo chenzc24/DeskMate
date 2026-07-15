@@ -1,0 +1,19 @@
+schema_version = 1
+model_id = "B-M01"
+task = "cat_breed"
+checkpoint = "models/yolo26s-cls.pt"
+imgsz = 224
+device = 0
+temperature = 1.0
+maximum_frame_age_ms = 500.0
+class_order = ["ragdoll", "singapura", "persian", "sphynx", "pallas", "not_target"]
+
+[roi_scales]
+wide = 1.0
+medium = 0.8
+tight = 0.6
+
+[benchmark]
+warmup_iterations = 5
+measured_iterations = 30
+smoke_image = "References/The requirement/SWS3009A_Assg_assets/cat-000.png"

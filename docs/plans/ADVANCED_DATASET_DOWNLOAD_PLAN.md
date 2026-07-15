@@ -1,5 +1,6 @@
-# DeskMate Final Dataset Download Plan
+# DeskMate Advanced Dataset Download Plan
 
+> 阶段：仅用于正式猫分类 Baseline 通过后的 DeskMate Advanced。
 > 目标：生成 Dataset v0.1，共 800 张；Train 560 / Validation 120 / Test 120。
 > 类别顺序：`person / phone / bottle / cup / book / laptop`。
 > 原始数据和大文件不提交 Git，只提交清单、下载说明、许可和校验值。
@@ -157,7 +158,7 @@ dataset = foz.load_zoo_dataset(
 | 完整 COCO 2017 | 六类能力已通过 `yolo26n.pt` 迁移；整库约数十 GB，重复收益低 |
 | 完整 Open Images | 规模过大且存在部分标注语义问题，只按失败类型取子集 |
 | 完整 iCubWorld | 完整 640×480 分包超过 20 GB；小型序列已足够补机器人视角 |
-| Objectron | 原始数据约 1.9 TB，主要是 3D 框，Baseline 转换成本过高 |
+| Objectron | 原始数据约 1.9 TB，主要是 3D 框，Advanced 转换成本过高 |
 | 随机 Kaggle/Roboflow 合集 | 来源、许可、重复和漏标不可统一核验 |
 
 ## 6. 本地采集计划

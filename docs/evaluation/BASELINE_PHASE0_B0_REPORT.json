@@ -1,0 +1,190 @@
+{
+  "checks": [
+    {
+      "evidence": {
+        "internal": [
+          "ragdoll",
+          "singapura",
+          "persian",
+          "sphynx",
+          "pallas",
+          "not_target"
+        ],
+        "reportable": [
+          "ragdoll",
+          "singapura",
+          "persian",
+          "sphynx",
+          "pallas"
+        ]
+      },
+      "id": "labels_and_task_contract",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "candidate_unique": {
+          "not_target": 40,
+          "pallas": 20,
+          "persian": 20,
+          "ragdoll": 20,
+          "singapura": 10,
+          "sphynx": 20
+        },
+        "errors": 0,
+        "quarantine_rows": 130,
+        "rows": 130
+      },
+      "id": "pilot_manifest_provenance",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "complete_pairs": 13,
+        "required_pairs": 13,
+        "selenium_used": false
+      },
+      "id": "traceable_source_pairs",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "acceptance_authority": false,
+        "reviewed_pairs": 13,
+        "visually_usable": {
+          "inaturalist:pallas": 5,
+          "oxford_iiit_pet:persian": 10,
+          "oxford_iiit_pet:ragdoll": 10,
+          "oxford_iiit_pet:sphynx": 10,
+          "wikimedia_commons:not_target:desk_scene": 10,
+          "wikimedia_commons:not_target:floor_scene": 7,
+          "wikimedia_commons:not_target:mobile_robot": 7,
+          "wikimedia_commons:not_target:other_cat_breed": 7,
+          "wikimedia_commons:pallas": 7,
+          "wikimedia_commons:persian": 7,
+          "wikimedia_commons:ragdoll": 3,
+          "wikimedia_commons:singapura": 10,
+          "wikimedia_commons:sphynx": 10
+        }
+      },
+      "id": "single_review_risk_triage",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "archive_bytes": 791918971,
+        "archive_sha256": "67195c5e1c01f1ab5f9b6a5d22b8c27a580d896ece458917e61d459337fa318d",
+        "downloaded_by_label": {
+          "persian": 10,
+          "ragdoll": 10,
+          "sphynx": 10
+        },
+        "image_pilot_complete": true
+      },
+      "id": "oxford_image_pilot",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "candidate_unique": 40,
+        "groups": [
+          "desk_scene",
+          "floor_scene",
+          "mobile_robot",
+          "other_cat_breed"
+        ],
+        "phase1_route": "Combine licensed public hard negatives with grouped robot-camera background sessions; keep source/session groups intact and review all candidates before the 85/10/5 split.",
+        "required_phase1_floor": 300
+      },
+      "id": "not_target_source_pilot",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "compile_returncode": 0,
+        "pytest_returncode": 0,
+        "pytest_summary": "55 passed in 0.65s"
+      },
+      "id": "deterministic_contract_tests",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "confirmation_line": "2026-07-14T22:23:57+08:00 CONFIRMED species=ragdoll confidence=0.820 margin=0.770 found=1/8 model=B-M01-PLACEHOLDER",
+        "duplicate_confirmation_line": null,
+        "first_job_kind": "confirmation",
+        "fresh_observation_accepted": true,
+        "motion_enabled": false,
+        "preview_console_line": null,
+        "queue_sizes_after_pop": [
+          0,
+          0
+        ],
+        "second_job_kind": "preview",
+        "temporal_size_after_stale": 0
+      },
+      "id": "bounded_runtime_smoke",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "format": "png",
+        "height": 179,
+        "path": "References\\The requirement\\SWS3009A_Assg_assets\\cat-000.png",
+        "real_robot_evidence": false,
+        "source_kind": "assignment_smoke",
+        "width": 251
+      },
+      "id": "real_robot_frame",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "color_format": "unknown",
+        "motion_enabled": false,
+        "orientation": "unknown",
+        "stream_endpoint": "",
+        "stream_protocol": "unknown"
+      },
+      "id": "robot_stream_contract",
+      "passed": false
+    },
+    {
+      "evidence": {
+        "selenium_used": false
+      },
+      "id": "selenium_disabled_until_phase1_gap_report",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "note": "Provisional plumbing values only; Phase 3 freezes values from val_cal and robot_calibration.",
+        "temperature_frozen": false,
+        "thresholds_frozen": false
+      },
+      "id": "calibration_not_frozen_in_phase0",
+      "passed": true
+    }
+  ],
+  "checksums": {
+    "baseline_phase0_config": "f99a783232769dafff30e14b488aad01ce85dee3ca63e1fbff26f36e8e907af5",
+    "baseline_sources_config": "805e6f3a140fc0f8b7140ddf7d43f195c45aac28c4bcc7d71a590064561f3e8c",
+    "phase0_pilot_review": "680e7d81de2718a4524eebba08daa8faa029470e956062866418f2e1906bec25",
+    "pilot_manifest": "b7cbc5b7e40c3dee585f25ec56b492772c70ae6c29358b44ab91ae650f7b771f",
+    "pilot_report": "8d31008d314bb6020e76dc4f3270de089b2420ffa360683b1619164c0b9a450b",
+    "skeleton_report": "54743cc33d5dba3ce310c11418ac4bb09e74bd218c893da1b607a04f1dded90b"
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU, 592.27, 8188 MiB",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.1"
+  },
+  "failed_checks": [
+    "real_robot_frame",
+    "robot_stream_contract"
+  ],
+  "gate": "B0",
+  "generated_at": "2026-07-15T01:48:30+08:00",
+  "schema_version": 1,
+  "status": "NOT_PASSED"
+}

@@ -1,0 +1,191 @@
+schema_version = 1
+reviewed_at = "2026-07-14T22:42:00+08:00"
+reviewer = "Codex visual precheck"
+acceptance_authority = false
+policy = "Single-review pilot triage only; all images remain quarantine until team review."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "ragdoll"
+source_group = ""
+downloaded = 10
+visually_usable = 3
+label_error_count = 2
+license_missing_count = 0
+duplicate_risk_count = 1
+reject_ids = [
+  "commons-15109176",
+  "commons-24514347",
+  "commons-31013809",
+  "commons-105220722",
+  "commons-131334473",
+  "commons-138650423",
+  "commons-141626969",
+]
+near_duplicate_groups = [["commons-131334473", "commons-138650423"]]
+notes = "Category contains coat samples, drawings, silhouette/partial views, and eye crops; broad category membership is not sufficient evidence of a usable breed image."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "singapura"
+source_group = ""
+downloaded = 10
+visually_usable = 10
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 1
+reject_ids = []
+near_duplicate_groups = [["commons-45166340", "commons-45166341", "commons-45166344"]]
+notes = "Labels appear on target, but three close portraits likely share an individual/session and must remain grouped during splitting."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "persian"
+source_group = ""
+downloaded = 10
+visually_usable = 7
+label_error_count = 2
+license_missing_count = 0
+duplicate_risk_count = 1
+reject_ids = ["commons-8095880", "commons-9004281", "commons-122540504"]
+near_duplicate_groups = [["commons-47932198", "commons-47932199", "commons-47932200"]]
+notes = "One chart, one rear-only view, and one ambiguous breed image fail pilot triage; three carrier images are one source/individual group."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "sphynx"
+source_group = ""
+downloaded = 10
+visually_usable = 10
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 0
+reject_ids = []
+near_duplicate_groups = []
+notes = "All ten show recognizable Sphynx cats; group images and cut-out backgrounds still require final human review."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "pallas"
+source_group = ""
+downloaded = 10
+visually_usable = 7
+label_error_count = 1
+license_missing_count = 0
+duplicate_risk_count = 0
+reject_ids = ["commons-19551595", "commons-22046920", "commons-73783967"]
+near_duplicate_groups = []
+notes = "The zoo subcategory is substantially cleaner than the top-level category; reject a book page, a very small caged subject, and a motion-blurred subject."
+
+[[pairs]]
+source_kind = "inaturalist"
+label = "pallas"
+source_group = ""
+downloaded = 10
+visually_usable = 5
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 1
+reject_ids = [
+  "inat-381240175-697548267",
+  "inat-379653534-694459470",
+  "inat-379171315-693550388",
+  "inat-371868122-679469418",
+  "inat-363652308-663825360",
+]
+near_duplicate_groups = [[
+  "inat-381348902-697766577",
+  "inat-381348898-697766564",
+]]
+notes = "Research-grade species labels are useful, but several frames contain a tiny or visually absent target; nearby observations can still share an individual/session."
+
+[[pairs]]
+source_kind = "oxford_iiit_pet"
+label = "persian"
+source_group = ""
+downloaded = 10
+visually_usable = 10
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 0
+reject_ids = []
+near_duplicate_groups = []
+notes = "All ten official Oxford images visibly contain Persian cats; studio-watermark and photographer/session concentration remain domain-diversity risks for bulk acquisition."
+
+[[pairs]]
+source_kind = "oxford_iiit_pet"
+label = "ragdoll"
+source_group = ""
+downloaded = 10
+visually_usable = 10
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 1
+reject_ids = []
+near_duplicate_groups = [["oxford-ragdoll-1", "oxford-ragdoll-2", "oxford-ragdoll-3"]]
+notes = "All ten official Oxford images visibly contain Ragdolls; the first three are a likely shared studio/individual group and must not cross a future split."
+
+[[pairs]]
+source_kind = "oxford_iiit_pet"
+label = "sphynx"
+source_group = ""
+downloaded = 10
+visually_usable = 10
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 0
+reject_ids = []
+near_duplicate_groups = []
+notes = "All ten official Oxford images visibly contain Sphynx cats across studio and household backgrounds."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "not_target"
+source_group = "desk_scene"
+downloaded = 10
+visually_usable = 10
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 0
+reject_ids = []
+near_duplicate_groups = []
+notes = "All ten are valid non-targets, but many are historical objects, illustrations, or museum scenes; Phase 1 must add modern desk and actual robot-camera backgrounds."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "not_target"
+source_group = "floor_scene"
+downloaded = 10
+visually_usable = 7
+label_error_count = 0
+license_missing_count = 1
+duplicate_risk_count = 1
+reject_ids = ["commons-1343940", "commons-4092593", "commons-38940400"]
+near_duplicate_groups = [["commons-32393596", "commons-32393600"]]
+notes = "Three diagram/product images are poor camera-domain negatives and two renovation frames share one session. One additional candidate with missing canonical license URL was rejected before the final ten-row manifest."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "not_target"
+source_group = "mobile_robot"
+downloaded = 10
+visually_usable = 7
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 0
+reject_ids = ["commons-23853214", "commons-23853359", "commons-23853530"]
+near_duplicate_groups = []
+notes = "Seven images visibly contain robots; three circuit schematics remain valid non-targets but are rejected from the camera-domain pilot subset."
+
+[[pairs]]
+source_kind = "wikimedia_commons"
+label = "not_target"
+source_group = "other_cat_breed"
+downloaded = 10
+visually_usable = 7
+label_error_count = 0
+license_missing_count = 0
+duplicate_risk_count = 0
+reject_ids = ["commons-16591227", "commons-32222611", "commons-98458750"]
+near_duplicate_groups = []
+notes = "Seven photos visibly contain Maine Coon cats and are useful other-breed hard negatives; three postage-stamp illustrations are rejected from the photo-domain subset."

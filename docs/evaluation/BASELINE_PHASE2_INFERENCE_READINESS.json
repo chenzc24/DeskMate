@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T01:39:16+08:00",
+  "status": "ADAPTER_READY_CHECKPOINT_AND_STREAM_PENDING",
+  "species_output_enabled": false,
+  "robot_motion": false,
+  "adapter": {
+    "contract": "ModelRunner[ClassificationObservation]",
+    "canonical_class_order": [
+      "ragdoll",
+      "singapura",
+      "persian",
+      "sphynx",
+      "pallas",
+      "not_target"
+    ],
+    "native_objects_cross_boundary": false,
+    "roi_scales": {
+      "wide": 1.0,
+      "medium": 0.8,
+      "tight": 0.6
+    },
+    "temperature": 1.0,
+    "maximum_frame_age_ms": 500.0,
+    "failure_mode": "explicit_invalid_observation"
+  },
+  "base_weight_mapping_gate": {
+    "passed": true,
+    "base_weight_rejected": true,
+    "native_class_count": 1000,
+    "required_class_count": 6,
+    "reason": "checkpoint must expose exactly six contiguous classes; got 1000",
+    "species_output_emitted": false
+  },
+  "raw_base_model_benchmark": {
+    "evidence_role": "raw_base_model_latency_only",
+    "cat_census_accuracy_evidence": false,
+    "iterations": 30,
+    "mean_ms": 12.75823,
+    "p50_ms": 14.3738,
+    "p95_ms": 15.5422,
+    "throughput_fps_from_mean": 78.38077852492079,
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "includes_capture_or_ui": false,
+    "probs_present": true,
+    "boxes_present": false
+  },
+  "validated_failures": [
+    "missing_checkpoint",
+    "missing_extra_or_duplicate_classes",
+    "imagenet_mapping_mismatch",
+    "invalid_roi_scale",
+    "invalid_image_shape",
+    "frame_metadata_mismatch",
+    "stale_frame",
+    "missing_results_probs",
+    "inference_exception"
+  ],
+  "gates": {
+    "B0": {
+      "status": "NOT_PASSED_DEFERRED_BY_USER",
+      "failed_checks": ["real_robot_frame", "robot_stream_contract"]
+    },
+    "B1": {
+      "status": "NOT_PASSED",
+      "pending_reviews": 2321
+    },
+    "B2": {
+      "status": "NOT_PASSED",
+      "remaining": [
+        "fine_tuned_six_class_checkpoint",
+        "real_robot_stream",
+        "end_to_end_ui_and_console_validation"
+      ]
+    }
+  },
+  "validation": {
+    "tests_passed": 48,
+    "tests_failed": 0,
+    "actual_base_weight_mapping_test": true,
+    "actual_gpu_benchmark": true,
+    "console_species_lines": 0,
+    "census_events": 0
+  },
+  "checksums": {
+    "inference_config": "1221b73bb0a3ea415e14b800a5f4baf7e06b737bb4fce8137c8d67e7bdd64677",
+    "inference_module": "ecd08ed2cbdc4ec81d316101b803df53c2c4d31bf56499415d4017f0b51bcb04",
+    "mapping_verifier": "f5f38fae141f44f6eeb825fd471101d94417c0d7ff7e7b399b46646f00ea46c5",
+    "benchmark_script": "517bbeb6ee0e19c2e6b8091956e355e48c6336d5a90b18d50a2e22d49d0d25f4",
+    "base_weight": "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09"
+  }
+}

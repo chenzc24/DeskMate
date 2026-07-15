@@ -8,30 +8,50 @@ relative to this directory.
 
 ## Current Direction
 
-The baseline is a local, no-cloud multi-expert perception system:
+Work is split into two sequential phases:
 
 ```text
-object expert + face/eye expert + hand expert
-    -> timestamped observations
-    -> temporal evidence fusion
-    -> WorldState
-    -> decision FSM
-    -> safety gate
-    -> robot adapter
+Official Baseline (now, due 17 July)
+robot stream -> five-breed cat classifier -> visible console/UI -> census
+                          |
+                          v reuse proven infrastructure
+DeskMate Advanced (only after Baseline Gate B4)
+multi-expert perception -> WorldState -> FSM -> safety gate -> robot adapter
 ```
 
-Training and inference target the local NVIDIA RTX 4070 plus CPU. The demo must
-remain usable offline and degrade safely when an expert, camera, or controller
-is unavailable.
+The current P0 is the official Great Cat Census: fine-tune the Ultralytics
+`yolo26s-cls.pt` whole-image classifier for Ragdoll, Singapura, Persian, Sphynx,
+and Pallas cat plus an internal `not_target` rejection output; run it on
+quality-gated, operator-aligned multi-scale ROIs from the live robot camera;
+calibrate and aggregate correlated probabilities; print only confirmed target
+species; and support the remotely piloted 15-minute course. Baseline does not
+train an object detector or implement autonomous search. Model selection,
+calibration, and untouched robot final testing use separate data. Advanced work
+is paused until the Baseline passes three complete rehearsals and its offline
+release is frozen.
+
+Both phases target the local NVIDIA RTX 4070 plus CPU and must remain usable
+without cloud inference. Advanced reuses the Baseline's Ultralytics/PyTorch
+toolchain, bounded-queue frame capture, reconnect, model packaging, generic
+`ModelRunner` lifecycle, UI, telemetry, replay tests, and robot video
+configuration. Cat classification
+weights, heads, labels, datasets, thresholds, and `Results.probs` are not reused
+as detection assets.
 
 ## Entry Documents
 
-- [Baseline plan](BASELINE_PLAN.md): demo scope, models, architecture, safety,
-  schedule, tests, and Definition of Done.
-- [Dataset sourcing](DATASET_SOURCING.md): candidate data sources and source
-  policy.
-- [Dataset download plan](DATASET_DOWNLOAD_PLAN.md): acquisition and local
-  storage workflow.
+- [High-level plan index](docs/plans/README.md): authority order and document
+  scope.
+- [Official Baseline plan](docs/plans/BASELINE_PLAN.md): five-cat data, model,
+  robot-stream integration, three-day schedule, report evidence, and gates.
+- [DeskMate Advanced plan](docs/plans/ADVANCED_PLAN.md): post-Baseline
+  multi-expert perception, semantic fusion, decisions, safety, and schedule.
+- [Advanced dataset sourcing](docs/plans/ADVANCED_DATASET_SOURCING.md):
+  post-Baseline desk-object data-source decisions.
+- [Advanced dataset download plan](docs/plans/ADVANCED_DATASET_DOWNLOAD_PLAN.md):
+  post-Baseline acquisition and local storage workflow.
+- [Formal requirement transcriptions](<References/The requirement/>): local
+  evidence for the assignment, evaluation SOP, announcement, and answer book.
 - [Repository Agent rules](AGENTS.md): model, data, validation, robot-safety,
   and commit policy.
 - [Repository workflow](plan/README.md): target plans and factual maintenance
@@ -53,10 +73,8 @@ From this `/project` root:
 
 ## Repository Boundary
 
-This directory is the management root of the sub-repository. A containing
-course checkout, if present, is outside the project workflow boundary. This
-adoption does not create a nested `.git` or invent an independent remote; Git
-topology can be changed later only when an actual sub-repository remote and
-integration policy are supplied. Large datasets, downloaded model weights,
-private videos, and training outputs are local artifacts and must not be
-committed.
+This directory is the independent `chenzc24/DeskMate` repository and is tracked
+as the `project` Git submodule by the containing course repository. The parent
+checkout remains outside this project's workflow boundary. Large datasets,
+downloaded model weights, private videos, and training outputs are local
+artifacts and must not be committed.

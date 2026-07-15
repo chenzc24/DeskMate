@@ -1,9 +1,10 @@
-# DeskMate Dataset Sourcing Decision
+# DeskMate Advanced Dataset Sourcing Decision
 
 > 调研日期：2026-07-14
-> 对应计划：`BASELINE_PLAN.md` v0.1
+> 阶段：仅用于正式猫分类 Baseline 通过后的 DeskMate Advanced
+> 对应计划：`ADVANCED_PLAN.md` v0.3
 > 最终检测类别：`person / phone / bottle / cup / book / laptop`
-> 具体下载步骤：见 `DATASET_DOWNLOAD_PLAN.md`
+> 具体下载步骤：见 `ADVANCED_DATASET_DOWNLOAD_PLAN.md`
 
 ## 1. 最终结论
 
@@ -28,7 +29,7 @@ DeskMate 使用 COCO 预训练的 `yolo26n.pt` 进行迁移学习微调。`perso
 | B | Open Images V7 | 六类均有对应类别，场景多样 | 约 1.9M 带框图片、16M boxes、600 类；支持按类下载 | 标注 CC BY 4.0；图片列为 CC BY 2.0，仍需逐图核验 | 第一轮失败后最多选 20 张 |
 | B | iCubWorld Transformations | 机器人低清相机视角与桌面/地面物体 | Pascal VOC XML；小型序列包约 7.4 MB | Zenodo 记录为 CC BY 4.0 | 只选 20 张 bottle/cup 非相邻帧 |
 | 初始化 | COCO 2017 | 六类全部覆盖 | 80 个检测类 | 图片许可随原图 | 已包含在 `yolo26n.pt`，不再下载整库 |
-| 不采用 | Objectron | book/bottle/cup/laptop 多视角，但偏单物体和 3D 任务 | 15K 视频、4M 帧、3D box；原始数据约 1.9 TB | C-UDA-1.0 | Baseline 转换成本过高 |
+| 不采用 | Objectron | book/bottle/cup/laptop 多视角，但偏单物体和 3D 任务 | 15K 视频、4M 帧、3D box；原始数据约 1.9 TB | C-UDA-1.0 | Advanced 转换成本过高 |
 | 不优先 | 随机 Kaggle/Roboflow 项目 | 可能含目标类 | 来源、重复、漏标和许可不统一 | 逐项目不同 | 本轮不使用 |
 
 ## 3. 已核验的公开数据

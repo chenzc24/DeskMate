@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deskmate-baseline"
+version = "0.1.0"
+description = "SWS3009A Cat Census Baseline runtime and data contracts"
+requires-python = ">=3.11"
+
+[project.optional-dependencies]
+phase0-media = ["Pillow>=11"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"

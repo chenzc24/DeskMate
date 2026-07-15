@@ -1,0 +1,84 @@
+schema_version = 1
+random_seed = 20260714
+user_agent = "DeskMate-NUS-SOC-Acquisition/0.1 (https://github.com/chenzc24/DeskMate; educational)"
+
+[paths]
+phase0_oxford_archive = "data/downloads/phase0_pilot/oxford_iiit_pet/images.tar.gz"
+output_dir = "data/downloads/phase1_candidates"
+
+[network]
+request_timeout_seconds = 15
+archive_timeout_seconds = 120
+commons_max_depth = 2
+
+[targets]
+release_floor_total = 1200
+release_floor_per_class = 220
+preferred_per_class = 400
+not_target_floor = 300
+
+[technical_filter]
+minimum_width = 160
+minimum_height = 160
+near_duplicate_hamming_distance = 4
+
+[commons]
+api_url = "https://commons.wikimedia.org/w/api.php"
+limit_per_target_category = 250
+limit_per_supplemental_target_category = 300
+limit_per_negative_category = 75
+
+[commons.target_categories]
+ragdoll = "Ragdoll cats"
+singapura = "Singapura"
+persian = "Persian cats"
+sphynx = "Sphynx (cat)"
+pallas = "Otocolobus manul in zoos"
+
+[commons.supplemental_target_categories]
+pallas_general = "Otocolobus manul"
+
+[commons.negative_categories]
+desk_scene = "Desks"
+floor_scene = "Floors"
+mobile_robot = "Mobile robots"
+other_cat_breed = "Maine Coon cats"
+wall_scene = "Walls"
+human_hand = "Human hands"
+
+[inaturalist]
+api_url = "https://api.inaturalist.org/v1/observations"
+taxon_id = 42029
+label = "pallas"
+limit = 500
+max_api_pages = 100
+allowed_photo_licenses = ["cc0", "cc-by", "cc-by-sa", "cc-by-nc", "cc-by-nc-sa"]
+
+[gbif]
+api_url = "https://api.gbif.org/v1/occurrence/search"
+scientific_name = "Otocolobus manul"
+label = "pallas"
+limit = 400
+allowed_media_licenses = ["cc0", "cc-by", "cc-by-sa", "cc-by-nc", "cc-by-nc-sa"]
+
+[oxford_iiit_pet]
+page_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/"
+images_archive_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz"
+labels = ["persian", "ragdoll", "sphynx"]
+license_name = "Oxford-IIIT Pet research use"
+license_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/"
+attribution = "Oxford Visual Geometry Group"
+
+[review]
+automatic_acceptance = false
+second_reviewer_required_for = ["singapura", "pallas", "persian"]
+contact_sheet_batch_size = 20
+
+[deferred_robot_evidence]
+status = "deferred_by_user"
+real_robot_frame = ""
+stream_protocol = "unknown"
+stream_endpoint = ""
+orientation = "unknown"
+color_format = "unknown"
+note = "User will collect the real robot frame and stream contract later; public images do not satisfy Gate B0."

@@ -1,0 +1,47 @@
+schema_version = 1
+user_agent = "DeskMate-NUS-SOC-Pilot/0.1 (https://github.com/chenzc24/DeskMate; educational)"
+
+[pilot]
+download_limit_per_pair = 10
+commons_max_depth = 2
+request_timeout_seconds = 8
+archive_timeout_seconds = 120
+
+[commons]
+api_url = "https://commons.wikimedia.org/w/api.php"
+
+[commons.categories]
+ragdoll = "Ragdoll cats"
+singapura = "Singapura"
+persian = "Persian cats"
+sphynx = "Sphynx (cat)"
+pallas = "Otocolobus manul in zoos"
+
+[inaturalist]
+api_url = "https://api.inaturalist.org/v1/observations"
+taxon_id = 42029
+label = "pallas"
+quality_grade = "research"
+allowed_photo_licenses = ["cc0", "cc-by", "cc-by-sa", "cc-by-nc", "cc-by-nc-sa"]
+
+[not_target]
+phase1_floor = 300
+phase1_route = "Combine licensed public hard negatives with grouped robot-camera background sessions; keep source/session groups intact and review all candidates before the 85/10/5 split."
+
+[not_target.commons_categories]
+desk_scene = "Desks"
+floor_scene = "Floors"
+mobile_robot = "Mobile robots"
+other_cat_breed = "Maine Coon cats"
+
+[oxford_iiit_pet]
+page_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/"
+images_archive_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz"
+annotations_archive_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz"
+labels = ["persian", "ragdoll", "sphynx"]
+pilot_mode = "archive_bounded_extract"
+pilot_count_per_label = 10
+license_name = "Oxford-IIIT Pet research use"
+license_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/"
+attribution = "Oxford Visual Geometry Group"
+reason = "Download the official archive once, verify its SHA-256, and extract only the three bounded 10-image pilot groups."

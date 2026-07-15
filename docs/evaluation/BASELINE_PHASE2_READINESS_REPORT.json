@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T01:30:53+08:00",
+  "status": "PIPELINE_READY_GATES_PENDING",
+  "official_training_started": false,
+  "robot_motion": false,
+  "capabilities": {
+    "review_to_split_merge": true,
+    "group_aware_85_10_5_split": true,
+    "idempotent_dataset_view": true,
+    "dataset_integrity_audit": true,
+    "training_dry_run": true,
+    "isolated_cuda_environment": true,
+    "official_base_weight_verified": true
+  },
+  "environment": {
+    "default_python": "3.13.1",
+    "training_python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "torchvision": "0.26.0+cu128",
+    "ultralytics": "8.4.95",
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "cuda_available": true
+  },
+  "base_weight": {
+    "id": "B-M01-BASE",
+    "task": "classify",
+    "file": "models/yolo26s-cls.pt",
+    "bytes": 13622082,
+    "sha256": "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09",
+    "source_url": "https://github.com/ultralytics/assets/releases/download/v8.4.0/yolo26s-cls.pt",
+    "documentation_url": "https://docs.ultralytics.com/models/yolo26/",
+    "license": "AGPL-3.0",
+    "license_url": "https://www.ultralytics.com/license",
+    "smoke": {
+      "assignment_example_only": true,
+      "in_training_data": false,
+      "probs_present": true,
+      "boxes_present": false,
+      "imagenet_top1": "Persian_cat",
+      "confidence": 0.4253929555416107,
+      "performance_evidence": false
+    }
+  },
+  "gates": {
+    "B0": {
+      "status": "NOT_PASSED_DEFERRED_BY_USER",
+      "failed_checks": [
+        "real_robot_frame",
+        "robot_stream_contract"
+      ]
+    },
+    "B1": {
+      "status": "NOT_PASSED",
+      "candidate_rows": 2321,
+      "accepted": 0,
+      "rejected": 0,
+      "pending": 2321,
+      "ready_to_freeze_split": false
+    },
+    "B2": {
+      "status": "NOT_STARTED",
+      "reason": "Official training and live integration require a frozen Gate B1 split."
+    }
+  },
+  "fail_closed_evidence": {
+    "freeze_exit_code": 3,
+    "training_execution_authorized": false,
+    "split_manifest_written": false,
+    "dataset_materialized": false,
+    "selenium_used": false
+  },
+  "validation": {
+    "tests_passed": 38,
+    "tests_failed": 0,
+    "training_environment_ready": true,
+    "requirement_originals_modified": false
+  },
+  "checksums": {
+    "training_config": "6023d1e0b7c995209dd9242321e64f5f24ca5bdde6c0f532cb87c9173143c594",
+    "training_requirements": "d4668f85debbb76840aae09af03fd9dd76feb631afd5878f980176d0a1ace235",
+    "training_lock": "7b8d3603a998e5dcf36c12e5b955a21706f764341c2a297178f2bf4682ca23ec",
+    "model_manifest": "2829fbe366e4e2bf64c02fa8933811f4a8e8d15c4f2f9a0b29c0260510de3dbf",
+    "base_weight": "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09",
+    "phase1_source_manifest": "f7a116719990b98f2cbc8f1355f8a4682bc1109afccb5c46ba99b9e8a8268ea4",
+    "phase1_review_queue": "b3b2ca5a938830ad1dc5b953c5d0bf5a48533ce8f458bf907bb7013b27a2b36f"
+  }
+}

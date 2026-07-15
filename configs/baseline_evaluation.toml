@@ -1,0 +1,21 @@
+schema_version = 1
+class_order = ["ragdoll", "singapura", "persian", "sphynx", "pallas", "not_target"]
+ece_bins = 15
+
+[temperature]
+fit_split = "val_cal"
+minimum = 0.5
+maximum = 5.0
+steps = 451
+
+[release_gates]
+target_accuracy = 0.90
+target_macro_f1 = 0.88
+minimum_target_class_recall = 0.80
+maximum_ece = 0.10
+final_target_correct = 46
+final_target_total = 50
+minimum_final_per_class_correct = 9
+minimum_final_per_class_total = 10
+negative_rejection_correct = 45
+negative_rejection_total = 50

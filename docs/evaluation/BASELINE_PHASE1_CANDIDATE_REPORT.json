@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T00:57:00+08:00",
+  "status": "CANDIDATE_POOL_PREPARED_NOT_ACCEPTED",
+  "gate_b0": {
+    "status": "NOT_PASSED",
+    "deferred_by_user": [
+      "real_robot_frame",
+      "robot_stream_contract"
+    ]
+  },
+  "gate_b1": {
+    "status": "NOT_PASSED",
+    "reason": "All 2321 reviewable candidates are pending human review; no split is frozen."
+  },
+  "acquisition": {
+    "raw_source_rows": 2467,
+    "manifest_rows": 2427,
+    "reviewable_candidates": 2321,
+    "technical_rejected": 106,
+    "automatic_acceptance": false,
+    "selenium_used": false
+  },
+  "candidate_unique": {
+    "ragdoll": 450,
+    "singapura": 250,
+    "persian": 447,
+    "sphynx": 449,
+    "pallas": 279,
+    "not_target": 446
+  },
+  "accepted_unique": {
+    "ragdoll": 0,
+    "singapura": 0,
+    "persian": 0,
+    "sphynx": 0,
+    "pallas": 0,
+    "not_target": 0
+  },
+  "coverage": {
+    "candidate_target_total": 1875,
+    "candidate_release_floor_ready": true,
+    "candidate_not_target_floor_ready": true,
+    "accepted_release_floor_ready": false,
+    "gap_to_balanced_400": {
+      "ragdoll": 0,
+      "singapura": 150,
+      "persian": 0,
+      "sphynx": 0,
+      "pallas": 121
+    },
+    "selenium_authorized": false
+  },
+  "source_downloads": {
+    "commons_target_primary": {
+      "ragdoll": 250,
+      "singapura": 250,
+      "persian": 250,
+      "sphynx": 250,
+      "pallas": 119
+    },
+    "oxford_iiit_pet": {
+      "ragdoll": 200,
+      "persian": 200,
+      "sphynx": 200
+    },
+    "inaturalist_pallas": 103,
+    "commons_pallas_general": 95,
+    "gbif_pallas": {
+      "downloaded": 100,
+      "unique_after_original_url_dedup": 4,
+      "license_rejected_records": 300
+    },
+    "commons_not_target": {
+      "desk_scene": 75,
+      "floor_scene": 75,
+      "mobile_robot": 75,
+      "other_cat_breed": 75,
+      "wall_scene": 75,
+      "human_hand": 75
+    }
+  },
+  "deduplication": {
+    "collapsed_same_id_aliases": 39,
+    "cross_label_id_conflicts": 1,
+    "technical_rejections": 7,
+    "exact_duplicate_clusters": 2,
+    "normalized_original_url_duplicate_clusters": 96,
+    "near_duplicate_clusters_flagged": 18,
+    "known_limitation": "Perceptual hash under-detects same-individual and same-session series; human grouping is mandatory."
+  },
+  "review": {
+    "queue_rows": 2321,
+    "contact_sheets": 119,
+    "missing_local_images": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "pending": 2321,
+    "audit_errors": 0,
+    "ready_to_freeze_split": false,
+    "second_reviewer_required_for": [
+      "singapura",
+      "pallas",
+      "persian"
+    ]
+  },
+  "checksums": {
+    "config": "8c6a638098db5d5b3983c5cd50223605fbc7ddbf965ebcf483f2911bcf975f7f",
+    "ignored_manifest": "f7a116719990b98f2cbc8f1355f8a4682bc1109afccb5c46ba99b9e8a8268ea4",
+    "ignored_full_report": "c4078452ea9bbd525fc83c3d300d822f790f3dc0a95737cb79083c532649b824",
+    "ignored_review_queue": "b3b2ca5a938830ad1dc5b953c5d0bf5a48533ce8f458bf907bb7013b27a2b36f",
+    "ignored_review_index": "cab3b4804bcd72549a65316353b958d4adb59571f51f851b3a3689fa8448185c",
+    "ignored_review_audit": "9ac3d2167823dcd2b6859e67dcbcb20668730faf80b560c3c82c216f2e0ffd24"
+  }
+}

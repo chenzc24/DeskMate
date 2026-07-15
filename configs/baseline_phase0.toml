@@ -1,0 +1,42 @@
+schema_version = 1
+model_id = "B-M01-PLACEHOLDER"
+task = "cat_breed"
+
+[labels]
+internal = ["ragdoll", "singapura", "persian", "sphynx", "pallas", "not_target"]
+reportable = ["ragdoll", "singapura", "persian", "sphynx", "pallas"]
+
+[capture]
+latest_frame_capacity = 5
+max_frame_age_ms = 500
+
+[inference_queue]
+max_confirmation_jobs = 2
+max_pending_preview_jobs = 1
+
+[source_pilot]
+minimum_per_source_class = 10
+maximum_per_source_class = 20
+target_unique_per_class = 400
+gap_fill_review_buffer = 1.25
+not_target_floor = 300
+
+[quality.provisional]
+minimum_blur_score = 20.0
+minimum_mean_brightness = 20.0
+maximum_mean_brightness = 235.0
+maximum_overexposed_ratio = 0.35
+maximum_underexposed_ratio = 0.35
+minimum_roi_coverage = 0.50
+
+[calibration]
+thresholds_frozen = false
+temperature_frozen = false
+note = "Provisional plumbing values only; Phase 3 freezes values from val_cal and robot_calibration."
+
+[robot]
+motion_enabled = false
+stream_protocol = "unknown"
+stream_endpoint = ""
+orientation = "unknown"
+color_format = "unknown"

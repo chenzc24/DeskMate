@@ -1,0 +1,63 @@
+schema_version = 1
+
+[model]
+id = "B-M01"
+task = "classify"
+weights = "models/yolo26s-cls.pt"
+official_name = "yolo26s-cls.pt"
+documentation_url = "https://docs.ultralytics.com/models/yolo26/"
+license = "AGPL-3.0-or-later"
+priority = "P0"
+input = "RGB 224x224 centre ROI"
+output = "Ultralytics Results.probs adapted to canonical Prediction"
+
+[environment]
+python = "3.12"
+torch = "2.11.0"
+torchvision = "0.26.0"
+cuda_wheel = "cu128"
+ultralytics = "8.4.95"
+
+[dataset]
+source_manifest = "data/downloads/phase1_candidates/source_manifest.csv"
+review_queue = "data/downloads/phase1_candidates/review_batches/review_queue.csv"
+split_manifest = "data/cat_census/split_manifest.csv"
+dataset_root = "data/cat_census/yolo_classify"
+seed = 20260714
+labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas", "not_target"]
+second_review_required = ["singapura", "pallas", "persian"]
+release_floor_total = 1200
+release_floor_per_class = 220
+preferred_per_class = 400
+not_target_floor = 300
+
+[split]
+train = 0.85
+val_select = 0.10
+val_cal = 0.05
+
+[training]
+initial_seed = 20260714
+comparison_seeds = [20260714, 20260715, 20260716]
+imgsz = 224
+epochs = 50
+batch = 32
+workers = 4
+patience = 12
+device = 0
+amp = true
+deterministic = true
+cache = false
+optimizer = "auto"
+project = "runs/baseline"
+name = "b-m01-seed-20260714"
+
+[augmentation]
+degrees = 8.0
+translate = 0.08
+scale = 0.20
+fliplr = 0.5
+flipud = 0.0
+hsv_h = 0.015
+hsv_s = 0.40
+hsv_v = 0.30
