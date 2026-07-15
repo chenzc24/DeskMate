@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-15T01:47:40+08:00",
-  "status": "VIDEO_CONSUMER_READY_ROBOT_CONTRACT_PENDING",
+  "generated_at": "2026-07-15T09:56:45+08:00",
+  "status": "VIDEO_CONSUMER_READY_ROBOT_JPEG_DELIVERY_PENDING",
   "capabilities": {
     "camera_index_endpoint": true,
     "local_file_endpoint": true,
@@ -26,16 +26,30 @@
     "read_failures": 1,
     "stale_frame_reused": false
   },
-  "deferred_robot_contract": {
+  "requested_robot_profile": {
+    "profile_status": "provisional_requested_unverified",
+    "image_encoding": "jpeg",
+    "width": 480,
+    "height": 480,
+    "jpeg_quality": 85,
+    "target_fps": 8,
+    "orientation": "upright_no_mirror",
+    "decoded_color_format": "opencv_bgr_after_jpeg_decode",
+    "latest_frame_only": true,
+    "maximum_frame_age_ms": 500,
+    "requires_source_frame_identity": true
+  },
+  "remaining_robot_contract": {
     "endpoint": "",
     "protocol": "unknown",
-    "orientation": "unknown",
-    "stable_resolution": "unknown",
-    "stable_fps": "unknown",
+    "observed_resolution": "unknown",
+    "observed_fps": "unknown",
+    "disconnect_behavior": "unknown",
+    "real_robot_jpg_received": false,
     "gate_b0_satisfied": false
   },
   "validation": {
-    "tests_passed": 55,
+    "tests_passed": 61,
     "tests_failed": 0,
     "robot_endpoint_opened": false,
     "robot_motion": false

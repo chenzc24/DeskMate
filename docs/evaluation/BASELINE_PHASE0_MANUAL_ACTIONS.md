@@ -4,13 +4,15 @@
 >
 > Machine evidence: `BASELINE_PHASE0_B0_REPORT.json`
 
-The software and source-pilot checks are complete. Exactly two human-supplied
-robot inputs still block Gate B0; both are intentionally fail-closed.
+The software and source-pilot checks are complete. The provisional requested
+camera profile is 480 x 480 JPEG quality 85 at 8 FPS. Exactly two
+human-supplied robot inputs still block Gate B0; both are intentionally
+fail-closed.
 
 | Gate B0 action | State | Human owner | Evidence needed |
 | --- | --- | --- | --- |
 | B0-1: obtain one consented frame from the actual robot camera | OPEN | unassigned | saved frame plus a `recorded_robot` or `live_robot` skeleton report |
-| B0-2: confirm the robot video-stream contract | OPEN | Robotics / unassigned | completed non-secret contract fields in `configs/baseline_phase0.toml` |
+| B0-2: confirm JPG delivery protocol and endpoint | PARTIAL | Robotics / unassigned | verified delivery fields and requested-profile confirmation in `configs/baseline_phase0.toml` |
 
 ## B0-1: Actual Robot-Camera Frame
 
@@ -42,9 +44,11 @@ URLs, tokens, or other secrets in Git.
 | Responsible owner and contact | |
 | Protocol or capture type (USB, RTSP, HTTP/MJPEG, file, other) | |
 | Endpoint configuration method; no secret value | |
-| Stable resolution and expected FPS | |
-| Pixel/color format (BGR, RGB, YUV, other) | |
-| Rotation and mirroring | |
+| Requested resolution and FPS | 480 x 480 at 8 FPS; awaiting real-stream verification |
+| JPEG quality | 85; awaiting real-stream verification |
+| Encoding and decoded color | JPEG; OpenCV BGR after decode |
+| Rotation and mirroring | upright, not mirrored; awaiting visual verification |
+| Freshness policy | latest frame only; source frame identity required; reject after 500 ms |
 | Disconnect, timeout, and restart behavior | |
 | Required room network or device setup | |
 | Demo window/layout constraints | |
@@ -57,9 +61,12 @@ variable name in the repository.
 
 ## Separate Gate B1 Human Image Review
 
-Image acceptance is visible here because it is the largest pending human task,
+Status: **HUMAN REVIEW IN PROGRESS**.
+
+Image acceptance is visible here because it is the largest active human task,
 but it is **not a third Gate B0 failure**. It blocks the later dataset-freeze
-Gate B1:
+Gate B1. Until reviewer decisions are written back, the latest machine audit
+still reports:
 
 - the 130-image Phase 0 pilot remains quarantined; its Codex visual precheck
   has `acceptance_authority=false`;

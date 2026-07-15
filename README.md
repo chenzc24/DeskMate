@@ -41,14 +41,16 @@ as detection assets.
 ## Current Gate Status
 
 Baseline Gate B0 is **NOT PASSED**. The software and data-pilot checks are
-complete; two human inputs remain: one consented frame from the actual robot
-camera and the non-secret robot video-stream contract. The exact collection
-steps and ownership blanks are exposed in the
+complete. The requested camera profile is now 480 x 480 JPEG quality 85 at
+8 FPS, upright and not mirrored, with OpenCV BGR output after decode. Two human
+inputs remain: one consented frame from the actual robot camera and its delivery
+protocol/endpoint. The exact collection steps and ownership blanks are exposed in the
 [Phase 0 manual-action dashboard](docs/evaluation/BASELINE_PHASE0_MANUAL_ACTIONS.md).
 
-The later Gate B1 review queue currently has 2,321 pending candidates and zero
-human-accepted images. This is a separate dataset-freeze blocker, not a third
-Gate B0 failure.
+Gate B1 human image review is now **IN PROGRESS**. The latest machine audit still
+has 2,321 pending candidates and zero accepted images until reviewer decisions
+are written back. This is a separate dataset-freeze blocker, not a third Gate
+B0 failure.
 
 ## Entry Documents
 

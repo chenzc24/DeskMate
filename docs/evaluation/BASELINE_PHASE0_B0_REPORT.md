@@ -1,6 +1,6 @@
 # Baseline Phase 0 — Gate B0 Audit
 
-> Audit time: 2026-07-15 08:16 Asia/Singapore
+> Audit time: 2026-07-15 09:56 Asia/Singapore
 >
 > Result: **NOT PASSED**
 >
@@ -14,9 +14,13 @@ Phase 0 has a working, deterministic software and data-contract foundation.
 The Oxford and `not_target` data-pilot gaps are closed, but Gate B0 is not yet
 passed. Two robot-evidence items remain open:
 
-1. one recorded or live frame from the actual robot camera;
-2. confirmed robot stream protocol, endpoint/configuration method, orientation,
-   and color format.
+1. one recorded or live JPG from the actual robot camera;
+2. confirmed delivery protocol and endpoint/configuration method, plus
+   real-stream verification of the requested camera profile.
+
+The provisional requested profile is 480 x 480 JPEG quality 85 at 8 FPS,
+upright and not mirrored, with OpenCV BGR output after decode. These configured
+values are not yet real-stream evidence.
 
 No Phase 1 accepted-dataset count, model-training result, robot-camera result,
 or B0 pass is claimed by this report.
@@ -34,7 +38,7 @@ or B0 pass is claimed by this report.
 Validation results:
 
 - `python -m compileall -q src tests scripts`: passed;
-- `python -m pytest -q tests`: **55 passed**;
+- `python -m pytest -q tests`: **61 passed**;
 - manifest audit: 130 rows, 130 quarantine, 0 errors and 0 warnings;
 - assignment example smoke fixture: passed as software-only input;
 - confirmation ran before preview, preview emitted no species line, duplicate
@@ -98,10 +102,10 @@ post-dedup coverage report that could authorize gap-fill scraping.
 | Pilot visual risk triage | PASS | 13 contact sheets and review summary |
 | Oxford source image pilot | PASS | three labels x 10; archive SHA-256 recorded |
 | `not_target` source pilot | PASS | four groups, 40 candidates, Phase 1 route |
-| Compile and deterministic tests | PASS | 55 tests passed |
+| Compile and deterministic tests | PASS | 61 tests passed |
 | Bounded runtime / console behavior | PASS | smoke report and tests |
 | Actual robot-camera frame | **FAIL** | no recorded/live robot media available |
-| Robot stream contract | **FAIL** | protocol/endpoint/orientation/color unknown |
+| Robot stream contract | **FAIL** | requested JPG profile configured; protocol/endpoint and real-stream observations unknown |
 | Selenium held behind gap report | PASS | `selenium_used=false` |
 | Calibration remains unfrozen | PASS | temperature/threshold flags false |
 
@@ -117,9 +121,9 @@ Use the [Phase 0 manual-action dashboard](BASELINE_PHASE0_MANUAL_ACTIONS.md)
 to assign owners and record the two remaining inputs without committing secrets
 or robot-camera media.
 
-1. Obtain the robot stream protocol, endpoint/configuration method, stable
-   resolution and FPS, BGR/RGB/YUV format, rotation, reconnect behavior, and
-   responsible Robotics owner.
+1. Obtain the JPG delivery protocol, endpoint/configuration method, reconnect
+   behavior, source frame identity/timestamp, and responsible Robotics owner;
+   confirm the requested 480 x 480, quality 85, 8 FPS profile is delivered.
 2. Save one consented recorded/live robot frame and rerun the skeleton with
    `--source-kind recorded_robot` or `live_robot`; verify dimensions,
    orientation, color treatment, timestamp, and stale-frame behavior.

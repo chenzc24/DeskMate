@@ -36,7 +36,15 @@ note = "Provisional plumbing values only; Phase 3 freezes values from val_cal an
 
 [robot]
 motion_enabled = false
+profile_status = "provisional_requested_unverified"
+image_encoding = "jpeg"
+requested_width = 480
+requested_height = 480
+jpeg_quality = 85
+target_fps = 8
+latest_frame_only = true
+requires_source_frame_identity = true
 stream_protocol = "unknown"
 stream_endpoint = ""
-orientation = "unknown"
-color_format = "unknown"
+orientation = "upright_no_mirror"
+color_format = "opencv_bgr_after_jpeg_decode"
