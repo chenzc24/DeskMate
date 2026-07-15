@@ -38,6 +38,18 @@ configuration. Cat classification
 weights, heads, labels, datasets, thresholds, and `Results.probs` are not reused
 as detection assets.
 
+## Current Gate Status
+
+Baseline Gate B0 is **NOT PASSED**. The software and data-pilot checks are
+complete; two human inputs remain: one consented frame from the actual robot
+camera and the non-secret robot video-stream contract. The exact collection
+steps and ownership blanks are exposed in the
+[Phase 0 manual-action dashboard](docs/evaluation/BASELINE_PHASE0_MANUAL_ACTIONS.md).
+
+The later Gate B1 review queue currently has 2,321 pending candidates and zero
+human-accepted images. This is a separate dataset-freeze blocker, not a third
+Gate B0 failure.
+
 ## Entry Documents
 
 - [High-level plan index](docs/plans/README.md): authority order and document
@@ -56,6 +68,8 @@ as detection assets.
   and commit policy.
 - [Repository workflow](plan/README.md): target plans and factual maintenance
   logs.
+- [Phase 0 manual-action dashboard](docs/evaluation/BASELINE_PHASE0_MANUAL_ACTIONS.md):
+  open robot evidence for B0 and the separate human image-review queue for B1.
 
 ## Development Workflow
 

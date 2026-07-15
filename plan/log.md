@@ -125,3 +125,10 @@ Use concise entries:
 - Changed areas: added a bounded OpenCV frame source, explicit health/reconnect counters, fake-capture tests, actual local MP4 replay smoke, and tracked readiness reports.
 - Validation: both Python environments pass 55 tests; actual OpenCV wrote/read 20/20 320x240 BGR frames with sequential IDs, monotonic timestamps, EOF disconnect, and no stale reuse; parsing, checksums, B0/B1 audits, requirement immutability, and diff checks pass.
 - Commit status: not committed or pushed. Replay is fixture-only; no robot endpoint, command, motion, split, training, or calibration was used.
+
+## 2026-07-15 - Expose Phase 0 Manual Actions
+
+- Target: make the remaining human work immediately actionable while preserving the distinction between Gate B0 robot evidence and Gate B1 image acceptance.
+- Changed areas: added an operator-facing manual-action dashboard; linked it from the repository entry point and human-readable B0 audit; refreshed the machine-readable audit evidence; and documented this bounded target.
+- Validation: system Python 3.13 and training Python 3.12 each pass all 55 tests; the B0 verifier remains fail-closed with exactly `real_robot_frame` and `robot_stream_contract` failed; the B1 auditor reports 2,321 pending, zero accepted, zero audit errors, and `ready_to_freeze_split=false`; JSON parsing, required-path checks, requirement immutability, and `git diff --check` pass.
+- Commit status: the user authorized a bounded commit and push to `main`; no pull request is intended.

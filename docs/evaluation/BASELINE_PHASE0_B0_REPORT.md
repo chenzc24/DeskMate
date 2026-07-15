@@ -1,10 +1,12 @@
 # Baseline Phase 0 — Gate B0 Audit
 
-> Audit time: 2026-07-14 22:44 Asia/Singapore
+> Audit time: 2026-07-15 08:16 Asia/Singapore
 >
 > Result: **NOT PASSED**
 >
 > Machine-readable evidence: `BASELINE_PHASE0_B0_REPORT.json`
+>
+> Human follow-up: [Phase 0 manual-action dashboard](BASELINE_PHASE0_MANUAL_ACTIONS.md)
 
 ## Outcome
 
@@ -32,7 +34,7 @@ or B0 pass is claimed by this report.
 Validation results:
 
 - `python -m compileall -q src tests scripts`: passed;
-- `python -m pytest -q tests`: **20 passed**;
+- `python -m pytest -q tests`: **55 passed**;
 - manifest audit: 130 rows, 130 quarantine, 0 errors and 0 warnings;
 - assignment example smoke fixture: passed as software-only input;
 - confirmation ran before preview, preview emitted no species line, duplicate
@@ -96,7 +98,7 @@ post-dedup coverage report that could authorize gap-fill scraping.
 | Pilot visual risk triage | PASS | 13 contact sheets and review summary |
 | Oxford source image pilot | PASS | three labels x 10; archive SHA-256 recorded |
 | `not_target` source pilot | PASS | four groups, 40 candidates, Phase 1 route |
-| Compile and deterministic tests | PASS | 20 tests passed |
+| Compile and deterministic tests | PASS | 55 tests passed |
 | Bounded runtime / console behavior | PASS | smoke report and tests |
 | Actual robot-camera frame | **FAIL** | no recorded/live robot media available |
 | Robot stream contract | **FAIL** | protocol/endpoint/orientation/color unknown |
@@ -110,6 +112,10 @@ Authoritative checksum values are stored in
 ignored pilot manifest/report, and the ignored skeleton smoke report.
 
 ## Required Actions To Pass B0
+
+Use the [Phase 0 manual-action dashboard](BASELINE_PHASE0_MANUAL_ACTIONS.md)
+to assign owners and record the two remaining inputs without committing secrets
+or robot-camera media.
 
 1. Obtain the robot stream protocol, endpoint/configuration method, stable
    resolution and FPS, BGR/RGB/YUV format, rotation, reconnect behavior, and

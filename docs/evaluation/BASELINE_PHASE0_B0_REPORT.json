@@ -103,7 +103,7 @@
       "evidence": {
         "compile_returncode": 0,
         "pytest_returncode": 0,
-        "pytest_summary": "55 passed in 0.65s"
+        "pytest_summary": "55 passed in 0.69s"
       },
       "id": "deterministic_contract_tests",
       "passed": true
@@ -184,7 +184,7 @@
     "robot_stream_contract"
   ],
   "gate": "B0",
-  "generated_at": "2026-07-15T01:48:30+08:00",
+  "generated_at": "2026-07-15T08:16:58+08:00",
   "schema_version": 1,
   "status": "NOT_PASSED"
 }
