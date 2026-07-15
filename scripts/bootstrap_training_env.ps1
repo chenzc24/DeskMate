@@ -29,5 +29,8 @@ if ($Difference) {
     throw 'Installed training environment does not match requirements-training.lock.txt'
 }
 
+& $Python (Join-Path $PSScriptRoot 'fetch_baseline_model_assets.py') --model-id B-M01-BASE
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
 & $Python (Join-Path $PSScriptRoot 'verify_training_environment.py')
 exit $LASTEXITCODE

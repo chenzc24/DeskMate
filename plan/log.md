@@ -175,3 +175,17 @@ Use concise entries:
 - Changed areas: added canonical folder mapping, decode/dimension/hash checks, exact-duplicate exclusion, conservative dHash grouping, ignored clean-candidate materialization, tracked aggregate evaluation reports, tests, and the user-named target plan.
 - Validation: all 2,427 images decode; 2,341 candidates remain after 79 below-floor and 7 redundant-exact exclusions; no cross-label exact duplicate exists; two independent scans have identical manifest/duplicate-review/audit hashes; both Python environments pass 71 tests; TOML/JSON parsing, compilation, and `git diff --check` pass.
 - Commit status: not committed or pushed; generated data stays ignored. Gate B1 remains closed and no training, robot connection, or motion occurred.
+
+## 2026-07-15 - Build Provisional Baseline Split
+
+- Target: combine the processed human-screened five-breed intake with the original Phase 1 `not_target` pool under the user's explicit development-risk decisions, without changing official Gate B1.
+- Changed areas: added a provisional dataset config, deterministic grouped split/materialization builder, tests, tracked aggregate evidence, and an ignored six-class 85/10/5 dataset view.
+- Validation: 2,787 rows materialized with exact per-class rounded 85/10/5 allocation and zero source/duplicate/hash group leakage; every copy passed SHA-256; two independent builds match; both Python environments pass 74 tests; the official B1 audit remains fail-closed with exit 3.
+- Commit policy: included in the user-authorized detector-view training code freeze. Provenance, source-session reconstruction, negative review, and cross-label dHash adjudication remain deferred development risks; no robot connection or motion occurred.
+
+## 2026-07-15 - Freeze Detector-View Parallel-Training Handoff
+
+- Target: implement the Baseline v1.4 `B-D01 -> B-M01` offline path and give two trainers identical data, code, dependencies, and pretrained weights for immediate classifier fine-tuning.
+- Changed areas: generated a complete parent-linked detector-view manifest; materialized one deterministic crop-or-original view per parent; retargeted the guarded classifier training entry point; added a dataset-only handoff ZIP, Git-delivered training code, pinned asset bootstrap, inventories, tests, and evaluation evidence.
+- Validation: pinned COCO `B-D01` generated 1,958 selected crops with 829 original/fallback views while preserving all 2,787 parents and the frozen 85/10/5 allocation; the clean repository extraction passed 2,789 dataset per-file size/SHA-256 checks, contained 2,787 training images and zero interrupted checkpoints, and passed the repository training dry-run.
+- Commit policy: the user authorized this bounded code/configuration/evidence scope for direct commit and push to `main`; no PR. The interrupted original-only run is excluded and superseded. Gate B1 remains closed because negative review, provenance/license, source/session grouping, dHash adjudication, and multi-box review are still provisional; no robot connection or motion occurred.

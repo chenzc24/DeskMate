@@ -1,0 +1,32 @@
+schema_version = 1
+
+[paths]
+target_manifest = "data/downloads/cat_processed/intake_manifest.csv"
+target_root = "data/downloads/cat_processed"
+negative_manifest = "data/downloads/phase1_candidates/source_manifest.csv"
+negative_root = "data/downloads/phase1_candidates"
+output_root = "data/downloads/baseline_provisional_split"
+
+[selection]
+target_status = "candidate"
+negative_label = "not_target"
+negative_status = "quarantine"
+allow_pending_negative_review = true
+defer_provenance_and_license = true
+group_same_label_dhash_clusters = true
+ignore_cross_label_dhash_only_clusters = true
+
+[split]
+seed = 20260715
+train = 0.85
+val_select = 0.10
+val_cal = 0.05
+
+[release_floor]
+target_total = 1200
+target_per_class = 220
+not_target = 300
+
+[materialization]
+method = "copy"
+verify_sha256 = true

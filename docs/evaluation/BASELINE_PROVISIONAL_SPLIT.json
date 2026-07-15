@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "status": "PROVISIONAL_DEVELOPMENT_SPLIT_READY",
+  "official_gate_b1_ready": false,
+  "provisional_training_data_ready": true,
+  "risk_scope": "development_only_not_final_release",
+  "seed": 20260715,
+  "ratios": {
+    "train": 0.85,
+    "val_select": 0.1,
+    "val_cal": 0.05
+  },
+  "class_order": [
+    "ragdoll",
+    "singapura",
+    "persian",
+    "sphynx",
+    "pallas",
+    "not_target"
+  ],
+  "class_counts": {
+    "ragdoll": 604,
+    "singapura": 298,
+    "persian": 674,
+    "sphynx": 465,
+    "pallas": 300,
+    "not_target": 446
+  },
+  "split_counts": {
+    "train": {
+      "ragdoll": 513,
+      "singapura": 253,
+      "persian": 573,
+      "sphynx": 395,
+      "pallas": 255,
+      "not_target": 379,
+      "total": 2368
+    },
+    "val_select": {
+      "ragdoll": 61,
+      "singapura": 30,
+      "persian": 67,
+      "sphynx": 47,
+      "pallas": 30,
+      "not_target": 45,
+      "total": 280
+    },
+    "val_cal": {
+      "ragdoll": 30,
+      "singapura": 15,
+      "persian": 34,
+      "sphynx": 23,
+      "pallas": 15,
+      "not_target": 22,
+      "total": 139
+    }
+  },
+  "rows": 2787,
+  "materialized_files": 2787,
+  "materialized_integrity_errors": 0,
+  "exact_duplicates_dropped": 0,
+  "group_leakage": {
+    "source_group_cross_split": 0,
+    "duplicate_group_cross_split": 0,
+    "exact_hash_cross_split": 0
+  },
+  "deferred_risks": [
+    "target_author_and_license_completion",
+    "target_source_session_reconstruction",
+    "not_target_human_review_completion",
+    "cross_label_dhash_only_collision_adjudication"
+  ],
+  "checksums": {
+    "config_sha256": "6b495a87f284bade1e4e4718957429af884af39f8cdb1e8d907f5ef32a6a9d9f",
+    "builder_sha256": "0e2b52c4e0cdef7821cc5fd86e37f49aa9d16b90aadcff481e0e9223323ac4d3",
+    "builder_test_sha256": "8cc247627f13be3b4f9f18ecd36342007a42be976f872dc44318d9ad9fc1bc69",
+    "materialized_manifest_sha256": "89a52d55fb1fbbd5d39cb57e354421457d336e528d0913b4a4663205e347c583",
+    "materialized_report_sha256": "2e7e0283d0747abb683c2bf14ae506bd51095cb83d27c86ccef510a351ba5d6a",
+    "deterministic_manifest_sha256": "8a67f6cf8ad054c92cdb70cd33bb4bb870dc09db5f5ee0cccb61947549d3fd79",
+    "deterministic_report_sha256": "26052ed5cf50ef40e81f309cac0d39c2be2c734bc234438d2d5855ebe96d3126"
+  }
+}

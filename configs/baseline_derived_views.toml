@@ -1,0 +1,42 @@
+schema_version = 1
+freeze_id = "baseline-derived-views-20260715-v1"
+generated_at = "2026-07-15T11:30:00+08:00"
+
+[paths]
+base_split_manifest = "data/downloads/baseline_provisional_split/provisional_split_manifest.csv"
+base_dataset_root = "data/downloads/baseline_provisional_split"
+target_source_root = "data/downloads/cat_processed"
+negative_source_root = "data/downloads/phase1_candidates"
+negative_source_manifest = "data/downloads/phase1_candidates/source_manifest.csv"
+output_root = "data/downloads/baseline_detector_views"
+
+[detector]
+model_id = "B-D01"
+checkpoint = "models/yolo26s.pt"
+expected_sha256 = "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
+task = "detect"
+native_class = "cat"
+imgsz = 640
+device = 0
+confidence_threshold = 0.25
+minimum_box_area_ratio = 0.02
+maximum_candidates = 5
+maximum_frame_age_ms = 500.0
+
+[views]
+padding_ratio = 0.15
+jpeg_quality = 95
+minimum_crop_width = 32
+minimum_crop_height = 32
+strategy = "one_view_per_parent"
+target_hit_view = "bd01_crop"
+target_miss_view = "original"
+known_other_breed_hit_view = "bd01_crop"
+background_view = "original"
+known_other_breed_source_dataset = "Category:Maine Coon cats"
+
+[training]
+folder_root = "one_view_yolo_classify"
+sampling_unit = "parent_image_id"
+selected_views_per_parent = 1
+official_counts_use_base_images = true

@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "status": "DETECTOR_DERIVED_ONE_VIEW_DATASET_READY",
+  "scope": "development_only_not_final_release",
+  "official_gate_b1_ready": false,
+  "pipeline": "frozen_B-D01_cat_detection_then_B-M01_classification_finetuning",
+  "detector": {
+    "model_id": "B-D01",
+    "weights": "yolo26s.pt",
+    "task": "detect",
+    "fine_tuned": false,
+    "cat_class_id": 15,
+    "ultralytics_version": "8.4.95",
+    "sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
+  },
+  "classifier": {
+    "model_id": "B-M01-PROVISIONAL-BD01VIEWS",
+    "weights": "yolo26s-cls.pt",
+    "task": "classify",
+    "fine_tuned": true,
+    "sha256": "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09"
+  },
+  "dataset": {
+    "parent_count": 2787,
+    "selected_view_count": 2787,
+    "selected_views_per_parent": 1,
+    "crop_count": 1958,
+    "original_or_fallback_count": 829,
+    "view_manifest_sha256": "c588872eb8a6375895ab5df7e08ba566549ffa5eeab36fe55d8052ddba93ccde",
+    "selected_snapshot_sha256": "7fdde727679325f45bea03ac3f349c94e2aeadb4e960b719044dce5f3b89f7e9"
+  },
+  "selected_kind_counts": {
+    "ragdoll": {"bd01_crop": 593, "original": 11},
+    "singapura": {"bd01_crop": 284, "original": 14},
+    "persian": {"bd01_crop": 615, "original": 59},
+    "sphynx": {"bd01_crop": 239, "original": 226},
+    "pallas": {"bd01_crop": 155, "original": 145},
+    "not_target": {"bd01_crop": 72, "original": 374}
+  },
+  "handoff": {
+    "freeze_id": "deskmate-baseline-bd01-views-20260715-v2",
+    "code_delivery": "git_repository",
+    "weight_delivery": "pinned_manifest_download_during_bootstrap",
+    "data_archive": {
+      "file": "deskmate_baseline_data_bd01_views_20260715.zip",
+      "bytes": 365703437,
+      "members": 2790,
+      "sha256": "7450d20376974383e642fa23a129ea7a3e05f75ce77f8314da26ccde26da3464"
+    },
+    "clean_repository_extract_dry_run": "passed",
+    "forbidden_checkpoint_members": 0
+  },
+  "deferred_release_risks": [
+    "official_not_target_review",
+    "source_author_license_completion",
+    "source_session_group_completion",
+    "cross_label_dhash_adjudication",
+    "multi_box_crop_review"
+  ]
+}
