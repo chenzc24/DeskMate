@@ -1,0 +1,48 @@
+schema_version = 1
+seed = 20260715
+
+[model]
+id = "B-M01-HARDENING"
+task = "classify"
+weights = "models/yolo26s-cls.pt"
+expected_sha256 = "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09"
+current_checkpoint = "runs/baseline_provisional/b-m01-provisional-bd01-oneview-seed-20260715/weights/best.pt"
+current_checkpoint_sha256 = "c41cfd4a12411883df52bf8643b20a2621b189bbd27c642bae441e92cf06319d"
+
+[dataset]
+source_root = "data/downloads/baseline_detector_views/one_view_yolo_classify"
+output_root = "data/downloads/baseline_classifier_hardening"
+labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas", "not_target"]
+class_directories = ["0_ragdoll", "1_singapura", "2_persian", "3_sphynx", "4_pallas", "5_not_target"]
+target_train_images_per_class = 573
+printed_page_labels = ["singapura", "pallas"]
+variants = ["balanced_oneview", "balanced_print"]
+
+[printed_page]
+width = 640
+height = 480
+minimum_jpeg_quality = 55
+maximum_jpeg_quality = 85
+
+[training]
+imgsz = 224
+epochs = 50
+batch = 32
+workers = 4
+patience = 10
+device = 0
+amp = true
+deterministic = true
+cache = false
+optimizer = "auto"
+project = "runs/baseline_classifier_hardening"
+
+[augmentation]
+degrees = 8.0
+translate = 0.08
+scale = 0.20
+fliplr = 0.5
+flipud = 0.0
+hsv_h = 0.015
+hsv_s = 0.40
+hsv_v = 0.30

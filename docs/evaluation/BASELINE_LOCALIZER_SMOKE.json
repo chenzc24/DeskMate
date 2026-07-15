@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-15T10:50:18+08:00",
+  "generated_at": "2026-07-15T13:35:09+08:00",
   "status": "SMOKE_COMPLETE_NOT_RELEASE_ADMITTED",
   "model_id": "B-D01",
   "task": "cat_localization",
@@ -12,9 +12,9 @@
     "sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
   },
   "checksums": {
-    "config": "d44dc280e5c98412a11c2926a348bd4629a22a7887fda4dc9a77d353503c66f2",
-    "localization_module": "48f1d4fb2f203fc226034b5173291f4b219876c54c552469a26e9ed68f449cbf",
-    "smoke_script": "9483d40898f38741498518cbe8881b5c419159d8d57c8798dd1909e822f32739"
+    "config": "0d1dec5f16b4d6b61488da243ebc5b946eb164385d0a834dd7ccdcf5eca2998f",
+    "localization_module": "37108936ba2bf52debe1923a11093fe3ec80bc8d9c2053c11c99dcbe20657f90",
+    "smoke_script": "0bb943b5d39c964ab4698bf5ca5891ebba34c268dc31eea7849c1625a191cdae"
   },
   "runtime": {
     "ultralytics": "8.4.95",
@@ -31,8 +31,8 @@
     "images_with_cat_proposal": 5,
     "measured_iterations_per_image": 5,
     "measured_predictions": 25,
-    "mean_latency_ms": 37.709052,
-    "p95_latency_ms": 44.5221,
+    "mean_latency_ms": 15.702924000000001,
+    "p95_latency_ms": 18.0194,
     "results": [
       {
         "path": "References/The requirement/SWS3009A_Assg_assets/cat-000.png",
@@ -40,8 +40,8 @@
         "reason": null,
         "candidate_count": 1,
         "top_confidence": 0.9530130624771118,
-        "mean_latency_ms": 36.2252,
-        "p95_latency_ms": 38.677
+        "mean_latency_ms": 15.062360000000002,
+        "p95_latency_ms": 15.768
       },
       {
         "path": "References/The requirement/SWS3009A_Assg_assets/cat-001.png",
@@ -49,8 +49,8 @@
         "reason": null,
         "candidate_count": 1,
         "top_confidence": 0.9288290143013,
-        "mean_latency_ms": 35.43492,
-        "p95_latency_ms": 38.7196
+        "mean_latency_ms": 15.425,
+        "p95_latency_ms": 17.0664
       },
       {
         "path": "References/The requirement/SWS3009A_Assg_assets/cat-002.png",
@@ -58,8 +58,8 @@
         "reason": null,
         "candidate_count": 1,
         "top_confidence": 0.844835638999939,
-        "mean_latency_ms": 39.23084,
-        "p95_latency_ms": 44.5221
+        "mean_latency_ms": 15.22548,
+        "p95_latency_ms": 16.4522
       },
       {
         "path": "References/The requirement/SWS3009A_Assg_assets/cat-003.png",
@@ -67,8 +67,8 @@
         "reason": null,
         "candidate_count": 1,
         "top_confidence": 0.763640820980072,
-        "mean_latency_ms": 41.01688,
-        "p95_latency_ms": 50.6304
+        "mean_latency_ms": 16.93918,
+        "p95_latency_ms": 18.2545
       },
       {
         "path": "References/The requirement/SWS3009A_Assg_assets/cat-004.png",
@@ -76,8 +76,8 @@
         "reason": null,
         "candidate_count": 1,
         "top_confidence": 0.7340813875198364,
-        "mean_latency_ms": 36.63742,
-        "p95_latency_ms": 43.2791
+        "mean_latency_ms": 15.8626,
+        "p95_latency_ms": 16.8867
       }
     ]
   },

@@ -32,7 +32,6 @@ phase1_route = "Combine licensed public hard negatives with grouped robot-camera
 desk_scene = "Desks"
 floor_scene = "Floors"
 mobile_robot = "Mobile robots"
-other_cat_breed = "Maine Coon cats"
 
 [oxford_iiit_pet]
 page_url = "https://www.robots.ox.ac.uk/~vgg/data/pets/"

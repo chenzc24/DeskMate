@@ -18,6 +18,7 @@ __pycache__/
 data/raw/
 data/downloads/
 data/cache/
+data/work/
 datasets/
 *.zip
 *.tar
@@ -45,6 +46,7 @@ wandb/
 logs/
 artifacts/logs/
 artifacts/demo_videos/
+artifacts/robot_camera_eval/
 events.out.tfevents.*
 
 # Private or generated video captures

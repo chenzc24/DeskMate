@@ -1,0 +1,44 @@
+schema_version = 1
+seed = 20260715
+
+[model]
+id = "B-M03-TARGET5-ROBOT-ADAPTED"
+task = "classify"
+weights = "runs/baseline_target5/b-m02-target5-seed-20260715/weights/best.pt"
+expected_sha256 = "2004c4e1575782ccd2beb6958e249a460f05a9602d39e297378a9be2f49d9095"
+
+[dataset]
+root = "data/downloads/baseline_robot_adaptation_20260715/yolo_classify"
+manifest = "data/downloads/baseline_robot_adaptation_20260715/robot_adaptation_manifest.csv"
+report = "data/downloads/baseline_robot_adaptation_20260715/robot_adaptation_report.json"
+labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas"]
+class_directories = ["0_ragdoll", "1_singapura", "2_persian", "3_sphynx", "4_pallas"]
+
+[training]
+imgsz = 224
+epochs = 25
+batch = 32
+workers = 4
+patience = 7
+device = 0
+amp = true
+deterministic = true
+cache = false
+optimizer = "AdamW"
+project = "runs/baseline_target5_robot_adapt"
+name = "b-m03-target5-robot-adapt-seed-20260715"
+
+[augmentation]
+degrees = 10.0
+translate = 0.10
+scale = 0.25
+fliplr = 0.5
+flipud = 0.0
+hsv_h = 0.015
+hsv_s = 0.30
+hsv_v = 0.35
+auto_augment = "randaugment"
+erasing = 0.15
+lr0 = 0.0005
+lrf = 0.05
+weight_decay = 0.0005

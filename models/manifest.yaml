@@ -1,5 +1,48 @@
 schema_version: 1
 models:
+  - id: B-M01-SP-HARDENED-CANDIDATE
+    state: development_candidate_not_release_admitted
+    enabled_priority: P0_candidate_disabled
+    task: classification
+    framework: ultralytics
+    architecture: YOLO26s-cls
+    file: runs/baseline_classifier_hardening/soups/b50_p50.pt
+    bytes: 11048289
+    sha256: 0d598ec33773e82b147380c9fa866c71482fe42800dae1086fb63b90935b3296
+    composition:
+      method: single_checkpoint_weight_soup
+      active_models_at_inference: 1
+      balanced_oneview:
+        coefficient: 0.5
+        source_sha256: 836f508e390907baa76c0af29c0f0a8fd87feb1b6ea44f3f0ceb8954f233882d
+      balanced_print:
+        coefficient: 0.5
+        source_sha256: b2abc617772ff97f5e63cb69d0616f031dd9a1af80c6dac6095405a093b6f858
+    training:
+      base_weight_sha256: 816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09
+      dataset_manifest_sha256: 1dd6e54b36fa93299639c8b2316fb8841ff61516ef7dbe920658deac6ca3b2ba
+      seed: 20260715
+      scope: development_only_not_final_release
+    input:
+      color: RGB
+      size: [224, 224]
+      scope: hardened_detector_crop_or_centre_fallback
+    output:
+      native: Ultralytics Results.probs
+      adapter_contract: ClassificationObservation
+      native_objects_must_not_cross_adapter: true
+      class_order:
+        - ragdoll
+        - singapura
+        - persian
+        - sphynx
+        - pallas
+        - not_target
+    evidence: docs/evaluation/BASELINE_CLASSIFIER_HARDENING.md
+    limitations:
+      - robot evidence contains only nine design stills and is not a final test
+      - probabilities remain uncalibrated
+      - release requires unseen session-grouped robot-domain validation
   - id: B-M01-BASE
     state: verified_base_weight_not_finetuned
     enabled_priority: P0

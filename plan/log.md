@@ -245,3 +245,36 @@ Use concise entries:
 - Changed areas: added a 64-source-pixel padded-crop gate, explicit fallback reasons, IoU 0.85 candidate de-duplication, a 1% detector area floor, unit tests, a reproducible four-policy ablation, and tracked aggregate evidence; generated per-image results and the robot comparison sheet remain ignored.
 - Validation: 10 targeted tests passed; the control reproduced all 640 previous non-robot predictions. Hardened routing moved the biased 40 from 37 to 38 correct and the nine robot stills from 6 to 7 visible-label-correct, with no change across the expanded 600 and zero observed regressions. Candidate de-duplication reduced 12 candidate sets without changing top routes. A robot-only confidence `[0.01, 0.25)` sweep added four candidates but classified none correctly, including both Pallas proposals as Persian; Pallas remains explicitly deferred to a separate classifier/domain-data target.
 - Commit status: user explicitly authorized a bounded direct commit and push to `main`; results remain static diagnostics, not held-out release accuracy; no robot command or motion occurred. Concurrent dirty paths remain unstaged.
+
+## 2026-07-15 - Harden Singapura And Pallas Classification
+
+- Target: improve Pallas and Singapura classification with one active Baseline classifier while preserving the frozen split, hardened ROI route, and no-robot-training boundary.
+- Changed areas: added deterministic class-balanced and train-only printed-page dataset construction, two candidate training runs, bounded single-checkpoint weight-soup construction, same-ROI evaluation, a disabled candidate config/manifest entry, unit tests, and tracked evidence. Generated datasets, runs, detailed predictions, and sheets remain ignored.
+- Validation: the selected deterministic 50/50 candidate (`0d598ec33773e82b147380c9fa866c71482fe42800dae1086fb63b90935b3296`) moved frozen validation from 399/419 to 403/419 and macro F1 from 0.9534 to 0.9656. Pallas moved 44/45 to 45/45 and robot Pallas 0/2 to 2/2; Singapura moved 43/45 to 42/45 while its sole robot still remained correct. Robot total moved 7/9 to 8/9, with one Persian-to-`not_target` regression and effectively unchanged latency. Eighty-eight tests passed; deterministic build, parsing, hash/mapping, compile, and visual checks passed.
+- Decision: retain this checkpoint as a development candidate, not an automatic release replacement. The nine robot stills influenced design and include only one Singapura and two Pallas images; a new session-grouped robot set is required for admission.
+- Commit status: no commit or push requested; no robot command or motion occurred, and concurrent dirty paths remained unstaged.
+## 2026-07-15 - Balanced-300 Classifier Ablation
+
+- Target: test whether the low Singapura/Pallas robot recognition is caused by target-class imbalance, using the current handoff after other-cat negatives were removed.
+- Changed areas: added a deterministic ignored balanced-300 dataset builder and development training configuration; original handoff data and frozen checkpoint remain unchanged.
+- Validation: target totals are Ragdoll/Persian/Sphynx/Pallas 300 each and Singapura 298, with 85/10/5 splits; `not_target` is 377 with no other-cat files. The new model completed 27 epochs, best epoch 15, and reached 96.79% top-1. On the same balanced validation set, frozen baseline was 97.33%; balanced model was 96.79%, with Singapura recall 90.0% vs 96.67%, Pallas 100% vs 100%, and `not_target` recall 97.30% vs 94.59%. Robot-camera comparison remains pending.
+- Commit status: not committed or pushed.
+
+## 2026-07-15 - Manual Pallas ROI Ablation
+
+- Target: bypass the detector on the two robot Pallas stills and determine whether human-selected tight or padded cat boxes repair the frozen current classifier.
+- Validation: both manual boxes were visually valid and excluded the printed breed name. The current model returned no Pallas result across four manual ROIs: frame 8 changed from detector-crop Persian 0.814 to tight Sphynx 0.508 and padded Persian 0.583; frame 9 changed from centre-fallback Persian 0.459 to tight/padded Persian 0.782/0.783. A correct manual box therefore does not repair the current classifier. The disabled hardened candidate classified both routed and both padded inputs as Pallas but failed on both overly tight boxes, exposing context sensitivity.
+- Scope: two descriptive robot stills only; no model, route, dataset, threshold, robot command, or motion changed. Generated coordinates, predictions, crops, and comparison sheet remain ignored.
+- Commit status: no commit or push requested; concurrent dirty paths remained unstaged.
+
+## 2026-07-15 - Balanced-300 Robot-Camera Comparison
+
+- Target: classify the same nine saved routed robot-camera crops with the balanced-300 classifier while keeping detector, route, and crops fixed.
+- Validation: frozen and balanced classifiers each scored 6/9 (66.7%) by human-read printed labels. Balanced-300 corrected one Pallas still, but changed one Persian and the other Pallas still to `not_target`; no net gain was observed. This is descriptive evidence, not a held-out release accuracy set.
+- Commit status: not committed or pushed.
+## 2026-07-15 - Source Singapura And Pallas Gap-Fill Candidates
+
+- Target: prepare two independent human-review folders with enough new candidates to bring Singapura and Pallas toward 400 accepted images.
+- Changed areas: added a reproducible acquisition/materialization script and generated ignored review folders under `data/downloads/baseline_additional_review_20260715/`; frozen datasets and checkpoints remained read-only.
+- Validation: materialized 204 Singapura and 220 Pallas candidates. All 424 images decoded, contain source/license metadata, are exact-hash unique within class, and have zero SHA-256 overlap with the 2,787 frozen split. Status is pending human review; no images were merged or trained.
+- Commit status: not committed or pushed.

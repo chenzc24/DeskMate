@@ -1,0 +1,23 @@
+schema_version = 1
+model_id = "B-M01-SP-HARDENED-CANDIDATE"
+task = "cat_breed"
+checkpoint = "runs/baseline_classifier_hardening/soups/b50_p50.pt"
+expected_sha256 = "0d598ec33773e82b147380c9fa866c71482fe42800dae1086fb63b90935b3296"
+imgsz = 224
+device = 0
+temperature = 1.0
+maximum_frame_age_ms = 500.0
+class_order = ["ragdoll", "singapura", "persian", "sphynx", "pallas", "not_target"]
+development_candidate = true
+release_admitted = false
+
+[composition]
+method = "single_checkpoint_weight_soup"
+balanced_oneview = 0.5
+balanced_print = 0.5
+active_models_at_inference = 1
+
+[roi_scales]
+wide = 1.0
+medium = 0.8
+tight = 0.6

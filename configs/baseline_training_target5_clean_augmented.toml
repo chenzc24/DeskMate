@@ -1,0 +1,44 @@
+schema_version = 1
+seed = 20260715
+
+[model]
+id = "B-M08-TARGET5-CLEAN-AUG-FROM-PRETRAINED"
+task = "classify"
+weights = "models/yolo26s-cls.pt"
+expected_sha256 = "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09"
+
+[dataset]
+root = "data/downloads/baseline_target5_clean_augmented_20260715/one_view_yolo_classify"
+manifest = "data/downloads/baseline_target5_clean_augmented_20260715/augmented_manifest.csv"
+report = "data/downloads/baseline_target5_clean_augmented_20260715/augmented_report.json"
+labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas"]
+class_directories = ["0_ragdoll", "1_singapura", "2_persian", "3_sphynx", "4_pallas"]
+
+[training]
+imgsz = 224
+epochs = 45
+batch = 64
+workers = 4
+patience = 10
+device = 0
+amp = true
+deterministic = true
+cache = false
+optimizer = "AdamW"
+project = "runs/baseline_target5_clean_augmented"
+name = "b-m08-target5-clean-aug-seed-20260715"
+
+[augmentation]
+degrees = 5.0
+translate = 0.05
+scale = 0.15
+fliplr = 0.5
+flipud = 0.0
+hsv_h = 0.01
+hsv_s = 0.20
+hsv_v = 0.20
+auto_augment = "randaugment"
+erasing = 0.10
+lr0 = 0.0005
+lrf = 0.03
+weight_decay = 0.0005

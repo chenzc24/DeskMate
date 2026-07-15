@@ -1,0 +1,44 @@
+schema_version = 1
+seed = 20260715
+
+[model]
+id = "B-M05-SIXCLASS-NOCAT-MACHINE-MERGED"
+task = "classify"
+weights = "runs/baseline_merged_gapfill_clean/b-m01-merged-gapfill-clean-seed-20260715/weights/best.pt"
+expected_sha256 = "adb5fad13b29398964fec225d5d092701b055e79294864682533f30226407af5"
+
+[dataset]
+root = "data/downloads/baseline_nocat_machine_merged_20260715/one_view_yolo_classify"
+manifest = "data/downloads/baseline_nocat_machine_merged_20260715/merged_manifest.csv"
+report = "data/downloads/baseline_nocat_machine_merged_20260715/merged_report.json"
+labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas", "not_target"]
+class_directories = ["0_ragdoll", "1_singapura", "2_persian", "3_sphynx", "4_pallas", "5_not_target"]
+
+[training]
+imgsz = 224
+epochs = 35
+batch = 32
+workers = 4
+patience = 10
+device = 0
+amp = true
+deterministic = true
+cache = false
+optimizer = "AdamW"
+project = "runs/baseline_nocat_machine_merged"
+name = "b-m05-sixclass-machine-merged-seed-20260715"
+
+[augmentation]
+degrees = 10.0
+translate = 0.10
+scale = 0.25
+fliplr = 0.5
+flipud = 0.0
+hsv_h = 0.015
+hsv_s = 0.35
+hsv_v = 0.35
+auto_augment = "randaugment"
+erasing = 0.15
+lr0 = 0.0003
+lrf = 0.05
+weight_decay = 0.0005

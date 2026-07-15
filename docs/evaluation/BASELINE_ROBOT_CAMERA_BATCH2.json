@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "ROBOT_CAMERA_BATCH2_PIPELINE_COMPLETE",
+  "accuracy_claim_allowed": false,
+  "folder_snapshot": {
+    "total_images": 9,
+    "previous_images": 3,
+    "new_images": 6,
+    "resolution": "640x480"
+  },
+  "active_configuration_new_images": {
+    "detector_hits": 4,
+    "detector_fallbacks": 2,
+    "descriptive_correct_from_visible_page_labels": 4,
+    "descriptive_total": 6,
+    "descriptive_accuracy": 0.6666666666666666,
+    "mean_model_chain_latency_ms": 40.2025
+  },
+  "new_frames": [
+    {"frame": 4, "visible_label": "persian", "route": "centre_fallback", "prediction": "persian", "confidence": 0.9022822686256005, "correct_descriptive": true},
+    {"frame": 5, "visible_label": "ragdoll", "route": "detector_crop", "detector_confidence": 0.38879022002220154, "prediction": "ragdoll", "confidence": 0.992072488487059, "correct_descriptive": true},
+    {"frame": 6, "visible_label": "persian", "route": "detector_crop", "detector_confidence": 0.48638802766799927, "prediction": "persian", "confidence": 0.9999654421613221, "correct_descriptive": true},
+    {"frame": 7, "visible_label": "singapura", "route": "detector_crop", "detector_confidence": 0.7845596075057983, "prediction": "singapura", "confidence": 0.7742201155936359, "correct_descriptive": true},
+    {"frame": 8, "visible_label": "pallas", "route": "detector_crop", "detector_confidence": 0.2598777115345001, "prediction": "persian", "confidence": 0.8028446495744932, "correct_descriptive": false},
+    {"frame": 9, "visible_label": "pallas", "route": "centre_fallback", "prediction": "persian", "confidence": 0.4856226448291243, "correct_descriptive": false}
+  ],
+  "diagnosis": {
+    "pallas_errors": 2,
+    "other_visible_label_errors": 0,
+    "area001_recovered_active_misses": 0,
+    "frame4_native_top_cat_confidence": 0.04765147343277931,
+    "frame9_native_top_cat_confidence": 0.016700904816389084,
+    "pallas_correct_at_any_centre_scale": false,
+    "active_configuration_changed": false
+  },
+  "models": {
+    "detector_sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b",
+    "classifier_sha256": "c41cfd4a12411883df52bf8643b20a2621b189bbd27c642bae441e92cf06319d"
+  },
+  "artifact_root": "artifacts/robot_camera_eval/batch_20260715_1237",
+  "limitations": [
+    "visible paper labels were inspected by a human but are not a frozen ground-truth manifest",
+    "six new still images are too few for a release accuracy claim",
+    "still images cannot validate temporal box stability",
+    "diagnostic sweeps did not modify active thresholds"
+  ]
+}

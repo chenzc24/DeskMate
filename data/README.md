@@ -11,7 +11,9 @@ ragdoll / singapura / persian / sphynx / pallas
 ```
 
 `not_target` is an internal rejection output. Keep its 300–600 grouped negative
-images separate from the five target-cat report counts. Assignment example
+images focused on non-cat scenes and robot-domain backgrounds; other cat breeds
+are not required negative classes. Keep these images separate from the five
+target-cat report counts. Assignment example
 images under `References/The requirement/` are smoke-test inputs only and must
 never enter training or validation manifests.
 

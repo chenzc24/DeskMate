@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "status": "BD05_M09_24_VISUAL_EVALUATION_COMPLETE",
+  "created_at_local": "2026-07-16T00:18:31+0800",
+  "selection_manifest": "E:\\NOS_NUS\\DeepLearning\\project\\data\\downloads\\Camera\\model_test_selection_20260715\\manifest.csv",
+  "selection_count": 24,
+  "detector": {
+    "checkpoint": "E:\\NOS_NUS\\DeepLearning\\project\\models\\frozen\\b-d05-manual-curated-screenprint.pt",
+    "sha256": "b290f57f3534b60a59b5f1d281b209ff773b8acab4b20a90458be9af51fbe503",
+    "imgsz": 640,
+    "confidence_threshold": 0.25,
+    "minimum_box_area_ratio": 0.02
+  },
+  "classifier": {
+    "checkpoint": "E:\\NOS_NUS\\DeepLearning\\project\\models\\frozen\\b-m09-target5-manual-curated-aug.pt",
+    "sha256": "d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1",
+    "labels": [
+      "ragdoll",
+      "singapura",
+      "persian",
+      "sphynx",
+      "pallas"
+    ]
+  },
+  "routing": {
+    "padding_ratio": 0.25,
+    "fallback_center_scale": 0.8,
+    "minimum_padded_short_side_pixels": 32
+  },
+  "metrics": {
+    "correct": 22,
+    "total": 24,
+    "accuracy": 0.9166666666666666,
+    "detector_hits": 20,
+    "detector_misses": 4,
+    "by_class": {
+      "ragdoll": {
+        "correct": 4,
+        "total": 5
+      },
+      "singapura": {
+        "correct": 5,
+        "total": 5
+      },
+      "persian": {
+        "correct": 5,
+        "total": 5
+      },
+      "sphynx": {
+        "correct": 5,
+        "total": 5
+      },
+      "pallas": {
+        "correct": 3,
+        "total": 4
+      }
+    }
+  },
+  "errors": [
+    {
+      "sample_id": "robot-model-test-001",
+      "truth": "ragdoll",
+      "prediction": "sphynx",
+      "detector_hit": true,
+      "top1_confidence": "0.570992"
+    },
+    {
+      "sample_id": "robot-model-test-022",
+      "truth": "pallas",
+      "prediction": "sphynx",
+      "detector_hit": true,
+      "top1_confidence": "0.635561"
+    }
+  ],
+  "artifacts": {
+    "csv": "results.csv",
+    "all_contact_sheet": "contact_sheet_all_24.jpg",
+    "pages": [
+      "contact_sheet_page_1.jpg",
+      "contact_sheet_page_2.jpg",
+      "contact_sheet_page_3.jpg",
+      "contact_sheet_page_4.jpg"
+    ],
+    "per_sample": "per_sample/"
+  }
+}

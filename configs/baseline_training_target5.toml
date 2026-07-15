@@ -1,0 +1,41 @@
+schema_version = 1
+seed = 20260715
+
+[model]
+id = "B-M02-TARGET5-NO-REJECTION-HEAD"
+task = "classify"
+weights = "models/yolo26s-cls.pt"
+expected_sha256 = "816790029d5df3fef358f03c8144b96339d8824ee25577aeda8be0963e5c5f09"
+
+[dataset]
+root = "data/downloads/baseline_target5_20260715/one_view_yolo_classify"
+manifest = "data/downloads/baseline_target5_20260715/target5_manifest.csv"
+report = "data/downloads/baseline_target5_20260715/target5_report.json"
+labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas"]
+class_directories = ["0_ragdoll", "1_singapura", "2_persian", "3_sphynx", "4_pallas"]
+
+[training]
+imgsz = 224
+epochs = 50
+batch = 32
+workers = 4
+patience = 12
+device = 0
+amp = true
+deterministic = true
+cache = false
+optimizer = "auto"
+project = "runs/baseline_target5"
+name = "b-m02-target5-seed-20260715"
+
+[augmentation]
+degrees = 8.0
+translate = 0.08
+scale = 0.20
+fliplr = 0.5
+flipud = 0.0
+hsv_h = 0.015
+hsv_s = 0.40
+hsv_v = 0.30
+auto_augment = "randaugment"
+erasing = 0.20

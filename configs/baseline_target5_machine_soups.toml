@@ -1,0 +1,16 @@
+schema_version = 1
+
+[sources]
+base = "models/frozen/b-m04-target5-robot-soup-a03.pt"
+machine_finetuned = "runs/baseline_target5_machine_merged/b-m06-target5-machine-merged-seed-20260715/weights/best.pt"
+
+[output]
+directory = "runs/baseline_target5_machine_soups"
+
+[alphas]
+alpha_0_02 = 0.02
+alpha_0_05 = 0.05
+alpha_0_10 = 0.10
+alpha_0_15 = 0.15
+alpha_0_20 = 0.20
+alpha_0_30 = 0.30

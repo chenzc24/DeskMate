@@ -42,7 +42,6 @@ pallas_general = "Otocolobus manul"
 desk_scene = "Desks"
 floor_scene = "Floors"
 mobile_robot = "Mobile robots"
-other_cat_breed = "Maine Coon cats"
 wall_scene = "Walls"
 human_hand = "Human hands"
 

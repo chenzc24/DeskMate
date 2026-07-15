@@ -1,0 +1,54 @@
+schema_version = 1
+
+[sources]
+current = "runs/baseline_provisional/b-m01-provisional-bd01-oneview-seed-20260715/weights/best.pt"
+balanced_oneview = "runs/baseline_classifier_hardening/b-m01-balanced_oneview-seed-20260715/weights/best.pt"
+balanced_print = "runs/baseline_classifier_hardening/b-m01-balanced_print-seed-20260715/weights/best.pt"
+
+[output]
+directory = "runs/baseline_classifier_hardening/soups"
+
+[soups.b50_p50]
+current = 0.0
+balanced_oneview = 0.5
+balanced_print = 0.5
+
+[soups.b40_p60]
+current = 0.0
+balanced_oneview = 0.4
+balanced_print = 0.6
+
+[soups.b45_p55]
+current = 0.0
+balanced_oneview = 0.45
+balanced_print = 0.55
+
+[soups.b55_p45]
+current = 0.0
+balanced_oneview = 0.55
+balanced_print = 0.45
+
+[soups.b60_p40]
+current = 0.0
+balanced_oneview = 0.6
+balanced_print = 0.4
+
+[soups.c34_b33_p33]
+current = 0.34
+balanced_oneview = 0.33
+balanced_print = 0.33
+
+[soups.c50_b25_p25]
+current = 0.5
+balanced_oneview = 0.25
+balanced_print = 0.25
+
+[soups.c60_b20_p20]
+current = 0.6
+balanced_oneview = 0.2
+balanced_print = 0.2
+
+[soups.c70_b15_p15]
+current = 0.7
+balanced_oneview = 0.15
+balanced_print = 0.15

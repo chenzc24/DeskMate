@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "status": "ROBOT_CAMERA_STILL_PIPELINE_COMPLETE",
+  "accuracy_claim_allowed": false,
+  "visual_expected_label": "sphynx",
+  "input_count": 3,
+  "active_configuration": {
+    "detector_images_with_box": 2,
+    "detector_fallback_count": 1,
+    "predictions": {"sphynx": 2, "not_target": 1},
+    "detector_mean_latency_ms": 97.8441,
+    "classifier_mean_latency_ms": 15.1832,
+    "end_to_end_model_mean_latency_ms": 113.0273
+  },
+  "models": {
+    "detector": {
+      "id": "B-D01",
+      "sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b",
+      "cat_class_id": 15,
+      "imgsz": 640,
+      "confidence_threshold": 0.25,
+      "minimum_box_area_ratio": 0.02,
+      "padding_ratio": 0.15
+    },
+    "classifier": {
+      "id": "B-M01-PROVISIONAL-BD01VIEWS",
+      "sha256": "c41cfd4a12411883df52bf8643b20a2621b189bbd27c642bae441e92cf06319d",
+      "imgsz": 224
+    }
+  },
+  "frames": [
+    {
+      "frame": 1,
+      "detector_box_count": 1,
+      "detector_confidence": 0.7087949514389038,
+      "detector_area_ratio": 0.09087212104290288,
+      "route": "detector_crop",
+      "prediction": "sphynx",
+      "classifier_confidence": 0.9999905257889272,
+      "margin": 0.9999867083874951,
+      "detector_latency_ms": 194.087,
+      "classifier_latency_ms": 16.7961
+    },
+    {
+      "frame": 2,
+      "detector_box_count": 1,
+      "detector_confidence": 0.8646301627159119,
+      "detector_area_ratio": 0.06272689816788812,
+      "route": "detector_crop",
+      "prediction": "sphynx",
+      "classifier_confidence": 0.9999981307948204,
+      "margin": 0.9999969848861358,
+      "detector_latency_ms": 35.4141,
+      "classifier_latency_ms": 11.4619
+    },
+    {
+      "frame": 3,
+      "detector_box_count": 0,
+      "route": "centre_fallback",
+      "prediction": "not_target",
+      "classifier_confidence": 0.4979459402214839,
+      "margin": 0.1643447200339982,
+      "detector_latency_ms": 64.0312,
+      "classifier_latency_ms": 17.2915
+    }
+  ],
+  "far_frame_area_gate_diagnostic": {
+    "not_active_config": true,
+    "minimum_box_area_ratio_active": 0.02,
+    "minimum_box_area_ratio_diagnostic": 0.01,
+    "detector_confidence": 0.3759874701499939,
+    "detector_area_ratio": 0.012600888414736389,
+    "route": "detector_crop",
+    "prediction": "sphynx",
+    "classifier_confidence": 0.991334924161798,
+    "margin": 0.9863324900517024
+  },
+  "artifact_root": "artifacts/robot_camera_eval",
+  "limitations": [
+    "three still frames are not an independent accuracy set",
+    "visual expected label comes from the visible print label and human inspection, not a frozen ground-truth manifest",
+    "still frames cannot validate temporal box stability",
+    "the 0.01 area threshold is diagnostic only and has not replaced the active configuration",
+    "temperature and confirmation thresholds are not calibrated"
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15T14:14:41+08:00",
+  "status": "SINGLE_MODEL_DEVELOPMENT_CANDIDATE_SELECTED_NOT_RELEASE_ADMITTED",
+  "selected_candidate": {
+    "model_id": "B-M01-SP-HARDENED-CANDIDATE",
+    "path": "runs/baseline_classifier_hardening/soups/b50_p50.pt",
+    "sha256": "0d598ec33773e82b147380c9fa866c71482fe42800dae1086fb63b90935b3296",
+    "bytes": 11048289,
+    "composition": {
+      "balanced_oneview": 0.5,
+      "balanced_print": 0.5
+    },
+    "single_active_classifier": true,
+    "release_admitted": false
+  },
+  "dataset": {
+    "manifest": "data/downloads/baseline_classifier_hardening/manifest.csv",
+    "manifest_sha256": "1dd6e54b36fa93299639c8b2316fb8841ff61516ef7dbe920658deac6ca3b2ba",
+    "rows_across_two_variants": 7714,
+    "per_variant": {
+      "train_per_class": 573,
+      "val_select": 280,
+      "val_cal": 139
+    },
+    "balanced_print_train_views": {
+      "singapura": {"base": 253, "printed": 253, "repeat": 67},
+      "pallas": {"base": 255, "printed": 255, "repeat": 63}
+    },
+    "robot_images_in_training": 0,
+    "deterministic_double_build": true
+  },
+  "training": {
+    "balanced_oneview": {
+      "best_epoch": 25,
+      "epochs_run": 35,
+      "folder_validation_top1": 0.95357,
+      "elapsed_seconds": 428.091,
+      "best_sha256": "836f508e390907baa76c0af29c0f0a8fd87feb1b6ea44f3f0ceb8954f233882d"
+    },
+    "balanced_print": {
+      "best_epoch": 10,
+      "epochs_run": 20,
+      "folder_validation_top1": 0.95,
+      "elapsed_seconds": 228.3596,
+      "best_sha256": "b2abc617772ff97f5e63cb69d0616f031dd9a1af80c6dac6095405a093b6f858"
+    }
+  },
+  "same_roi_evaluation": {
+    "validation_count": 419,
+    "robot_still_count": 9,
+    "current": {
+      "validation_correct": 399,
+      "validation_macro_f1": 0.9534461708991492,
+      "val_select_correct": 268,
+      "val_cal_correct": 131,
+      "per_class_correct": {
+        "ragdoll": "85/91",
+        "singapura": "43/45",
+        "persian": "99/101",
+        "sphynx": "69/70",
+        "pallas": "44/45",
+        "not_target": "59/67"
+      },
+      "robot_correct": "7/9",
+      "robot_singapura": "1/1",
+      "robot_pallas": "0/2"
+    },
+    "selected_candidate": {
+      "validation_correct": 403,
+      "validation_macro_f1": 0.965633969401105,
+      "val_select_correct": 267,
+      "val_cal_correct": 136,
+      "per_class_correct": {
+        "ragdoll": "87/91",
+        "singapura": "42/45",
+        "persian": "99/101",
+        "sphynx": "69/70",
+        "pallas": "45/45",
+        "not_target": "61/67"
+      },
+      "robot_correct": "8/9",
+      "robot_singapura": "1/1",
+      "robot_pallas": "2/2"
+    }
+  },
+  "classifier_latency_ms": {
+    "current": {"mean": 11.641230607476636, "p95": 20.9685},
+    "selected_candidate": {"mean": 11.541545794392524, "p95": 20.2919}
+  },
+  "known_regressions": [
+    "singapura validation correct decreased from 43/45 to 42/45",
+    "val_select correct decreased from 268/280 to 267/280",
+    "robot-04 Persian changed from correct Persian to not_target"
+  ],
+  "limitations": [
+    "robot stills influenced candidate selection and are not a final held-out release test",
+    "one robot Singapura and two robot Pallas images are too few for a generalization claim",
+    "static images do not validate temporal consensus",
+    "reported classifier probabilities are not calibrated"
+  ],
+  "generated_artifacts": [
+    "data/downloads/baseline_classifier_hardening/evaluation/report.json",
+    "data/downloads/baseline_classifier_hardening/evaluation/predictions.csv",
+    "data/downloads/baseline_classifier_hardening/evaluation/robot_candidate_comparison.jpg"
+  ]
+}

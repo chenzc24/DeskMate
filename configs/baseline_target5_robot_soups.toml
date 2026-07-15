@@ -1,0 +1,16 @@
+schema_version = 1
+
+[sources]
+general = "runs/baseline_target5/b-m02-target5-seed-20260715/weights/best.pt"
+robot_adapted = "runs/baseline_target5_robot_adapt/b-m03-target5-robot-adapt-seed-20260715/weights/best.pt"
+
+[output]
+directory = "runs/baseline_target5_weight_soups"
+
+[alphas]
+alpha_0_1 = 0.1
+alpha_0_2 = 0.2
+alpha_0_3 = 0.3
+alpha_0_4 = 0.4
+alpha_0_5 = 0.5
+alpha_0_6 = 0.6

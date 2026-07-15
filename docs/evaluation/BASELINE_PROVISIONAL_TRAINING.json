@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "PROVISIONAL_TRAINING_COMPLETE",
+  "scope": "development_only_not_final_release",
+  "official_gate_b1_ready": false,
+  "model_id": "B-M01-PROVISIONAL-BD01VIEWS",
+  "pipeline": "frozen_B-D01_derived_views_then_B-M01_classifier_finetuning",
+  "dataset": {
+    "train": 2368,
+    "val_select": 280,
+    "val_cal_unused": 139,
+    "view_manifest_sha256": "c588872eb8a6375895ab5df7e08ba566549ffa5eeab36fe55d8052ddba93ccde"
+  },
+  "training": {
+    "configured_epochs": 50,
+    "epochs_completed": 19,
+    "early_stopping_patience": 12,
+    "best_epoch_csv": 7,
+    "elapsed_seconds": 139.54761052131653,
+    "best_train_loss": 0.15007,
+    "best_val_loss": 0.17156,
+    "best_val_top1": 0.95714,
+    "best_val_top5": 1.0,
+    "last_train_loss": 0.05384,
+    "last_val_loss": 0.40026,
+    "last_val_top1": 0.92857
+  },
+  "independent_val_select_check": {
+    "samples": 280,
+    "accuracy_top1": 0.9571428571428572,
+    "macro_f1": 0.9581227930390113,
+    "mean_top1_confidence": 0.9665676189320428,
+    "per_class": {
+      "ragdoll": {"support": 61, "precision": 0.9830508474576272, "recall": 0.9508196721311475, "f1": 0.9666666666666667},
+      "singapura": {"support": 30, "precision": 0.9666666666666667, "recall": 0.9666666666666667, "f1": 0.9666666666666667},
+      "persian": {"support": 67, "precision": 0.9295774647887324, "recall": 0.9850746268656716, "f1": 0.9565217391304348},
+      "sphynx": {"support": 47, "precision": 0.9787234042553191, "recall": 0.9787234042553191, "f1": 0.9787234042553191},
+      "pallas": {"support": 30, "precision": 0.967741935483871, "recall": 1.0, "f1": 0.9836065573770492},
+      "not_target": {"support": 45, "precision": 0.9285714285714286, "recall": 0.8666666666666667, "f1": 0.896551724137931}
+    },
+    "by_selected_view": {
+      "bd01_crop": {"correct": 183, "total": 193, "accuracy": 0.9481865284974094},
+      "original": {"correct": 85, "total": 87, "accuracy": 0.9770114942528736}
+    },
+    "confusion_matrix_rows_true_cols_pred": [
+      [58, 0, 3, 0, 0, 0],
+      [0, 29, 0, 0, 0, 1],
+      [0, 0, 66, 0, 0, 1],
+      [0, 0, 0, 46, 0, 1],
+      [0, 0, 0, 0, 30, 0],
+      [1, 1, 2, 1, 1, 39]
+    ]
+  },
+  "checkpoint": {
+    "best_path": "runs/baseline_provisional/b-m01-provisional-bd01-oneview-seed-20260715/weights/best.pt",
+    "best_bytes": 11035778,
+    "best_sha256": "c41cfd4a12411883df52bf8643b20a2621b189bbd27c642bae441e92cf06319d",
+    "last_sha256": "1a8a1d413c12b46a65db144eac6f2b82bab9c62bb56a46cd61f58baee7e423c1",
+    "native_names": ["0_ragdoll", "1_singapura", "2_persian", "3_sphynx", "4_pallas", "5_not_target"],
+    "canonical_index_mapping": [0, 1, 2, 3, 4, 5]
+  },
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "python": "3.12.10",
+    "torch": "2.11.0+cu128",
+    "ultralytics": "8.4.95",
+    "amp": true
+  },
+  "limitations": [
+    "val_select_was_used_for_epoch_selection_and_is_not_final_test_evidence",
+    "val_cal_was_not_used_in_this_target",
+    "robot_camera_calibration_and_final_sets_remain_unseen",
+    "official_gate_b1_remains_fail_closed"
+  ]
+}
