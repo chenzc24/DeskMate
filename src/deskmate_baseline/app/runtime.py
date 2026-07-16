@@ -155,6 +155,10 @@ class TemporalState:
     def __len__(self) -> int:
         return len(self._observations)
 
+    def snapshot(self) -> tuple[ClassificationObservation, ...]:
+        """Return the current ordered vote window without exposing its deque."""
+        return tuple(self._observations)
+
 
 def evaluate_quality(
     *,
