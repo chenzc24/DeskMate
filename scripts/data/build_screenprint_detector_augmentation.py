@@ -12,6 +12,7 @@ import csv
 import hashlib
 import json
 import math
+import os
 import random
 import shutil
 from pathlib import Path
@@ -22,6 +23,49 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".webp"}
+
+
+def materialize_tree(source: Path, output: Path) -> None:
+    """Create a disposable view, hard-linking large training files if possible."""
+
+    output.mkdir(parents=True)
+    for path in source.rglob("*"):
+        relative = path.relative_to(source)
+        target = output / relative
+        if path.is_dir():
+            target.mkdir(exist_ok=True)
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if path.suffix.lower() in IMAGE_SUFFIXES or path.suffix.lower() == ".txt":
+            try:
+                os.link(path, target)
+                continue
+            except OSError:
+                pass
+        shutil.copy2(path, target)
+
+
+def manifest_file(dataset: Path, row: dict[str, str], kind: str) -> Path:
+    """Resolve a row's output file without trusting stale copied paths."""
+
+    suffix = Path(row[f"output_{kind}"]).suffix
+    if kind == "image":
+        matches = [
+            path
+            for path in (dataset / "images" / row["split"]).glob(f"{row['sample_id']}.*")
+            if path.suffix.lower() in IMAGE_SUFFIXES
+        ]
+        if len(matches) != 1:
+            raise ValueError(f"expected one image for {row['sample_id']}, found {matches}")
+        return matches[0]
+    return dataset / "labels" / row["split"] / f"{row['sample_id']}{suffix or '.txt'}"
+
+
+def project_path(path: Path, root: Path) -> str:
+    try:
+        return path.resolve().relative_to(root.resolve()).as_posix()
+    except ValueError:
+        return path.resolve().as_posix()
 
 
 def read_bgr(path: Path) -> np.ndarray:
@@ -240,7 +284,7 @@ def main() -> None:
     output = args.output.resolve()
     if output.exists():
         raise SystemExit(f"refusing to overwrite existing output: {output}")
-    shutil.copytree(base, output)
+    materialize_tree(base, output)
     rng = random.Random(args.seed)
     (output / "data.yaml").write_text(
         f"path: {output.as_posix()}\n"
@@ -255,18 +299,45 @@ def main() -> None:
     with (base / "manifest.csv").open("r", newline="", encoding="utf-8") as handle:
         manifest = list(csv.DictReader(handle))
         fields = list(manifest[0])
-    positives = [row for row in manifest if row["split"] == "train" and row["breed"] in {"sphynx", "pallas"}]
-    backgrounds = [
-        path for path in (base / "images" / "train").iterdir()
-        if path.suffix.lower() in IMAGE_SUFFIXES and path.stem.startswith("negative-")
+    for optional in (
+        "source_dataset",
+        "annotation_source",
+        "quality_flags",
+        "source_group_id",
+        "parent_sample_id",
+        "transform",
+        "materialization",
+    ):
+        if optional not in fields:
+            fields.append(optional)
+    for row in manifest:
+        source_image = manifest_file(base, row, "image")
+        source_label = manifest_file(base, row, "label")
+        output_image = output / "images" / row["split"] / source_image.name
+        output_label = output / "labels" / row["split"] / source_label.name
+        row["output_image"] = project_path(output_image, root)
+        row["output_label"] = project_path(output_label, root)
+        row.setdefault("parent_sample_id", row["sample_id"])
+        row.setdefault("transform", "identity")
+        row.setdefault("materialization", "hardlink_or_copy")
+    positives = [
+        row
+        for row in manifest
+        if row["split"] == "train" and int(row["box_count"]) > 0
     ]
+    background_rows = [
+        row
+        for row in manifest
+        if row["split"] == "train" and int(row["box_count"]) == 0
+    ]
+    backgrounds = [manifest_file(output, row, "image") for row in background_rows]
     if not positives or not backgrounds:
         raise ValueError(f"empty inputs: positives={len(positives)}, backgrounds={len(backgrounds)}")
 
     synthetic_rows: list[dict[str, object]] = []
     for index, row in enumerate(positives, 1):
-        content_path = root / row["output_image"]
-        label_path = root / row["output_label"]
+        content_path = manifest_file(output, row, "image")
+        label_path = manifest_file(output, row, "label")
         background_path = rng.choice(backgrounds)
         content = read_bgr(content_path)
         background = read_bgr(background_path)
@@ -287,15 +358,22 @@ def main() -> None:
                 "sample_id": sample_id,
                 "breed": row["breed"],
                 "split": "train",
-                "source_image": row["output_image"],
-                "source_label": row["output_label"],
-                "output_image": output_image.relative_to(root).as_posix(),
-                "output_label": output_label.relative_to(root).as_posix(),
+                "source_dataset": row.get("source_dataset", ""),
+                "source_image": project_path(content_path, root),
+                "source_label": project_path(label_path, root),
+                "output_image": project_path(output_image, root),
+                "output_label": project_path(output_label, root),
                 "width": composite.shape[1],
                 "height": composite.shape[0],
                 "box_count": len(transformed),
                 "image_sha256": sha256(output_image),
                 "label_sha256": sha256(output_label),
+                "annotation_source": row.get("annotation_source", ""),
+                "quality_flags": row.get("quality_flags", ""),
+                "source_group_id": row.get("source_group_id", row["sample_id"]),
+                "parent_sample_id": row["sample_id"],
+                "transform": "screenprint_homography",
+                "materialization": "generated",
             }
         )
         synthetic_rows.append(
@@ -303,10 +381,10 @@ def main() -> None:
                 "sample_id": sample_id,
                 "kind": "screenprint_positive",
                 "breed": row["breed"],
-                "source_content": content_path.relative_to(root).as_posix(),
-                "source_background": background_path.relative_to(root).as_posix(),
-                "output_image": output_image.relative_to(root).as_posix(),
-                "output_label": output_label.relative_to(root).as_posix(),
+                "source_content": project_path(content_path, root),
+                "source_background": project_path(background_path, root),
+                "output_image": project_path(output_image, root),
+                "output_label": project_path(output_label, root),
                 "box_count": len(transformed),
                 "recipe": json.dumps(recipe, separators=(",", ":")),
                 "output_image_absolute": str(output_image),
@@ -334,15 +412,22 @@ def main() -> None:
                 "sample_id": sample_id,
                 "breed": "not_target",
                 "split": "train",
-                "source_image": content_path.relative_to(root).as_posix(),
+                "source_dataset": "synthetic_blank_panel",
+                "source_image": project_path(content_path, root),
                 "source_label": "",
-                "output_image": output_image.relative_to(root).as_posix(),
-                "output_label": output_label.relative_to(root).as_posix(),
+                "output_image": project_path(output_image, root),
+                "output_label": project_path(output_label, root),
                 "width": composite.shape[1],
                 "height": composite.shape[0],
                 "box_count": 0,
                 "image_sha256": sha256(output_image),
                 "label_sha256": hashlib.sha256(b"").hexdigest(),
+                "annotation_source": "empty_background",
+                "quality_flags": "",
+                "source_group_id": f"synthetic-blank-panel-{index:04d}",
+                "parent_sample_id": "",
+                "transform": "blank_screenprint_homography",
+                "materialization": "generated",
             }
         )
         synthetic_rows.append(
@@ -350,10 +435,10 @@ def main() -> None:
                 "sample_id": sample_id,
                 "kind": "blank_panel_negative",
                 "breed": "not_target",
-                "source_content": content_path.relative_to(root).as_posix(),
-                "source_background": background_path.relative_to(root).as_posix(),
-                "output_image": output_image.relative_to(root).as_posix(),
-                "output_label": output_label.relative_to(root).as_posix(),
+                "source_content": project_path(content_path, root),
+                "source_background": project_path(background_path, root),
+                "output_image": project_path(output_image, root),
+                "output_label": project_path(output_label, root),
                 "box_count": 0,
                 "recipe": json.dumps(recipe, separators=(",", ":")),
                 "output_image_absolute": str(output_image),
@@ -362,7 +447,7 @@ def main() -> None:
         )
 
     with (output / "manifest.csv").open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(manifest)
     public_synthetic_fields = [field for field in synthetic_rows[0] if not field.endswith("_absolute")]
@@ -375,7 +460,7 @@ def main() -> None:
 
     report = {
         "schema_version": 1,
-        "status": "READY_FOR_BD04_TRAINING",
+        "status": "READY_FOR_DETECTOR_TRAINING",
         "seed": args.seed,
         "train": {
             "original_positive_images": len(positives),
@@ -385,8 +470,8 @@ def main() -> None:
             "total_images": len(positives) + len(backgrounds) + len(positive_synthetic) + args.blank_negatives,
         },
         "held_out": {
-            "positive_val": 68,
-            "positive_test": 49,
+            "positive_val": sum(row["split"] == "val" and int(row["box_count"]) > 0 for row in manifest),
+            "positive_test": sum(row["split"] == "test" and int(row["box_count"]) > 0 for row in manifest),
             "not_target_val_and_val_cal": 54,
             "robot_camera_11_and_model_selection_24_used_for_training": False,
         },

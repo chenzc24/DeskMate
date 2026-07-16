@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "STAGE_CANDIDATE_FROZEN",
+  "freeze_date": "2026-07-16",
+  "combination": "BD06+M9",
+  "configuration": "models/frozen/baseline-bd06-m09.toml",
+  "models": {
+    "detector": {
+      "id": "B-D06-FIVE-BREED-SCREENPRINT-FROM-PRETRAINED",
+      "checkpoint": "models/frozen/b-d06-five-breed-screenprint.pt",
+      "bytes": 20280581,
+      "sha256": "edb29b9f78299ad268f0277bbc6bc28bca122283c0943bbf60f23616a61e1cae",
+      "download_url": "https://github.com/chenzc24/DeskMate/releases/download/bd06-20260716/b-d06-five-breed-screenprint.pt",
+      "initial_checkpoint": "models/yolo26s.pt",
+      "initial_checkpoint_sha256": "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
+    },
+    "classifier": {
+      "id": "B-M09-TARGET5-MANUAL-CURATED-AUG-FROM-PRETRAINED",
+      "checkpoint": "models/frozen/b-m09-target5-manual-curated-aug.pt",
+      "bytes": 11033666,
+      "sha256": "d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1"
+    }
+  },
+  "datasets": {
+    "base_manifest_sha256": "c620324343a32cc4e5670d48e00f6bdeb0ae05b22f436731e5e7c3560c369537",
+    "augmented_manifest_sha256": "26652f3b63ae72b3666ceed07287cf15dda2c098a4f2cf35e599fb4f42b28bea",
+    "synthetic_manifest_sha256": "42209fc8c4c79dca1053191cebb4dd730f07f1d2a5a117ff05c39fca072d6e8a",
+    "selection_24_manifest_sha256": "d9b99918c29b5e134fe3b72f39905d7b55dc09733583254e220ccf0447a4e73b",
+    "selection_24_exact_overlap": 0,
+    "seed": 20260715
+  },
+  "training": {
+    "run_id": "bd06-fivebreed-screenprint-yolo26s-s20260715-20260716-1351",
+    "epochs_completed": 35,
+    "best_epoch": 25,
+    "validation_precision": 0.98442,
+    "validation_recall": 0.97728,
+    "validation_map50": 0.99118,
+    "validation_map50_95": 0.78593
+  },
+  "evaluation": {
+    "model_selection_24": {
+      "bd05_m09_correct": 22,
+      "bd06_m09_correct": 24,
+      "total": 24,
+      "recovered": ["robot-model-test-001", "robot-model-test-022"],
+      "regressed": []
+    },
+    "five_breed_box_test_111": {
+      "bd05": {"precision": 0.99635, "recall": 0.92793, "map50": 0.99161, "map50_95": 0.79056},
+      "bd06": {"precision": 0.99007, "recall": 1.0, "map50": 0.995, "map50_95": 0.78494}
+    },
+    "held_out_not_target_54": {
+      "bd05_false_positive_images": 0,
+      "bd06_false_positive_images": 0
+    }
+  },
+  "fallback": "models/frozen/baseline-bd05-m09.toml",
+  "evidence": "docs/evaluation/BASELINE_FIVE_BREED_DETECTOR_20260716.md",
+  "limitations": [
+    "The 24-image set contains correlated robot-burst frames and is not a final independent holdout.",
+    "BD06 improved recall but was 0.56 percentage points lower than BD05 on mAP50-95 over the 111-image box test.",
+    "Keep BD05+M9 as the frozen rollback until a larger unseen robot-camera session confirms the change."
+  ]
+}

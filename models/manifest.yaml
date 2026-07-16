@@ -1,5 +1,48 @@
 schema_version: 1
 models:
+  - id: B-D06-FIVE-BREED-SCREENPRINT-FROM-PRETRAINED
+    state: candidate
+    enabled_priority: P0_candidate
+    task: detection
+    framework: ultralytics
+    architecture: YOLO26s
+    file: models/frozen/b-d06-five-breed-screenprint.pt
+    bytes: 20280581
+    sha256: edb29b9f78299ad268f0277bbc6bc28bca122283c0943bbf60f23616a61e1cae
+    distribution:
+      release_tag: bd06-20260716
+      download_url: https://github.com/chenzc24/DeskMate/releases/download/bd06-20260716/b-d06-five-breed-screenprint.pt
+    training:
+      run_id: bd06-fivebreed-screenprint-yolo26s-s20260715-20260716-1351
+      base_weight_sha256: 646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b
+      base_dataset_manifest_sha256: c620324343a32cc4e5670d48e00f6bdeb0ae05b22f436731e5e7c3560c369537
+      augmented_dataset_manifest_sha256: 26652f3b63ae72b3666ceed07287cf15dda2c098a4f2cf35e599fb4f42b28bea
+      synthetic_manifest_sha256: 42209fc8c4c79dca1053191cebb4dd730f07f1d2a5a117ff05c39fca072d6e8a
+      seed: 20260715
+      epochs_completed: 35
+      best_epoch: 25
+    input:
+      color: RGB
+      size: [640, 640]
+      scope: full_frame_cat_proposals
+    output:
+      native: Ultralytics Results.boxes
+      adapter_contract: LocalizerObservation
+      breed_semantics_allowed: false
+      native_objects_must_not_cross_adapter: true
+    class_filter:
+      native_name: cat
+      resolved_native_id: 0
+    evaluation:
+      model_selection_24_with_m9: 24/24
+      box_test_111_recall: 1.0
+      box_test_111_map50: 0.995
+      box_test_111_map50_95: 0.78494
+      held_out_not_target_false_positive_images: 0/54
+    evidence: docs/evaluation/BASELINE_FIVE_BREED_DETECTOR_20260716.md
+    limitations:
+      - the 24-image diagnostic contains correlated burst frames
+      - retain BD05+M9 as rollback until a larger unseen robot-camera session
   - id: B-M01-SP-HARDENED-CANDIDATE
     state: development_candidate_not_release_admitted
     enabled_priority: P0_candidate_disabled

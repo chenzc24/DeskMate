@@ -23,6 +23,7 @@ def main() -> None:
     parser.add_argument("--batch", type=int, default=8)
     parser.add_argument("--imgsz", type=int, default=640)
     parser.add_argument("--device", default="0")
+    parser.add_argument("--workers", type=int, default=0)
     parser.add_argument("--seed", type=int, default=20260715)
     parser.add_argument("--resume", type=Path, help="Resume an interrupted Ultralytics run from last.pt")
     args = parser.parse_args()
@@ -39,7 +40,7 @@ def main() -> None:
         imgsz=args.imgsz,
         batch=args.batch,
         device=args.device,
-        workers=0,
+        workers=args.workers,
         project=str(args.project.resolve()),
         name=args.name,
         exist_ok=False,

@@ -4,6 +4,7 @@ import argparse
 import csv
 import hashlib
 import json
+import sys
 import time
 from collections import Counter
 from pathlib import Path
@@ -11,15 +12,16 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+ROOT = Path(__file__).resolve().parents[2]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
 from deskmate_baseline.domain.contracts import FramePacket, REPORTABLE_LABELS
 from deskmate_baseline.perception.localization import (
     UltralyticsCatLocalizerBackend,
     route_classification_roi,
 )
-
-
-ROOT = Path(__file__).resolve().parents[2]
-
 
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
