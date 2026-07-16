@@ -12,6 +12,27 @@ cd C:\Users\32126\Desktop\Robitics\deskmate
 .\.venv\Scripts\python.exe scripts\runtime\run_robot_pipeline.py --source http://<PI-IP>:5000/highres_feed --result-file runtime\latest_result.json --display
 ```
 
+## One-command local start
+
+For the usual local setup, use the launcher in the project root. It checks that
+the Pi service is reachable, then opens the annotated AI window using the
+high-resolution stream:
+
+```powershell
+cd C:\Users\32126\Desktop\Robitics\deskmate
+pwsh.exe -NoLogo -NoProfile -File .\start_highres_ai.ps1
+```
+
+The default Pi address is `100.80.46.54`. If it changes, pass it explicitly:
+
+```powershell
+pwsh.exe -NoLogo -NoProfile -File .\start_highres_ai.ps1 -PiHost <PI-IP>
+```
+
+Press `Q` in the assisted video window to stop the program. Use `-NoDisplay`
+only when the program should run without an OpenCV window while still writing
+`runtime/latest_result.json`.
+
 Each processed image is emitted as one JSON line and atomically replaces
 `runtime/latest_result.json`. The `instant` result is for one image. The
 `temporal_vote.result` appears after five consecutive valid frames and should be
