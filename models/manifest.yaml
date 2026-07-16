@@ -1,8 +1,8 @@
 schema_version: 1
 models:
   - id: B-D06-FIVE-BREED-SCREENPRINT-FROM-PRETRAINED
-    state: candidate
-    enabled_priority: P0_candidate
+    state: release
+    enabled_priority: P0_default
     task: detection
     framework: ultralytics
     architecture: YOLO26s
@@ -43,6 +43,30 @@ models:
     limitations:
       - the 24-image diagnostic contains correlated burst frames
       - retain BD05+M9 as rollback until a larger unseen robot-camera session
+  - id: B-M09-TARGET5-MANUAL-CURATED-AUG-FROM-PRETRAINED
+    state: release
+    enabled_priority: P0_default
+    task: classification
+    framework: ultralytics
+    architecture: YOLO26s-cls
+    file: models/frozen/b-m09-target5-manual-curated-aug.pt
+    bytes: 11033666
+    sha256: d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1
+    distribution:
+      release_tag: bd06-20260716
+      download_url: https://github.com/chenzc24/DeskMate/releases/download/bd06-20260716/b-m09-target5-manual-curated-aug.pt
+    input:
+      color: RGB
+      size: [224, 224]
+      scope: detector_crop_or_centre_fallback
+    output:
+      native: Ultralytics Results.probs
+      adapter_contract: ClassificationObservation
+      native_objects_must_not_cross_adapter: true
+      class_order: [ragdoll, singapura, persian, sphynx, pallas]
+    evidence: docs/evaluation/BASELINE_FIVE_BREED_DETECTOR_20260716.md
+    limitations:
+      - rejection remains owned by localization or an external decision gate
   - id: B-M01-SP-HARDENED-CANDIDATE
     state: development_candidate_not_release_admitted
     enabled_priority: P0_candidate_disabled

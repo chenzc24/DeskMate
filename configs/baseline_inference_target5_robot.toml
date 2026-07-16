@@ -2,29 +2,35 @@ schema_version = 1
 mode = "target_aligned_baseline"
 
 [detector]
-model_id = "B-D01"
-checkpoint = "models/yolo26s.pt"
-expected_sha256 = "646f8bc3fe0a656803d95c294f7852321748cb29d13466a1af8862e2db384a1b"
+model_id = "B-D06-FIVE-BREED-SCREENPRINT-FROM-PRETRAINED"
+checkpoint = "models/frozen/b-d06-five-breed-screenprint.pt"
+expected_sha256 = "edb29b9f78299ad268f0277bbc6bc28bca122283c0943bbf60f23616a61e1cae"
+download_url = "https://github.com/chenzc24/DeskMate/releases/download/bd06-20260716/b-d06-five-breed-screenprint.pt"
 confidence_threshold = 0.25
 minimum_box_area_ratio = 0.02
 imgsz = 640
 
 [classifier]
-model_id = "B-M04-TARGET5-ROBOT-SOUP-A03"
+model_id = "B-M09-TARGET5-MANUAL-CURATED-AUG-FROM-PRETRAINED"
 backend = "UltralyticsTargetClassificationBackend"
-checkpoint = "runs/baseline_target5_weight_soups/target5_robot_alpha_0.3.pt"
-expected_sha256 = "75c5d7c5427feb3d56cab53c043fb14f0464069dfba602969c203660d358ef2c"
+checkpoint = "models/frozen/b-m09-target5-manual-curated-aug.pt"
+expected_sha256 = "d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1"
+download_url = "https://github.com/chenzc24/DeskMate/releases/download/bd06-20260716/b-m09-target5-manual-curated-aug.pt"
 labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas"]
 imgsz = 224
 temperature = 1.0
 
 [routing]
-padding_ratio = 0.15
+padding_ratio = 0.25
 fallback_center_scale = 0.8
 minimum_padded_short_side_pixels = 32
 primary_policy = "detector_crop_else_centre_fallback"
+temporal_voting_recommended = true
 
 [decision]
 breed_head_can_emit_not_target = false
 rejection_owner = "localizer_or_external_gate"
-temporal_voting_recommended = true
+
+[fallback]
+combination = "BD05+M9"
+config = "models/frozen/baseline-bd05-m09.toml"

@@ -2,8 +2,10 @@
 
 ## Decision
 
-Admit `BD06 + M9` as the new stage candidate and retain `BD05 + M9` as the
-rollback. On the unchanged 24-image robot-burst diagnostic, BD06 repaired both
+Admit `BD06 + M9` as the default baseline and retain `BD05 + M9` as the
+rollback. The canonical runtime config is
+`configs/baseline_inference_target5_robot.toml`. On the unchanged 24-image
+robot-burst diagnostic, BD06 repaired both
 BD05 failures with no regressions: `22/24 -> 24/24`.
 
 This is a development-set result, not a final independent accuracy claim. The
@@ -90,10 +92,15 @@ accepted false-positive images at the frozen 0.25 confidence and 2% area gate.
 - Detector: `models/frozen/b-d06-five-breed-screenprint.pt`
 - Rollback: `models/frozen/baseline-bd05-m09.toml`
 
-The detector weight is distributed outside Git history as the
-[`bd06-20260716` release asset](https://github.com/chenzc24/DeskMate/releases/download/bd06-20260716/b-d06-five-breed-screenprint.pt).
-After download, place it at the detector path above and verify SHA-256
-`edb29b9f78299ad268f0277bbc6bc28bca122283c0943bbf60f23616a61e1cae`.
+Both required weights are distributed outside Git history in the
+[`bd06-20260716` release](https://github.com/chenzc24/DeskMate/releases/tag/bd06-20260716):
+
+- Detector: `b-d06-five-breed-screenprint.pt`, SHA-256
+  `edb29b9f78299ad268f0277bbc6bc28bca122283c0943bbf60f23616a61e1cae`.
+- Classifier: `b-m09-target5-manual-curated-aug.pt`, SHA-256
+  `d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1`.
+
+Download both into `models/frozen/` before starting the default runtime.
 
 The next promotion gate remains a larger unseen robot-camera session with both
 BD05 and BD06 held fixed.

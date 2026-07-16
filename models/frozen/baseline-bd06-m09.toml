@@ -18,6 +18,7 @@ minimum_box_area_ratio = 0.02
 model_id = "B-M09-TARGET5-MANUAL-CURATED-AUG-FROM-PRETRAINED"
 checkpoint = "models/frozen/b-m09-target5-manual-curated-aug.pt"
 expected_sha256 = "d8eb66e7ee102e20efc15b385a4c73781596b38a790356510cb04caaf91cafc1"
+download_url = "https://github.com/chenzc24/DeskMate/releases/download/bd06-20260716/b-m09-target5-manual-curated-aug.pt"
 backend = "UltralyticsTargetClassificationBackend"
 labels = ["ragdoll", "singapura", "persian", "sphynx", "pallas"]
 imgsz = 224
