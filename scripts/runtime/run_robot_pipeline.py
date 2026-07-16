@@ -207,7 +207,11 @@ def main() -> int:
     parser.add_argument(
         "--source",
         required=True,
-        help="MJPEG URL, video-file path, or numeric OpenCV camera index",
+        help=(
+            "MJPEG URL, video-file path, or numeric OpenCV camera index. "
+            "For robot AI input, use shared /highres_feed; /video_feed is the "
+            "low-latency operator preview."
+        ),
     )
     parser.add_argument(
         "--config",
