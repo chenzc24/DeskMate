@@ -47,6 +47,7 @@ logs/
 artifacts/logs/
 artifacts/demo_videos/
 artifacts/robot_camera_eval/
+runtime/
 events.out.tfevents.*
 
 # Private or generated video captures
